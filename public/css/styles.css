@@ -1,0 +1,15 @@
+.sentence {
+    padding: 5px;
+    background-color: #eeeeee;
+    border-radius: 5px;
+}
+
+.sentence-text {
+    margin-left: 10px;
+}
+
+.sentence-question {
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 5px;
+}
