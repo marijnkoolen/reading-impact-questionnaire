@@ -15,6 +15,9 @@ class FormStore {
     saveResponse(serverResponse) {
         this.trigger('save-response', serverResponse.sentence_id);
     }
+    clearResponses() {
+        this.trigger('clear-responses');
+    }
 }
 
 var AppFormStore = new FormStore();
@@ -29,6 +32,9 @@ AppDispatcher.register(function(action) {
             break;
         case 'load-sentences':
             AppFormStore.loadSentences(action.sentences, action.responses, action.callback);
+            break;
+        case 'clear-responses':
+            AppFormStore.clearResponses(action.callback);
             break;
         case 'save-response':
             AppFormStore.saveResponse(action.serverResponse, action.callback);

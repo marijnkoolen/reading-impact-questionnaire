@@ -68,6 +68,9 @@ const FormActions = {
     clearLocalData() {
         window.localStorage.removeItem('sentences');
         window.localStorage.removeItem('responses');
+        AppDispatcher.dispatch({
+            eventName: 'clear-responses'
+        });
     },
 
     loadSentences(annotator) {
