@@ -23,14 +23,14 @@ class Indexer(object):
     def index_sentence(self, sentence):
         self.es.index(index=self.index, doc_type=self.doc_type, id=sentence["sentence_id"], body=sentence)
 
-    def get_unfinished_sentences(self, annotator):
-        response = self.search_unfinished_sentences(annotator)
+    def get_unfinished_sentences(self, annotator, size=10):
+        response = self.search_unfinished_sentences(annotator, size)
         if response['hits']['total'] == 0:
             return []
         else:
             return [hit["_source"] for hit in response['hits']['hits']]
 
-    def search_unfinished_sentences(self, annotator):
+    def search_unfinished_sentences(self, annotator, size):
         query = {
             "query": {
                 "bool": {
@@ -42,7 +42,8 @@ class Indexer(object):
                         "match": {"annotations.annotator": annotator}
                     }
                 }
-            }
+            },
+            "size": size
         }
         return self.es.search(index=self.index, doc_type=self.doc_type, body=query)
 
