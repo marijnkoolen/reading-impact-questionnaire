@@ -13,3 +13,26 @@
     margin-left: 20px;
     padding: 5px;
 }
+
+.sentence-checks {
+    margin: 25px;
+}
+
+.readme-explanation {
+    margin: 10px;
+}
+
+.thankyou {
+    margin-top: 100px;
+}
+
+.logo {
+    width: 100px;
+    float: right;
+    margin-top: 20px;
+}
+
+.closing {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
