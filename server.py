@@ -45,7 +45,7 @@ def load_progress():
 @app.route('/api/reading_impact/load_sentences', methods=["GET"])
 def load_sentences():
     annotator = request.args.get('annotator')
-    sentences = es_indexer.get_unfinished_sentences(annotator)
+    sentences = es_indexer.get_unfinished_sentences(annotator, size=1)
     return make_response(sentences)
 
 def get_sentences(hit):
