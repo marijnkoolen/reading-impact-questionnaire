@@ -21,6 +21,12 @@ class SentenceQuestions extends Component {
 
     componentDidMount() {
         AppFormStore.bind('save-response', this.setResponseStatus.bind(this));
+        AppFormStore.bind('clear-responses', this.clearResponses.bind(this));
+    }
+
+    clearResponses() {
+        console.log("clearing responses");
+        this.setState({response: null});
     }
 
     setResponseStatus(sentence_id) {
@@ -41,8 +47,6 @@ class SentenceQuestions extends Component {
             sentenceResponse.sentence_id = this.props.sentence.sentence_id;
         }
         sentenceResponse[questionResponse.category] = questionResponse.value;
-        //console.log(questionResponse);
-        //console.log(sentenceResponse);
         if (FormActions.checkResponseDone(sentenceResponse)) {
             FormActions.saveResponse(sentenceResponse);
         }
@@ -151,6 +155,7 @@ class SentenceQuestions extends Component {
         }
         return (
             <div key={this.props.sentence.sentence_id}>
+                <a name={'sentence-block-' + this.props.sentence.sentence_id}></a>
                 <div className="sentence">
                     <label>Zin {this.props.sentence.number}:</label>{'  '}
                     <span className="sentence-text">
