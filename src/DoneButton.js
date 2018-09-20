@@ -76,7 +76,7 @@ class DoneButton extends Component {
         return (
             <div className="done">
                 <div className="sentence-checks">
-                    <div>Zinnen beoordeelt:</div>
+                    <div>Zinnen volledig beantwoord:</div>
                     {sentenceChecks}
                 </div>
                 <div className="buttons">

@@ -74,7 +74,9 @@ class Questionnaire extends Component {
 
         let makeProgressBar = (progress) => {
             return (
-                <div className="header progress">{progress.sentences_done} van {progress.sentences_total} zinnen gedaan.</div>
+                <div className="header progress">
+                    Zinnen totaal: {progress.sentences_total}, klaar: {progress.sentences_done}, door u beoordeeld: {progress.sentences_done_by_you}.
+                </div>
             )
         }
         if (this.state.progress) {
