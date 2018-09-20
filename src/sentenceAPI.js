@@ -72,7 +72,22 @@ const SentenceAPI = {
                 callback(null, responseData);
             }
         }
-    }
+    },
+
+    removeResponse : (response, callback) => {
+        let url = SentenceAPI.sentenceServer + "/remove_response";
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        //xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(response));
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                callback(null, responseData);
+            }
+        }
+    },
 }
 
 export default SentenceAPI;

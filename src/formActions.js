@@ -15,11 +15,27 @@ const FormActions = {
         return SentenceAPI.annotator;
     },
 
+    setAnnotator(annotator) {
+        SentenceAPI.annotator = annotator;
+        localStorage.setItem("annotator", annotator);
+        FormActions.loadSentences(annotator);
+    },
+
     saveResponse(response) {
         FormActions.setLocalResponse(response);
         SentenceAPI.saveResponse(response, (error, serverResponse) => {
             AppDispatcher.dispatch({
                 eventName: 'save-response',
+                serverResponse: serverResponse
+            });
+        });
+    },
+
+    removeIncompleteResponse(response) {
+        FormActions.setLocalResponse(response);
+        SentenceAPI.removeResponse(response, (error, serverResponse) => {
+            AppDispatcher.dispatch({
+                eventName: 'remove-response',
                 serverResponse: serverResponse
             });
         });
@@ -32,6 +48,10 @@ const FormActions = {
     },
 
     checkResponseDone(response) {
+        console.log(response);
+        if (response.unanswerable) {
+            return true;
+        }
         return FormActions.getCategories().every(category => {
             if (!response.hasOwnProperty(category))
                 return false;

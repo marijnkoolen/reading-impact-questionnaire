@@ -15,7 +15,8 @@ class SentenceQuestions extends Component {
         this.setResponse = this.setResponse.bind(this);
         this.state = {
             response: this.props.response,
-            responseSaved: false
+            responseSaved: false,
+            unanswerable: false
         }
     }
 
@@ -36,6 +37,7 @@ class SentenceQuestions extends Component {
     }
 
     setResponse(questionResponse) {
+        console.log(questionResponse);
         var sentenceResponse = this.state.response;
         if (!sentenceResponse) {
             sentenceResponse = {};
@@ -49,12 +51,15 @@ class SentenceQuestions extends Component {
         sentenceResponse[questionResponse.category] = questionResponse.value;
         if (FormActions.checkResponseDone(sentenceResponse)) {
             FormActions.saveResponse(sentenceResponse);
+        } else if (questionResponse.category === "unanswerable") {
+            console.log("question is answerable but incomplete");
+            FormActions.removeIncompleteResponse(sentenceResponse);
         }
         FormActions.setLocalResponse(sentenceResponse);
         this.setState({response: sentenceResponse});
     }
 
-    makeRange() {
+    makeLikertRange() {
         var list = [];
         for (var i = 1; i <= 7; i++) {
             list.push(i);
@@ -63,6 +68,11 @@ class SentenceQuestions extends Component {
     }
 
     makeQuestion(question, sentence_id) {
+        if (this.state.unanswerable) {
+            return (
+                <div></div>
+            )
+        }
         let component = this;
         //console.log("rendering sentence", sentence_id);
         //console.log(this.state.response);
@@ -103,7 +113,7 @@ class SentenceQuestions extends Component {
                 />
             );
         }
-        var likertButtons = this.makeRange().map(value => {
+        var likertButtons = this.makeLikertRange().map(value => {
             return makeLikertButton(question, value);
         });
         let categoryValues = [
@@ -148,11 +158,41 @@ class SentenceQuestions extends Component {
         )
     }
 
+    setAnswerable(event) {
+        let unanswerable = event.target.checked;
+        this.setState({unanswerable: unanswerable})
+        this.setResponse({category: "unanswerable", "value": unanswerable});
+        FormActions.checkDone
+    }
+
+    makeQuestionList() {
+        let questionList = questions.map(question => {
+            return this.makeQuestion(question, this.props.sentence.sentence_id)
+        });
+        return (this.state.unanswerable) ? (<div></div>) : questionList;
+    }
+
     render() {
+        let answerable = (
+            <div>
+                <label>
+                    <input
+                        name={this.props.sentence.sentence_id + "-answerable"}
+                        type="checkbox"
+                        onChange={this.setAnswerable.bind(this)}
+                    />
+                    Voor deze zin zijn onderstaande vragen niet te beantwoorden
+                </label>
+            </div>
+        )
+
         let responseStatus = (<div></div>);
         if (this.state.responseSaved) {
             responseStatus = (<div>Antwoord opgeslagen</div>);
         }
+
+        let questionList = this.makeQuestionList();
+
         return (
             <div key={this.props.sentence.sentence_id}>
                 <a name={'sentence-block-' + this.props.sentence.sentence_id}></a>
@@ -162,10 +202,11 @@ class SentenceQuestions extends Component {
                         <i>{this.props.sentence.text}</i>
                     </span>
                 </div>
+                <div className="sentence-answerable">
+                    {answerable}
+                </div>
                 <div className="sentence-questions">
-                  {questions.map(question =>
-                    this.makeQuestion(question, this.props.sentence.sentence_id)
-                  )}
+                    {questionList}
                 </div>
             </div>
         )

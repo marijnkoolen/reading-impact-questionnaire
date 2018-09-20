@@ -96,6 +96,17 @@ class Indexer(object):
             sentence["annotation_status"] = "in_progress"
         self.index_sentence(sentence)
 
+    def remove_response(self, response):
+        sentence = self.get_sentence(response["sentence_id"])
+        for annotation_index, annotation in enumerate(sentence["annotations"]):
+            if annotation["annotator"] == response["annotator"]:
+                sentence["annotations"].pop(annotation_index)
+        if len(sentence["annotations"]) == self.NUM_ANNOTATORS:
+            sentence["annotation_status"] = "done"
+        else:
+            sentence["annotation_status"] = "in_progress"
+        self.index_sentence(sentence)
+
     def refresh(self):
         self.es.indices.refresh(index=self.index)
 

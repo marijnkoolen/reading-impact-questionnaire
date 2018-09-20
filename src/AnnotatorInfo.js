@@ -23,8 +23,8 @@ class AnnotatorInfo extends React.Component {
 
     setAnnotator(annotator) {
         this.setState({annotator: annotator});
-        //FormActions.loadSentences(annotator);
-        localStorage.setItem("annotator", annotator);
+        console.log("annotator set:", annotator);
+        FormActions.setAnnotator(annotator);
     }
 
     handleEmailSubmit() {
@@ -38,7 +38,7 @@ class AnnotatorInfo extends React.Component {
 
     render() {
         return (
-            <div>
+            <span className="author-info">
                 <label>Emailadres:</label>
                 <input
                     type="email"
@@ -46,14 +46,14 @@ class AnnotatorInfo extends React.Component {
                     placeholder="Uw emailadres"
                     value={this.state.annotator}
                     onChange={this.handleEmailChange.bind(this)}
-                />
+                /> {' '}
                 <button
-                    className="btn btn-default"
+                    className="btn btn-primary"
                     onClick={this.handleEmailSubmit.bind(this)}
                     >
                     verder
                 </button>
-            </div>
+            </span>
         )
     }
 }

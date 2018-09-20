@@ -33,6 +33,12 @@ def save_response():
     es_indexer.add_response(response)
     return make_response({"status": "saved_response", "sentence_id": response["sentence_id"]})
 
+@app.route('/api/reading_impact/remove_response', methods=["POST"])
+def remove_response():
+    response = request.get_json()
+    es_indexer.remove_response(response)
+    return make_response({"status": "removed_response", "sentence_id": response["sentence_id"]})
+
 @app.route('/api/reading_impact/load_progress', methods=["GET"])
 def load_progress():
     annotator = request.args.get('annotator')
@@ -47,4 +53,4 @@ def load_sentences():
     return make_response(sentences)
 
 if __name__ == '__main__':
-    app.run(port=int(os.environ.get("PORT", 3001)), debug=True)
+    app.run(port=int(os.environ.get("PORT", config["api_port"])), debug=True)

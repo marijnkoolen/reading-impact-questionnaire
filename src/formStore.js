@@ -15,6 +15,9 @@ class FormStore {
     saveResponse(serverResponse) {
         this.trigger('save-response', serverResponse.sentence_id);
     }
+    removeResponse(serverResponse) {
+        this.trigger('remove-response', serverResponse.sentence_id);
+    }
     clearResponses() {
         this.trigger('clear-responses');
     }
@@ -38,6 +41,9 @@ AppDispatcher.register(function(action) {
             break;
         case 'save-response':
             AppFormStore.saveResponse(action.serverResponse, action.callback);
+            break;
+        case 'remove-response':
+            AppFormStore.removeResponse(action.serverResponse, action.callback);
             break;
     }
 })

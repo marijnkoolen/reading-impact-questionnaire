@@ -21,6 +21,7 @@ class DoneButton extends Component {
     componentDidMount() {
         this.setCategories();
         AppFormStore.bind('save-response', this.checkDone.bind(this));
+        AppFormStore.bind('remove-response', this.checkDone.bind(this));
         AppFormStore.bind('load-sentences', this.checkDone.bind(this));
     }
 
@@ -48,6 +49,7 @@ class DoneButton extends Component {
             if (!localData.responses.hasOwnProperty(sentence.sentence_id))
                 return {sentence_id: sentence.sentence_id, responseDone: responseDone};
             let response = localData.responses[sentence.sentence_id];
+            console.log("response:", response);
             responseDone = FormActions.checkResponseDone(response);
             return {sentence_id: sentence.sentence_id, responseDone: responseDone};
         });

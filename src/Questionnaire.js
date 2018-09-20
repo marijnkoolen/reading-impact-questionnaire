@@ -32,7 +32,8 @@ class Questionnaire extends Component {
         AppFormStore.bind('load-progress', this.setProgress.bind(this));
         AppFormStore.bind('clear-responses', this.clearResponses.bind(this));
         let annotator = window.localStorage.getItem("annotator");
-        FormActions.loadSentences(annotator);
+        if (annotator)
+            FormActions.loadSentences(annotator);
     }
 
     clearResponses() {
@@ -83,10 +84,14 @@ class Questionnaire extends Component {
             progressBar = makeProgressBar(this.state.progress);
         }
 
+        var closing = (sentenceBlocks) ? (<DoneButton changeView={this.changeView.bind(this)}/>) : null;
+
 
         return (
             <div className="col-md-10">
                 <div className="row header">
+                    <AnnotatorInfo/>
+                    {' '}
                     <button
                         className="btn btn-primary"
                         name="readme"
@@ -94,16 +99,13 @@ class Questionnaire extends Component {
                     >
                         Terug naar uitleg
                     </button>
-                    <AnnotatorInfo/>
                     {progressBar}
                 </div>
                 <div className="row">
                     {sentenceBlocks}
                 </div>
                 <div className="row closing">
-                    <DoneButton
-                        changeView={this.changeView.bind(this)}
-                    />
+                    {closing}
                 </div>
             </div>
         )
