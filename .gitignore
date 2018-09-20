@@ -1,3 +1,5 @@
 node_modules/
 public/js/read_impact_quest.js*
 .eslint*
+# Never commit actual settings
+settings.py
