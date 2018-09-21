@@ -53,4 +53,4 @@ def load_sentences():
     return make_response(sentences)
 
 if __name__ == '__main__':
-    app.run(port=int(os.environ.get("PORT", config["api_port"])), debug=True)
+    app.run(host=config["api_host"], port=int(os.environ.get("PORT", config["api_port"])), debug=True)

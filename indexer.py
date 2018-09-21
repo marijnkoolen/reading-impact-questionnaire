@@ -6,7 +6,7 @@ class Indexer(object):
         self.index = config["es_index"]
         self.doc_type = config["es_doc_type"]
         self.es = Elasticsearch([config["es_host"]], port=config["es_port"])
-        self.NUM_ANNOTATORS = config["num_annotators"]
+        self.NUM_ANNOTATORS = config["num_annotators_per_sentence"]
         self.num_sentences_per_page = config["num_sentences_per_page"]
 
     def reset_response_index(self):
