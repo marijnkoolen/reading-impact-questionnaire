@@ -31,9 +31,20 @@ class Questionnaire extends Component {
         AppFormStore.bind('load-sentences', this.setSentences.bind(this));
         AppFormStore.bind('load-progress', this.setProgress.bind(this));
         AppFormStore.bind('clear-responses', this.clearResponses.bind(this));
+        AppFormStore.bind('login-annotator', this.loginAnnotator.bind(this));
+        AppFormStore.bind('logout-annotator', this.logoutAnnotator.bind(this));
         let annotator = window.localStorage.getItem("annotator");
         if (annotator)
             FormActions.loadSentences(annotator);
+            //this.loginAnnotator(annotator);
+    }
+
+    loginAnnotator(annotator) {
+        //FormActions.loadSentences(annotator);
+    }
+
+    logoutAnnotator(annotator) {
+        this.setState({progress: null});
     }
 
     clearResponses() {
@@ -55,12 +66,13 @@ class Questionnaire extends Component {
 
 
     render() {
+        let annotator = window.localStorage.getItem('annotator');
         let sentenceBlocks = null;
         let progressBar = null;
-        if (this.state.sentences) {
+        if (annotator && this.state.sentences) {
             sentenceBlocks = this.state.sentences.map((sentence, index) => {
                 sentence.number = index+1;
-                var response = null;
+                var response = {unanswerable: false};
                 if (this.state.responses && this.state.responses.hasOwnProperty(sentence.sentence_id))
                     response = this.state.responses[sentence.sentence_id];
                 return (
@@ -86,7 +98,6 @@ class Questionnaire extends Component {
 
         var closing = (sentenceBlocks) ? (<DoneButton changeView={this.changeView.bind(this)}/>) : null;
 
-
         return (
             <div className="col-md-10">
                 <div className="row header">
@@ -102,7 +113,7 @@ class Questionnaire extends Component {
                     {progressBar}
                 </div>
                 <div className="row">
-                    {sentenceBlocks}
+                    {(annotator) ? sentenceBlocks : null}
                 </div>
                 <div className="row closing">
                     {closing}

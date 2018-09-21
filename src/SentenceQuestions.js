@@ -16,18 +16,18 @@ class SentenceQuestions extends Component {
         this.state = {
             response: this.props.response,
             responseSaved: false,
-            unanswerable: false
         }
     }
 
     componentDidMount() {
         AppFormStore.bind('save-response', this.setResponseStatus.bind(this));
+        //AppFormStore.bind('remove-response', this.checkDone.bind(this));
         AppFormStore.bind('clear-responses', this.clearResponses.bind(this));
     }
 
     clearResponses() {
         console.log("clearing responses");
-        this.setState({response: null});
+        this.setState({response: {unanswerable: false}});
     }
 
     setResponseStatus(sentence_id) {
@@ -37,7 +37,6 @@ class SentenceQuestions extends Component {
     }
 
     setResponse(questionResponse) {
-        console.log(questionResponse);
         var sentenceResponse = this.state.response;
         if (!sentenceResponse) {
             sentenceResponse = {};
@@ -68,7 +67,7 @@ class SentenceQuestions extends Component {
     }
 
     makeQuestion(question, sentence_id) {
-        if (this.state.unanswerable) {
+        if (this.state.response && this.state.response.unanswerable) {
             return (
                 <div></div>
             )
@@ -152,15 +151,36 @@ class SentenceQuestions extends Component {
             <div className="sentence-question" key={question.key}>
                 <div className="row">
                     <label key={question.key}>{question.label}</label>
+                    <span
+                        className="badge term-info"
+                        data-toggle="popover"
+                        title="Uitleg"
+                        data-content="Een definitie"
+                        data-trigger="hover"
+                    >i</span>
                 </div>
                 <div>{buttons}</div>
             </div>
         )
     }
 
+    getAnswerable() {
+        let response = this.state.response;
+        console.log(response);
+        if (response && response.unanswerable)
+            return response.unanswerable;
+        else
+            return false;
+    }
+
     setAnswerable(event) {
         let unanswerable = event.target.checked;
-        this.setState({unanswerable: unanswerable})
+        let response = this.state.response;
+        if (!response)
+            response = {};
+        response.unanswerable = unanswerable;
+        this.setState({response: response})
+        //this.setState({unanswerable: unanswerable})
         this.setResponse({category: "unanswerable", "value": unanswerable});
         FormActions.checkDone
     }
@@ -169,7 +189,10 @@ class SentenceQuestions extends Component {
         let questionList = questions.map(question => {
             return this.makeQuestion(question, this.props.sentence.sentence_id)
         });
-        return (this.state.unanswerable) ? (<div></div>) : questionList;
+        var unanswerable = false;
+        if (this.state.response && this.state.response.unanswerable)
+            unanswerable = this.state.response.unanswerable;
+        return (unanswerable) ? (<div></div>) : questionList;
     }
 
     render() {
@@ -180,6 +203,7 @@ class SentenceQuestions extends Component {
                         name={this.props.sentence.sentence_id + "-answerable"}
                         type="checkbox"
                         onChange={this.setAnswerable.bind(this)}
+                        checked={this.state.response.unanswerable}
                     />
                     Voor deze zin zijn onderstaande vragen niet te beantwoorden
                 </label>
@@ -192,12 +216,15 @@ class SentenceQuestions extends Component {
         }
 
         let questionList = this.makeQuestionList();
+        var sentenceLabelClass = "badge progress-bar-";
+        let sentenceDone = FormActions.checkSentenceDone(this.props.sentence);
+        sentenceLabelClass += (sentenceDone) ? "success" : "danger";
 
         return (
             <div key={this.props.sentence.sentence_id}>
                 <a name={'sentence-block-' + this.props.sentence.sentence_id}></a>
                 <div className="sentence">
-                    <label>Zin {this.props.sentence.number}:</label>{'  '}
+                    <label className={sentenceLabelClass}>Zin {this.props.sentence.number}:</label>{'  '}
                     <span className="sentence-text">
                         <i>{this.props.sentence.text}</i>
                     </span>
