@@ -10,20 +10,20 @@ class AnnotatorInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            annotator: ''
+            annotator: '',
+            loggedIn: false
         }
     }
 
     componentDidMount() {
-        let annotator = localStorage.getItem("annotator");
+        let annotator = window.localStorage.getItem("annotator");
         if (annotator) {
             this.setAnnotator(annotator);
         }
     }
 
     setAnnotator(annotator) {
-        this.setState({annotator: annotator});
-        console.log("annotator set:", annotator);
+        this.setState({annotator: annotator, loggedIn: true});
         FormActions.setAnnotator(annotator);
     }
 
@@ -36,12 +36,16 @@ class AnnotatorInfo extends React.Component {
         this.setState({annotator: email});
     }
 
+    handleLogout() {
+        this.setState({annotator: '', loggedIn: false});
+        FormActions.removeAnnotator();
+    }
+
     render() {
-        return (
-            <span className="author-info">
-                <label>Emailadres:</label>
+        let login = (
+            <span>
                 <input
-                    type="email"
+                    type="text"
                     name="annotator_email"
                     placeholder="Uw emailadres"
                     value={this.state.annotator}
@@ -51,8 +55,30 @@ class AnnotatorInfo extends React.Component {
                     className="btn btn-primary"
                     onClick={this.handleEmailSubmit.bind(this)}
                     >
-                    verder
+                    Aanmelden
                 </button>
+            </span>
+        )
+
+        let logout = (
+            <span>
+                <span className="annotator-name"
+                >
+                    {this.state.annotator}
+                </span>
+                <button
+                    className="btn btn-primary"
+                    onClick={this.handleLogout.bind(this)}
+                >
+                    Afmelden
+                </button>
+            </span>
+        )
+
+        return (
+            <span className="author-info">
+                <label>Naam: {' '}</label>{' '}
+                {(this.state.loggedIn) ? logout : login}
             </span>
         )
     }
