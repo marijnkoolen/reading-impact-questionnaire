@@ -28,7 +28,6 @@ class ImpactForm extends Component {
     }
 
     changeView(view) {
-        console.log("view:", view);
         window.localStorage.setItem("view", view);
         this.setState({view: view});
     }
@@ -56,7 +55,6 @@ class ImpactForm extends Component {
             </div>
         )
 
-        console.log(this.state.view);
         var view = null;
         if (this.state.view === "readme")
             view = readme;

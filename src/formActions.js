@@ -17,8 +17,16 @@ const FormActions = {
 
     setAnnotator(annotator) {
         SentenceAPI.annotator = annotator;
-        localStorage.setItem("annotator", annotator);
+        window.localStorage.setItem("annotator", annotator);
         FormActions.loadSentences(annotator);
+    },
+
+    removeAnnotator() {
+        SentenceAPI.annotator = null;
+        window.localStorage.removeItem('annotator');
+        AppDispatcher.dispatch({
+            eventName: 'logout-annotator',
+        });
     },
 
     saveResponse(response) {
@@ -48,7 +56,6 @@ const FormActions = {
     },
 
     checkResponseDone(response) {
-        console.log(response);
         if (response.unanswerable) {
             return true;
         }
@@ -56,6 +63,26 @@ const FormActions = {
             if (!response.hasOwnProperty(category))
                 return false;
             return true;
+        });
+    },
+
+    checkSentenceDone(sentence) {
+        let localData = FormActions.getLocalData();
+        if (!localData.responses)
+            return false;
+        if (!localData.responses.hasOwnProperty(sentence.sentence_id))
+            return false;
+        let response = localData.responses[sentence.sentence_id];
+        return  FormActions.checkResponseDone(response);
+    },
+
+    checkSentencesDone() {
+        let localData = FormActions.getLocalData();
+        if (!localData.sentences)
+            return null;
+        return localData.sentences.map((sentence) => {
+            let sentenceDone = FormActions.checkSentenceDone(sentence);
+            return {sentence_id: sentence.sentence_id, sentenceDone: sentenceDone};
         });
     },
 
@@ -96,7 +123,6 @@ const FormActions = {
     loadSentences(annotator) {
         let localData = FormActions.getLocalData();
         if (localData.sentences) {
-            console.log("loading local data");
             AppDispatcher.dispatch({
                 eventName: 'load-sentences',
                 sentences: localData.sentences,
@@ -106,7 +132,6 @@ const FormActions = {
         else {
             SentenceAPI.loadSentences(annotator, (error, sentences) => {
                 FormActions.setLocalData(sentences, null);
-                console.log("loading server data");
                 AppDispatcher.dispatch({
                     eventName: 'load-sentences',
                     sentences: sentences,
@@ -115,6 +140,13 @@ const FormActions = {
             });
         }
     },
+
+    loadNewSentences() {
+        FormActions.clearLocalData();
+        let annotator = window.localStorage.getItem("annotator");
+        FormActions.loadSentences(annotator);
+    },
+
 
     loadProgress(annotator) {
         SentenceAPI.loadProgress(annotator, (error, progressData) => {

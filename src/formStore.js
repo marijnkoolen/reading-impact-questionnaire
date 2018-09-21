@@ -12,6 +12,12 @@ class FormStore {
     loadProgress(progress) {
         this.trigger('load-progress', progress);
     }
+    loginAnnotator(annotator) {
+        this.trigger('login-annotator', annotator);
+    }
+    logoutAnnotator() {
+        this.trigger('logout-annotator');
+    }
     saveResponse(serverResponse) {
         this.trigger('save-response', serverResponse.sentence_id);
     }
@@ -30,6 +36,12 @@ MicroEvent.mixin(FormStore);
 AppDispatcher.register(function(action) {
 
     switch(action.eventName) {
+        case 'login-annotator':
+            AppFormStore.loginAnnotator(action.annotator, action.callback);
+            break;
+        case 'logout-annotator':
+            AppFormStore.logoutAnnotator(action.callback);
+            break;
         case 'load-progress':
             AppFormStore.loadProgress(action.progress, action.callback);
             break;

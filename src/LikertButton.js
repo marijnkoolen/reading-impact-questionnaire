@@ -23,14 +23,17 @@ class LikertButton extends Component {
 
     render() {
         return (
-            <label key={this.props.value}>
+            <label
+                key={this.props.value}
+                className="likert-button"
+            >
                 <input
                     name={this.props.name}
                     type="radio"
                     value={this.props.value}
                     checked={this.props.selected}
                     onChange={this.handleChange.bind(this)}
-                />{' '}
+                />
             </label>
         )
     }

@@ -39,33 +39,18 @@ class DoneButton extends Component {
     }
 
     checkDone() {
-        let localData = FormActions.getLocalData();
-        if (!localData.sentences)
-            return false;
-        let sentencesDone = localData.sentences.map((sentence) => {
-            var responseDone = false;
-            if (!localData.responses)
-                return {sentence_id: sentence.sentence_id, responseDone: responseDone};
-            if (!localData.responses.hasOwnProperty(sentence.sentence_id))
-                return {sentence_id: sentence.sentence_id, responseDone: responseDone};
-            let response = localData.responses[sentence.sentence_id];
-            console.log("response:", response);
-            responseDone = FormActions.checkResponseDone(response);
-            return {sentence_id: sentence.sentence_id, responseDone: responseDone};
-        });
-        let done = sentencesDone.every(sentence => { return sentence.responseDone});
+        let sentencesDone = FormActions.checkSentencesDone();
+        let done = sentencesDone.every(sentence => { return sentence.sentenceDone});
         this.setState({done: done, sentencesDone: sentencesDone});
     }
 
     loadNewSentences() {
-        FormActions.clearLocalData();
-        let annotator = window.localStorage.getItem("annotator");
-        FormActions.loadSentences(annotator);
+        FormActions.loadNewSentences();
     }
 
     render() {
         let sentenceChecks = this.state.sentencesDone.map((sentence, index) => {
-            let buttonClass = (sentence.responseDone) ? "btn btn-success" : "btn btn-danger";
+            let buttonClass = (sentence.sentenceDone) ? "btn btn-success" : "btn btn-danger";
             return (
                 <a href={'#sentence-block-' + sentence.sentence_id} key={index+1}>
                     <button className={buttonClass}>
@@ -85,7 +70,6 @@ class DoneButton extends Component {
                     <button
                         type="button"
                         className="done btn btn-primary"
-                        disabled={!this.state.done}
                         name="thankyou"
                         onClick={this.changeView.bind(this)}
                     >
