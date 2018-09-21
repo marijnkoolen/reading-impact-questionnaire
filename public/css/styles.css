@@ -40,3 +40,18 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.likert-button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.term-info {
+    margin-left: 10px;
+}
+
+.annotator-name {
+    width: 100px;
+    margin-right: 50px;
+}
+

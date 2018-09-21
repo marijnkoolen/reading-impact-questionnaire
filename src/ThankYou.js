@@ -16,6 +16,11 @@ class ThankYou extends Component {
         this.props.changeView(view);
     }
 
+    loadNewSentences() {
+        FormActions.loadNewSentences();
+        this.props.changeView("questionnaire");
+    }
+
     render() {
         return (
             <div className="thankyou">
@@ -39,7 +44,14 @@ class ThankYou extends Component {
                         name="questionnaire"
                         onClick={this.changeView.bind(this)}
                     >
-                        Terug naar de vragen
+                        Terug naar de vorige vragen
+                    </button>
+                    <button
+                        type="button"
+                        className="done btn btn-primary"
+                        onClick={this.loadNewSentences.bind(this)}
+                    >
+                        Meer zinnen beoordelen!
                     </button>
                 </div>
             </div>
