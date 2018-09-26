@@ -149,7 +149,7 @@ class SentenceQuestions extends Component {
                         className="badge term-info"
                         data-toggle="popover"
                         title="Uitleg"
-                        data-content="Een definitie"
+                        data-content={question.explanation}
                         data-trigger="hover"
                     >i</span>
                 </div>
