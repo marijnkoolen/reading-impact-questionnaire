@@ -3,7 +3,7 @@
 
 const questions = [
     {
-        label: "Is er in deze zin sprake van emotionele impact op de reviewer?",
+        label: "Blijkt uit deze zin emotionele impact op de reviewer?",
         answerType: "likert",
         impactType: "emotional_scale",
         labels: ["Geen impact of heel twijfelachtig", "Zeer veel impact of heel duidelijk"],
@@ -19,7 +19,7 @@ const questions = [
         key: "emo_valence"
     },
     {
-        label: "Is er sprake van narratieve gevoelens bij de reviewer?",
+        label: "Blijken uit deze zin narratieve gevoelens bij de reviewer?",
         answerType: "likert",
         impactType: "narrative_scale",
         labels: ["Geen narratief gevoel zichtbaar", "Zeer sterk of duidelijk narratief gevoel"],
@@ -35,7 +35,7 @@ const questions = [
         key: "narr_valence"
     },
     {
-        label: "Is er bij de reviewer sprake van gevoelens m.b.t. de stijl?",
+        label: "Geeft de reviewer in deze zin blijk van gevoelens m.b.t. de stijl?",
         answerType: "likert",
         impactType: "style_scale",
         labels: ["Geen gevoel m.b.t. stijl zichtbaar", "Zeer sterk of duidelijk gevoel m.b.t. stijl"],
@@ -51,7 +51,7 @@ const questions = [
         key: "style_valence"
     },
     {
-        label: "Is er bij de reviewer sprake van reflectie?",
+        label: "Blijkt uit deze zin reflectie van de reviewer?",
         answerType: "likert",
         impactType: "reflection_scale",
         labels: ["Geen reflectie zichtbaar", "Zeer veel of duidelijke reflectie zichtbaar"],
