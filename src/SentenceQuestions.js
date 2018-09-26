@@ -115,13 +115,7 @@ class SentenceQuestions extends Component {
         var likertButtons = this.makeLikertRange().map(value => {
             return makeLikertButton(question, value);
         });
-        let categoryValues = [
-            {value: "positive", label: "Prettig"},
-            {value: "negative", label: "Onprettig"},
-            {value: "neutral", label: "Neutraal"},
-            {value: "unclear", label: "Onduidelijk"},
-        ];
-        var categoryButtons = categoryValues.map(value => {
+        var categoryButtons = question.labels.map(value => {
             return makeCategoryButton(question, value);
         });
         var makeButtons = question => {

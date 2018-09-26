@@ -11,28 +11,12 @@ const questions = [
         key: "emo_likert"
     },
     {
-        label: "Als er sprake is van emotionele impact op de reviewer, is deze dan",
-        answerType: "category",
-        impactType: "emotional_valence",
-        labels: ["prettig", "onprettig", "onduidelijk"],
-        required: true,
-        key: "emo_valence"
-    },
-    {
         label: "Blijken uit deze zin narratieve gevoelens bij de reviewer?",
         answerType: "likert",
         impactType: "narrative_scale",
         labels: ["Geen narratief gevoel zichtbaar", "Zeer sterk of duidelijk narratief gevoel"],
         required: true,
         key: "narr_likert"
-    },
-    {
-        label: "Als er sprake is van narratieve gevoelens bij de reviewer, zijn deze dan",
-        answerType: "category",
-        impactType: "narrative_valence",
-        labels: ["prettig", "onprettig", "onduidelijk"],
-        required: true,
-        key: "narr_valence"
     },
     {
         label: "Geeft de reviewer in deze zin blijk van gevoelens m.b.t. de stijl?",
@@ -43,10 +27,15 @@ const questions = [
         key: "style_likert"
     },
     {
-        label: "Als er bij de reviewer sprake is van gevoelens met betrekking tot de stijl, zijn deze dan",
+        label: "Als er bij de reviewer in deze zin sprake is van emotionele impact, narratieve gevoelens, of gevoelens m.b.t. de stijl, zijn deze dan:",
         answerType: "category",
         impactType: "style_valence",
-        labels: ["prettig", "onprettig", "onduidelijk"],
+        labels: [
+            {"value": "positive", "label": "prettig"},
+            {"value": "negative", "label": "onprettig"},
+            {"value": "both", "label": "zowel prettig als onprettig"},
+            {"value": "na", "label": "niet van toepassing, neutraal of onduidelijk"},
+        ],
         required: true,
         key: "style_valence"
     },
