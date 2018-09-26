@@ -7,7 +7,7 @@ import requests
 import xmltodict
 import re
 from flask import Flask, Response, request
-from flask.ext.cors import CORS
+from flask_cors import CORS
 from indexer import Indexer
 from settings import config
 
