@@ -3,11 +3,12 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import LogoutButton from './LogoutButton.js';
 import FormActions from './formActions.js';
 import AppFormStore from './formStore.js';
 import questions from './questions.js';
 
-class DoneButton extends Component {
+class SentenceProgress extends Component {
 
     constructor(props) {
         super(props);
@@ -67,14 +68,7 @@ class DoneButton extends Component {
                     {sentenceChecks}
                 </div>
                 <div className="buttons">
-                    <button
-                        type="button"
-                        className="done btn btn-primary"
-                        name="thankyou"
-                        onClick={this.changeView.bind(this)}
-                    >
-                        Afsluiten!
-                    </button>
+                    <LogoutButton/>
                     {' '}
                     <a
                         type="button"
@@ -91,5 +85,5 @@ class DoneButton extends Component {
     }
 }
 
-export default DoneButton;
+export default SentenceProgress;
 

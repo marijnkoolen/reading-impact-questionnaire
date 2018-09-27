@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
 import LogoutButton from './LogoutButton.js';
 import ReadmeButton from './ReadmeButton.js';
-import DoneButton from './DoneButton.js';
+import SentenceProgress from './SentenceProgress.js';
 import SentenceQuestions from './SentenceQuestions.js';
 import SentenceAPI from './sentenceAPI.js';
 import AppFormStore from './formStore.js';
@@ -74,8 +74,12 @@ class Questionnaire extends Component {
             sentenceBlocks = this.state.sentences.map((sentence, index) => {
                 sentence.number = index+1;
                 var response = {unanswerable: false};
-                if (this.state.responses && this.state.responses.hasOwnProperty(sentence.sentence_id))
-                    response = this.state.responses[sentence.sentence_id];
+                let responses = this.state.responses;
+                if (responses && responses.hasOwnProperty(sentence.sentence_id)) {
+                    if (responses[sentence.sentence_id].annotator === annotator)
+                        response = responses[sentence.sentence_id];
+                }
+                console.log(response);
                 return (
                     <SentenceQuestions
                         key={sentence.number}
@@ -101,7 +105,7 @@ class Questionnaire extends Component {
             progressBar = makeProgressBar(this.state.progress);
         }
 
-        var closing = (sentenceBlocks) ? (<DoneButton changeView={this.changeView.bind(this)}/>) : null;
+        var closing = (sentenceBlocks) ? (<SentenceProgress changeView={this.changeView.bind(this)}/>) : null;
 
         return (
             <div className="col-md-10">

@@ -5,12 +5,9 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
 import Login from './Login.js';
-import DoneButton from './DoneButton.js';
 import Readme from './Readme.js';
 import Questionnaire from './Questionnaire.js';
 import ThankYou from './ThankYou.js';
-import SentenceQuestions from './SentenceQuestions.js';
-import SentenceAPI from './sentenceAPI.js';
 import AppFormStore from './formStore.js';
 
 class ImpactForm extends Component {
