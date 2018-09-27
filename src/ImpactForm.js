@@ -25,6 +25,10 @@ class ImpactForm extends Component {
         this.setView();
     }
 
+    componentWillUnmount() {
+        AppFormStore.unbind('change-view', this.changeView.bind(this));
+    }
+
     changeView(view) {
         window.localStorage.setItem("view", view);
         this.setState({view: view});

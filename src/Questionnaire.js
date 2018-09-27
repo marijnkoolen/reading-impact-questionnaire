@@ -32,7 +32,6 @@ class Questionnaire extends Component {
         AppFormStore.bind('load-sentences', this.setSentences.bind(this));
         AppFormStore.bind('load-progress', this.setProgress.bind(this));
         AppFormStore.bind('clear-responses', this.clearResponses.bind(this));
-        AppFormStore.bind('login-annotator', this.loginAnnotator.bind(this));
         AppFormStore.bind('logout-annotator', this.logoutAnnotator.bind(this));
         let annotator = window.localStorage.getItem("annotator");
         if (annotator)
@@ -40,8 +39,11 @@ class Questionnaire extends Component {
             //this.loginAnnotator(annotator);
     }
 
-    loginAnnotator(annotator) {
-        //FormActions.loadSentences(annotator);
+    componentWillUnmount() {
+        AppFormStore.unbind('load-sentences', this.setSentences.bind(this));
+        AppFormStore.unbind('load-progress', this.setProgress.bind(this));
+        AppFormStore.unbind('clear-responses', this.clearResponses.bind(this));
+        AppFormStore.unbind('logout-annotator', this.logoutAnnotator.bind(this));
     }
 
     logoutAnnotator(annotator) {

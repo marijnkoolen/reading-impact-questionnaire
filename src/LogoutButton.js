@@ -12,7 +12,6 @@ class LogoutButton extends Component {
     }
 
     logout() {
-        //FormActions.logout();
         FormActions.removeAnnotator();
         FormActions.changeView("thankyou");
     }

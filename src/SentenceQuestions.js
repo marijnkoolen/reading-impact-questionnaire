@@ -21,8 +21,12 @@ class SentenceQuestions extends Component {
 
     componentDidMount() {
         AppFormStore.bind('save-response', this.setResponseStatus.bind(this));
-        //AppFormStore.bind('remove-response', this.checkDone.bind(this));
         AppFormStore.bind('clear-responses', this.clearResponses.bind(this));
+    }
+
+    componentWillUnmount() {
+        AppFormStore.unbind('save-response', this.setResponseStatus.bind(this));
+        AppFormStore.unbind('clear-responses', this.clearResponses.bind(this));
     }
 
     clearResponses() {

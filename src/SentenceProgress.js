@@ -26,6 +26,13 @@ class SentenceProgress extends Component {
         AppFormStore.bind('load-sentences', this.checkDone.bind(this));
     }
 
+    componentWillUnmount() {
+        AppFormStore.unbind('save-response', this.checkDone.bind(this));
+        AppFormStore.unbind('remove-response', this.checkDone.bind(this));
+        AppFormStore.unbind('load-sentences', this.checkDone.bind(this));
+
+    }
+
     changeView(event) {
         this.props.changeView(event);
     }
@@ -77,7 +84,7 @@ class SentenceProgress extends Component {
                         disabled={!this.state.done}
                         onClick={this.loadNewSentences.bind(this)}
                     >
-                        Meer zinnen beoordelen!
+                        Meer zinnen beoordelen
                     </a>
                 </div>
             </div>
