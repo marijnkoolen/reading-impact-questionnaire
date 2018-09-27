@@ -31,7 +31,7 @@ const questions = [
     },
     {
         label: "Als er bij de reviewer in deze zin sprake is van emotionele impact, narratieve gevoelens, of gevoelens m.b.t. de stijl, zijn deze dan:",
-        explanation: "Reflectie: gedachten, inzichten en mijmeringen over jezelf, de personages, het boek of de wereld.",
+        explanation: "Prettig/onprettig: Het gaat hier om de gevoelens van de reviewer! Een 'afschuwelijke moord' is iets negatiefs, maar kan het beginpunt zijn voor een mooi verhaal. 'Prettig' is wat je aanzet tot lezen, 'onprettig' is waardoor je met lezen wilt stoppen.",
         answerType: "category",
         impactType: "style_valence",
         labels: [
@@ -45,7 +45,7 @@ const questions = [
     },
     {
         label: "Blijkt uit deze zin reflectie van de reviewer?",
-        explanation: "Prettig/onprettig: Het gaat hier om de gevoelens van de reviewer! Een 'afschuwelijke moord' is iets negatiefs, maar kan het beginpunt zijn voor een mooi verhaal. 'Prettig' is wat je aanzet tot lezen, 'onprettig' is waardoor je met lezen wilt stoppen.",
+        explanation: "Reflectie: gedachten, inzichten en mijmeringen over jezelf, de personages, het boek of de wereld.",
         answerType: "likert",
         impactType: "reflection_scale",
         labels: ["Geen reflectie zichtbaar", "Zeer veel of duidelijke reflectie zichtbaar"],
