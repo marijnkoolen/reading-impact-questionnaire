@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
-import AnnotatorInfo from './AnnotatorInfo.js';
+import Login from './Login.js';
 import DoneButton from './DoneButton.js';
 import Readme from './Readme.js';
 import Questionnaire from './Questionnaire.js';
@@ -23,6 +23,7 @@ class ImpactForm extends Component {
     }
 
     componentDidMount() {
+        AppFormStore.bind('change-view', this.changeView.bind(this));
         FormActions.setSentenceServer(this.props.apiUrl);
         this.setView();
     }
@@ -40,24 +41,32 @@ class ImpactForm extends Component {
 
     render() {
         let questionnaire = (
-            <Questionnaire changeView={this.changeView.bind(this)}/>
+            <Questionnaire/>
         );
+
+        let login = (
+            <Login/>
+        )
 
         let readme = (
             <div className="col-md-10">
-                <Readme changeView={this.changeView.bind(this)}/>
+                <Readme/>
             </div>
         )
 
         let thankyou = (
             <div className="col-md-10">
-                <ThankYou changeView={this.changeView.bind(this)}/>
+                <ThankYou/>
             </div>
         )
 
         var view = null;
         if (this.state.view === "readme")
             view = readme;
+        else if (this.state.view === "login")
+            view = login;
+        else if (this.state.view === "thankyou")
+            view = thankyou;
         else if (this.state.view === "questionnaire")
             view = questionnaire;
         else if (this.state.view === "thankyou")

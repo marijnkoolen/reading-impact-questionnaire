@@ -21,6 +21,35 @@ const FormActions = {
         FormActions.loadSentences(annotator);
     },
 
+    changeView(view) {
+        AppDispatcher.dispatch({
+            eventName: 'change-view',
+            view: view
+        })
+    },
+
+    generateID() {
+        let genChar = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 3);
+        let genNum = Math.random().toString().replace("0.","").substr(0,3);
+        return genChar + genNum;
+    },
+
+    addNewId(identifier) {
+        var previousIds = FormActions.getPreviousIds();
+        previousIds.push(identifier);
+        window.localStorage.setItem('previousIds', JSON.stringify(previousIds));
+    },
+
+    getPreviousIds() {
+        var previousIds = window.localStorage.getItem('previousIds');
+        if (!previousIds) {
+            previousIds = [];
+        } else {
+            previousIds = JSON.parse(previousIds);
+        }
+        return previousIds;
+    },
+
     removeAnnotator() {
         SentenceAPI.annotator = null;
         window.localStorage.removeItem('annotator');

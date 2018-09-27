@@ -27,6 +27,9 @@ class FormStore {
     clearResponses() {
         this.trigger('clear-responses');
     }
+    changeView(view) {
+        this.trigger('change-view', view);
+    }
 }
 
 var AppFormStore = new FormStore();
@@ -56,6 +59,9 @@ AppDispatcher.register(function(action) {
             break;
         case 'remove-response':
             AppFormStore.removeResponse(action.serverResponse, action.callback);
+            break;
+        case 'change-view':
+            AppFormStore.changeView(action.view, action.callback);
             break;
     }
 })

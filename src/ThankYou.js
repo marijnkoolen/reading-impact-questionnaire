@@ -3,12 +3,18 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import ReadmeButton from './ReadmeButton.js';
+import LoginButton from './LoginButton.js';
+import AppFormStore from './formStore.js';
 
 class ThankYou extends Component {
 
     constructor(props) {
         super(props);
         this.changeView = this.changeView.bind(this);
+        this.state = {
+            previousId: null
+        }
     }
 
     changeView(event) {
@@ -31,28 +37,9 @@ class ThankYou extends Component {
                     Als u op de hoogte gehouden wilt worden over de vorderingen van dit onderzoek, laat het ons weten. Mail naar ...
                 </p>
                 <div className="closing">
-                    <button
-                        className="btn btn-primary"
-                        name="readme"
-                        onClick={this.changeView.bind(this)}
-                    >
-                        Terug naar de uitleg
-                    </button>
+                    <ReadmeButton labelText="Terug naar de uitleg"/>
                     {' '}
-                    <button
-                        className="btn btn-primary"
-                        name="questionnaire"
-                        onClick={this.changeView.bind(this)}
-                    >
-                        Terug naar de vorige vragen
-                    </button>
-                    <button
-                        type="button"
-                        className="done btn btn-primary"
-                        onClick={this.loadNewSentences.bind(this)}
-                    >
-                        Meer zinnen beoordelen!
-                    </button>
+                    <LoginButton labelText="Opnieuw aanmelden"/>
                 </div>
             </div>
         )

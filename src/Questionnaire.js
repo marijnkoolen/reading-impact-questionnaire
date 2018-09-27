@@ -4,7 +4,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
-import AnnotatorInfo from './AnnotatorInfo.js';
+import LogoutButton from './LogoutButton.js';
+import ReadmeButton from './ReadmeButton.js';
 import DoneButton from './DoneButton.js';
 import SentenceQuestions from './SentenceQuestions.js';
 import SentenceAPI from './sentenceAPI.js';
@@ -88,7 +89,11 @@ class Questionnaire extends Component {
         let makeProgressBar = (progress) => {
             return (
                 <div className="header progress">
-                    Zinnen totaal: {progress.sentences_total}, klaar: {progress.sentences_done}, door u beoordeeld: {progress.sentences_done_by_you}.
+                    <span>Totaal te beoordelen zinnen {progress.sentences_total}.</span>
+                    {' '}
+                    <span>Voldoende oordelen verzameld voor {progress.sentences_done} zinnen.</span>
+                    {' '}
+                    <span>Zinnen door u beoordeelt: {progress.sentences_done_by_you}.</span>
                 </div>
             )
         }
@@ -101,15 +106,10 @@ class Questionnaire extends Component {
         return (
             <div className="col-md-10">
                 <div className="row header">
-                    <AnnotatorInfo/>
+                    <p>U bent aangemeld met ID: {annotator}</p>
+                    <LogoutButton/>
                     {' '}
-                    <button
-                        className="btn btn-primary"
-                        name="readme"
-                        onClick={this.changeView.bind(this)}
-                    >
-                        Terug naar uitleg
-                    </button>
+                    <ReadmeButton/>
                     {progressBar}
                 </div>
                 <div className="row">

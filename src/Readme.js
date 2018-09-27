@@ -3,6 +3,10 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import LoginButton from './LoginButton.js';
+import ReadmeMoreButton from './ReadmeMoreButton.js';
+import QuestionnaireButton from './QuestionnaireButton.js';
+import FormActions from './formActions.js';
 
 class Readme extends Component {
 
@@ -11,11 +15,18 @@ class Readme extends Component {
         super(props);
     }
 
-    changeView() {
-        this.props.changeView("questionnaire");
+    changeView(event) {
+        let action = event.target.name;
+        if (action === "readme-more") {
+            this.props.changeView("readme-more");
+       }
     }
 
     render() {
+        let annotator = FormActions.getAnnotator();
+        let nextButton = (annotator) ?
+            (<QuestionnaireButton labelText="Terug naar de vragenlijst"/>) :
+            (<LoginButton labelText="Ik doe graag mee!"/>);
         return (
             <div className="readme">
                 <div className="readme-header">
@@ -179,12 +190,9 @@ class Readme extends Component {
                     </div>
                </div>
                 <div className="closing">
-                    <button
-                        className="btn btn-primary"
-                        onClick={this.changeView.bind(this)}
-                    >
-                        Naar de vragenlijst
-                    </button>
+                    {nextButton}
+                    {' '}
+                    <ReadmeMoreButton/>
                 </div>
             </div>
         );
