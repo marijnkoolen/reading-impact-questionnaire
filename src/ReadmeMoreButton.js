@@ -12,7 +12,8 @@ class ReadmeMoreButton extends Component {
     }
 
     changeView() {
-        FormActions.changeView("readme-more");
+        // TO DO: implement readme-more page
+        //FormActions.changeView("readme-more");
     }
 
     render() {
