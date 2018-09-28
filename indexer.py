@@ -114,7 +114,7 @@ class Indexer(object):
         modified = self.check_response_exists(sentence, response)
         self.add_timestamp(response, modified)
         sentence["annotations"].append(response)
-        if len(sentence["annotations"]) == self.NUM_ANNOTATORS:
+        if len(sentence["annotations"]) >= self.NUM_ANNOTATORS:
             sentence["annotation_status"] = "done"
         else:
             sentence["annotation_status"] = "in_progress"
