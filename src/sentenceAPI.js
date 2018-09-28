@@ -25,6 +25,34 @@ const SentenceAPI = {
 
     },
 
+    registerId : (identifier, callback) => {
+        let url = SentenceAPI.sentenceServer + "/register_annotator?annotator=" + identifier;
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                //console.log(responseData);
+                callback(null, responseData);
+            }
+        }
+    },
+
+    checkIdExists : (identifier, callback) => {
+        let url = SentenceAPI.sentenceServer + "/annotator_exists?annotator=" + identifier;
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                //console.log(responseData);
+                callback(null, responseData);
+            }
+        }
+    },
+
     loadSentences : (annotator, callback) => {
         if (!(SentenceAPI.annotator)) {
             SentenceAPI.annotator = annotator;
@@ -37,6 +65,23 @@ const SentenceAPI = {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let responseData = JSON.parse(xhr.responseText);
                 //console.log(responseData);
+                callback(null, responseData);
+            }
+        }
+    },
+
+    loadAnnotatorJudgements : (annotator, callback) => {
+        if (!(SentenceAPI.annotator)) {
+            SentenceAPI.annotator = annotator;
+        }
+        let url = SentenceAPI.sentenceServer + "/load_annotator_sentences?annotator=" + annotator;
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                console.log(responseData);
                 callback(null, responseData);
             }
         }

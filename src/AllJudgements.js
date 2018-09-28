@@ -6,12 +6,12 @@ import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
 import LogoutButton from './LogoutButton.js';
 import ReadmeButton from './ReadmeButton.js';
-import SentenceProgress from './SentenceProgress.js';
+import QuestionnaireButton from './QuestionnaireButton.js';
 import SentenceQuestions from './SentenceQuestions.js';
 import SentenceAPI from './sentenceAPI.js';
 import AppFormStore from './formStore.js';
 
-class Questionnaire extends Component {
+class AllJudgements extends Component {
 
     constructor(props) {
         super(props);
@@ -29,31 +29,20 @@ class Questionnaire extends Component {
     }
 
     componentDidMount() {
-        AppFormStore.bind('load-sentences', this.setSentences.bind(this));
+        AppFormStore.bind('load-judgements', this.setJudgements.bind(this));
         AppFormStore.bind('load-progress', this.setProgress.bind(this));
         AppFormStore.bind('clear-responses', this.clearResponses.bind(this));
         AppFormStore.bind('logout-annotator', this.logoutAnnotator.bind(this));
         let annotator = window.localStorage.getItem("annotator");
-        console.log("loading sentences");
         if (annotator)
-            this.loadSentences(annotator);
-            //this.loginAnnotator(annotator);
+            FormActions.loadAnnotatorJudgements(annotator);
     }
 
     componentWillUnmount() {
-        AppFormStore.unbind('load-sentences', this.setSentences.bind(this));
+        AppFormStore.unbind('load-sentences', this.setJudgements.bind(this));
         AppFormStore.unbind('load-progress', this.setProgress.bind(this));
         AppFormStore.unbind('clear-responses', this.clearResponses.bind(this));
         AppFormStore.unbind('logout-annotator', this.logoutAnnotator.bind(this));
-    }
-
-    loadSentences(annotator) {
-        if (FormActions.isDispatching()) {
-            setTimeout(FormActions.loadSentences, 100, annotator)
-        } else {
-            FormActions.loadSentences(annotator);
-        }
-
     }
 
     logoutAnnotator(annotator) {
@@ -64,12 +53,14 @@ class Questionnaire extends Component {
         this.setState({responses: []});
     }
 
-    setSentences(sentences, responses) {
+    setJudgements(sentences, responses) {
+        console.log(sentences);
+        console.log(responses);
+        let annotator = FormActions.getAnnotator();
         this.setState({
             sentences: sentences,
             responses: responses
         });
-        let annotator = window.localStorage.getItem("annotator");
         FormActions.loadProgress(annotator);
     }
 
@@ -77,6 +68,10 @@ class Questionnaire extends Component {
         this.setState({progress: progress});
     }
 
+    backToQuestionnaire() {
+        FormActions.setLocalData(null, null);
+        FormActions.changeView("questionnaire");
+    }
 
     render() {
         let annotator = window.localStorage.getItem('annotator');
@@ -116,8 +111,6 @@ class Questionnaire extends Component {
             progressBar = makeProgressBar(this.state.progress);
         }
 
-        var closing = (sentenceBlocks) ? (<SentenceProgress changeView={this.changeView.bind(this)}/>) : null;
-
         return (
             <div className="col-md-10">
                 <div className="row header">
@@ -125,18 +118,31 @@ class Questionnaire extends Component {
                     <LogoutButton/>
                     {' '}
                     <ReadmeButton/>
+                    {' '}
+                    <QuestionnaireButton labelText="Toon nog te beoordelen zinnen"/>
                     {progressBar}
                 </div>
                 <div className="row">
                     {(annotator) ? sentenceBlocks : null}
                 </div>
                 <div className="row closing">
-                    {closing}
+                    <ReadmeButton/>
+                    {' '}
+                    <LogoutButton/>
+                    {' '}
+                    <button
+                        className="btn btn-primary"
+                        name="back-to-questionnaire"
+                        onClick={this.backToQuestionnaire.bind(this)}
+                    >
+                        Toon nog te beoordelen zinnen
+                    </button>
                 </div>
             </div>
         )
     }
 }
 
-export default Questionnaire;
+export default AllJudgements;
+
 

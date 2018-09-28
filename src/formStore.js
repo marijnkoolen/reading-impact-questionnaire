@@ -6,11 +6,16 @@ import AppDispatcher from './AppDispatcher.js';
 
 class FormStore {
     loadSentences(sentences, responses) {
-        //window.localStorage.setItem("sentences", JSON.stringify(sentences));
         this.trigger('load-sentences', sentences, responses);
+    }
+    loadJudgements(sentences, responses) {
+        this.trigger('load-judgements', sentences, responses);
     }
     loadProgress(progress) {
         this.trigger('load-progress', progress);
+    }
+    checkIdentifier(annotator) {
+        this.trigger('check-identifier', exists);
     }
     loginAnnotator(annotator) {
         this.trigger('login-annotator', annotator);
@@ -39,6 +44,9 @@ MicroEvent.mixin(FormStore);
 AppDispatcher.register(function(action) {
 
     switch(action.eventName) {
+        case 'check-identifier':
+            AppFormStore.checkIdentifier(action.identifier, action.callback);
+            break;
         case 'login-annotator':
             AppFormStore.loginAnnotator(action.annotator, action.callback);
             break;
@@ -50,6 +58,9 @@ AppDispatcher.register(function(action) {
             break;
         case 'load-sentences':
             AppFormStore.loadSentences(action.sentences, action.responses, action.callback);
+            break;
+        case 'load-judgements':
+            AppFormStore.loadJudgements(action.sentences, action.responses, action.callback);
             break;
         case 'clear-responses':
             AppFormStore.clearResponses(action.callback);

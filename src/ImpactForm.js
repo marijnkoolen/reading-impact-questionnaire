@@ -7,6 +7,7 @@ import FormActions from './formActions.js';
 import Login from './Login.js';
 import Readme from './Readme.js';
 import Questionnaire from './Questionnaire.js';
+import AllJudgements from './AllJudgements.js';
 import ThankYou from './ThankYou.js';
 import AppFormStore from './formStore.js';
 
@@ -45,20 +46,20 @@ class ImpactForm extends Component {
             <Questionnaire/>
         );
 
+        let judgements = (
+            <AllJudgements/>
+        );
+
         let login = (
             <Login/>
         )
 
         let readme = (
-            <div className="col-md-10">
-                <Readme/>
-            </div>
+            <Readme/>
         )
 
         let thankyou = (
-            <div className="col-md-10">
-                <ThankYou/>
-            </div>
+            <ThankYou/>
         )
 
         var view = null;
@@ -70,6 +71,8 @@ class ImpactForm extends Component {
             view = thankyou;
         else if (this.state.view === "questionnaire")
             view = questionnaire;
+        else if (this.state.view === "judgements")
+            view = judgements;
         else if (this.state.view === "thankyou")
             view = thankyou;
 

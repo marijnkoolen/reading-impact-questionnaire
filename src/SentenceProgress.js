@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import LogoutButton from './LogoutButton.js';
+import AllJudgementsButton from './AllJudgementsButton.js';
 import FormActions from './formActions.js';
 import AppFormStore from './formStore.js';
 import questions from './questions.js';
@@ -86,6 +87,8 @@ class SentenceProgress extends Component {
                     >
                         Meer zinnen beoordelen
                     </a>
+                    {' '}
+                    <AllJudgementsButton/>
                 </div>
             </div>
         )

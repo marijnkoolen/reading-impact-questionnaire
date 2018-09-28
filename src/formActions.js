@@ -21,6 +21,10 @@ const FormActions = {
         FormActions.loadSentences(annotator);
     },
 
+    isDispatching() {
+        return AppDispatcher.isDispatching();
+    },
+
     changeView(view) {
         AppDispatcher.dispatch({
             eventName: 'change-view',
@@ -38,6 +42,7 @@ const FormActions = {
         var previousIds = FormActions.getPreviousIds();
         previousIds.push(identifier);
         window.localStorage.setItem('previousIds', JSON.stringify(previousIds));
+        FormActions.registerId(identifier);
     },
 
     getPreviousIds() {
@@ -48,6 +53,23 @@ const FormActions = {
             previousIds = JSON.parse(previousIds);
         }
         return previousIds;
+    },
+
+    registerId(identifier) {
+        SentenceAPI.registerId(identifier, (error, serverResponse) => {
+            return serverResponse;
+        });
+    },
+
+    checkIdExists(identifier, callback) {
+        SentenceAPI.checkIdExists(identifier, (error, serverResponse) => {
+            console.log(serverResponse);
+            callback(serverResponse.exists);
+        });
+    },
+
+    checkIdIsValid(identifier) {
+        return identifier.match(/[a-z]{3}[0-9]{3}/) !== null;
     },
 
     removeAnnotator() {
@@ -102,6 +124,8 @@ const FormActions = {
         if (!localData.responses.hasOwnProperty(sentence.sentence_id))
             return false;
         let response = localData.responses[sentence.sentence_id];
+        if (response.annotator !== FormActions.getAnnotator())
+            return false;
         return  FormActions.checkResponseDone(response);
     },
 
@@ -164,9 +188,41 @@ const FormActions = {
                 AppDispatcher.dispatch({
                     eventName: 'load-sentences',
                     sentences: sentences,
-                    responses: {}
+                    responses: null
                 });
             });
+        }
+    },
+
+    loadAnnotatorJudgements(annotator) {
+        SentenceAPI.loadAnnotatorJudgements(annotator, (error, sentences) => {
+            FormActions.extractResponses(sentences, annotator, (responses) => {
+                console.log(responses);
+                FormActions.setLocalData(sentences, responses);
+                AppDispatcher.dispatch({
+                    eventName: 'load-judgements',
+                    sentences: sentences,
+                    responses: responses
+                });
+            });
+        });
+    },
+
+    extractResponses(sentences, annotator, callback) {
+        var responses = {};
+        if (sentences) {
+            sentences.forEach((sentence, index) => {
+                sentence.annotations.forEach((annotation) => {
+                    if (annotation.annotator === annotator) {
+                        responses[sentence.sentence_id] = annotation;
+                    }
+                });
+                if (index === sentences.length -1) {
+                    callback(responses);
+                }
+            });
+        } else {
+            callback(null);
         }
     },
 
