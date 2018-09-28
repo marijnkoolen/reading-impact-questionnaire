@@ -34,7 +34,7 @@ class ThankYou extends Component {
                     Hartelijk dank voor uw medewerking!
                 </h2>
                 <p>
-                    Als u op de hoogte gehouden wilt worden over de vorderingen van dit onderzoek, laat het ons weten. Mail naar ...
+                    Als u op de hoogte gehouden wilt worden over de vorderingen van dit onderzoek, laat het ons weten. Mail naar <a href="mailto:peter.boot@huygens.knaw.nl">peter.boot@huygens.knaw.nl</a> en/of <a href="mailto:marijn.koolen@di.huc.knaw.nl">marijn.koolen@di.huc.knaw.nl</a>.
                 </p>
                 <div className="closing">
                     <ReadmeButton labelText="Terug naar de uitleg"/>
