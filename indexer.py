@@ -1,3 +1,5 @@
+import datetime
+import pytz
 from elasticsearch import Elasticsearch
 
 class Indexer(object):
@@ -49,7 +51,6 @@ class Indexer(object):
         return self.es.search(index=self.index, doc_type=self.doc_type, body=query)
 
     def get_sentences_by_status(self, annotation_status):
-        print(annotation_status)
         query = {
             "query": {
                 "match": { "annotation_status": annotation_status }
@@ -59,7 +60,6 @@ class Indexer(object):
         return self.es.search(index=self.index, doc_type=self.doc_type, body=query)
 
     def get_sentences_by_annotator(self, annotator):
-        print(annotator)
         query = {
             "query": {
                 "match": { "annotations.annotator": annotator }
@@ -84,11 +84,35 @@ class Indexer(object):
         response = self.es.get(index=self.index, doc_type=self.doc_type, id=sentence_id)
         return response["_source"]
 
-    def add_response(self, response):
-        sentence = self.get_sentence(response["sentence_id"])
+    def make_timestamp(self):
+        return datetime.datetime.now(pytz.utc).isoformat()
+
+    def add_timestamp(self, response, modified):
+        # Keep track of number of times a judgement is modified for analysis.
+        # Many modifications suggests sentence is difficult.
+        if modified:
+            if "num_modifications" not in response:
+                response["num_modifications"] = 0
+            response["num_modifications"] += 1
+            response["modified"] = self.make_timestamp()
+        else:
+            response["created"] = self.make_timestamp()
+
+    def check_response_exists(self, sentence, response):
+        modified = False
         for annotation_index, annotation in enumerate(sentence["annotations"]):
             if annotation["annotator"] == response["annotator"]:
                 sentence["annotations"].pop(annotation_index)
+                response["created"] = annotation["created"]
+                if "num_modifications" in annotation:
+                    response["num_modifications"] = annotation["num_modifications"]
+                modified = True
+        return modified
+
+    def add_response(self, response):
+        sentence = self.get_sentence(response["sentence_id"])
+        modified = self.check_response_exists(sentence, response)
+        self.add_timestamp(response, modified)
         sentence["annotations"].append(response)
         if len(sentence["annotations"]) == self.NUM_ANNOTATORS:
             sentence["annotation_status"] = "done"

@@ -43,7 +43,6 @@ def remove_response():
 def load_progress():
     annotator = request.args.get('annotator')
     progress = es_indexer.get_progress(annotator)
-    print(progress)
     return make_response(progress)
 
 @app.route('/api/reading_impact/load_sentences', methods=["GET"])
@@ -53,4 +52,4 @@ def load_sentences():
     return make_response(sentences)
 
 if __name__ == '__main__':
-    app.run(host=config["api_host"], port=int(os.environ.get("PORT", config["api_port"])), debug=True)
+    app.run(port=int(os.environ.get("PORT", config["api_port"])), debug=True)
