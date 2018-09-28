@@ -18,6 +18,11 @@
     margin: 25px;
 }
 
+.readme {
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
 .readme-explanation {
     margin: 10px;
 }
@@ -32,8 +37,9 @@
 
 .logo {
     width: 100px;
-    float: right;
     margin-top: 20px;
+    margin-left: 50px;
+    display: block;
 }
 
 .header {
