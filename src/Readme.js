@@ -37,7 +37,7 @@ class Readme extends Component {
                         Vragenlijst opgesteld door Peter Boot (Huygens ING) en Marijn Koolen (KNAW
                         Humanities Cluster) in het kader van een onderzoek over hoe lezers de impact
                         van een boek uitdrukken. Als u meer wilt weten over dit onderzoek en hoe de
-                        gegevens gebruikt worden, kunt u contact opnemen via ... (email/blog/...).
+                        gegevens gebruikt worden, kunt u contact opnemen via email (<a href="mailto:peter.boot@huygens.knaw.nl">peter.boot@huygens.knaw.nl</a> en/of <a href="mailto:marijn.koolen@di.huc.knaw.nl">marijn.koolen@di.huc.knaw.nl</a>).
                     </p>
                     <p>
                         Deze vragenlijst is opgesteld om te begrijpen hoe lezers de impact van een boek
@@ -192,7 +192,6 @@ class Readme extends Component {
                 <div className="closing">
                     {nextButton}
                     {' '}
-                    <ReadmeMoreButton/>
                 </div>
             </div>
         );
