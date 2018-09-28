@@ -45,6 +45,24 @@ def load_progress():
     progress = es_indexer.get_progress(annotator)
     return make_response(progress)
 
+@app.route('/api/reading_impact/register_annotator', methods=["GET"])
+def register_annotator():
+    annotator = request.args.get('annotator')
+    response = es_indexer.register_annotator(annotator)
+    return make_response(response)
+
+@app.route('/api/reading_impact/annotator_exists', methods=["GET"])
+def annotator_exists():
+    annotator = request.args.get('annotator')
+    response = {"annotator": annotator, "exists": es_indexer.annotator_exists(annotator)}
+    return make_response(response)
+
+@app.route('/api/reading_impact/load_annotator_sentences', methods=["GET"])
+def load_annotator_sentences():
+    annotator = request.args.get('annotator')
+    sentences = es_indexer.get_annotator_sentences(annotator)
+    return make_response(sentences)
+
 @app.route('/api/reading_impact/load_sentences', methods=["GET"])
 def load_sentences():
     annotator = request.args.get('annotator')

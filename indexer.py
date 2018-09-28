@@ -26,6 +26,30 @@ class Indexer(object):
     def index_sentence(self, sentence):
         self.es.index(index=self.index, doc_type=self.doc_type, id=sentence["sentence_id"], body=sentence)
 
+    def annotator_exists(self, annotator):
+        return self.es.exists(index="reading_impact_annotator", doc_type="annotator", id=annotator)
+
+    def register_annotator(self, annotator):
+        if self.annotator_exists(annotator):
+            return {"status": 0, "message": "annotator already exists"}
+        doc = {"annotator": annotator, "created": self.make_timestamp()}
+        self.es.index(index="reading_impact_annotator", doc_type="annotator", id=annotator, body=doc)
+
+    def get_annotator_sentences(self, annotator):
+        query = {
+            "query": {
+                "match": {
+                    "annotations.annotator": annotator
+                }
+            },
+            "size": 10000
+        }
+        response = self.es.search(index=self.index, doc_type=self.doc_type, body=query)
+        if response['hits']['total'] == 0:
+            return []
+        else:
+            return [hit["_source"] for hit in response['hits']['hits']]
+
     def get_unfinished_sentences(self, annotator):
         response = self.search_unfinished_sentences(annotator)
         if response['hits']['total'] == 0:
