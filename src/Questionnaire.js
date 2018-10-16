@@ -108,7 +108,7 @@ class Questionnaire extends Component {
                     {' '}
                     <span>Voldoende oordelen verzameld voor {progress.sentences_done} zinnen.</span>
                     {' '}
-                    <span>Zinnen door u beoordeelt: {progress.sentences_done_by_you}.</span>
+                    <span>Zinnen door u beoordeeld: {progress.sentences_done_by_you}.</span>
                 </div>
             )
         }
