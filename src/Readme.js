@@ -34,8 +34,8 @@ class Readme extends Component {
 				</div>
 				<div className="readme-background">
 					<p>
-						Vragenlijst opgesteld door Peter Boot (Huygens ING) en Marijn Koolen (KNAW
-						Humanities Cluster) in het kader van een onderzoek over hoe lezers de impact
+						Vragenlijst opgesteld door Peter Boot (<a href="https://www.huygens.knaw.nl/">Huygens ING</a>) en Marijn Koolen (<a href="https://huc.knaw.nl/about/">KNAW
+						Humanities Cluster</a>) in het kader van een onderzoek over hoe lezers de impact
 						van een boek uitdrukken. Als u meer wilt weten over dit onderzoek en hoe de
 						gegevens gebruikt worden, kunt u contact opnemen via email (<a href="mailto:peter.boot@huygens.knaw.nl">peter.boot@huygens.knaw.nl</a> en/of <a href="mailto:marijn.koolen@di.huc.knaw.nl">marijn.koolen@di.huc.knaw.nl</a>).
 					</p>
@@ -56,18 +56,18 @@ class Readme extends Component {
 					<ul>
 						<li>
 							Wat voor soorten en vormen van leesimpact noemen fictielezers in hun
-							recensies? 
+							recensies?
 						</li>
 						<li>
 							Hoe worden die soorten en vormen van impact door fictielezers uitgedrukt?
 						</li>
 						<li>
 							Hoe verhouden verschillende fictiegenres zich tot verschillende soorten
-							van leesimpact 
+							van leesimpact
 						</li>
 						<li>
 							Welke aspecten van een roman (e.g. schrijfstijl, plot, karakters, sfeer)
-							leiden tot welke soorten leesimpact 
+							leiden tot welke soorten leesimpact
 						</li>
 					</ul>
 					<p>
@@ -75,10 +75,10 @@ class Readme extends Component {
 					</p>
 					<ul>
 						<li>
-							Emotie: elke (tijdelijke of blijvende) emotionele reactie tijdens of na het lezen, 
-							of die nu betrekking heeft op het boek als geheel, de karakters, de auteur, de stijl, 
-							aspecten van de wereld die het boek beschrijft, of enig ander aspect. Deze gevoelens 
-							mogen positief of negatief zijn, sterk of zwak. Het gaat echter niet om gevoelens zoals 
+							Emotie: elke (tijdelijke of blijvende) emotionele reactie tijdens of na het lezen,
+							of die nu betrekking heeft op het boek als geheel, de karakters, de auteur, de stijl,
+							aspecten van de wereld die het boek beschrijft, of enig ander aspect. Deze gevoelens
+							mogen positief of negatief zijn, sterk of zwak. Het gaat echter niet om gevoelens zoals
 							verveling, waar het boek kennelijk niet het gewenste effect heeft.
 						</li>
 						<li>
@@ -89,7 +89,7 @@ class Readme extends Component {
 							ergernis over een personage of over de wereld van het verhaal.
 						</li>
 						<li>
-							Gevoelens over de stijl: elk gevoel dat betrekking heeft op de aesthetische aspecten van de tekst: 
+							Gevoelens over de stijl: elk gevoel dat betrekking heeft op de aesthetische aspecten van de tekst:
 							of de stijl aantrekkelijk is (mooi, goed, maar ook lelijk) en of het
 							opvallend is  (origineel, verrassend, treffend).
 						</li>
@@ -99,19 +99,19 @@ class Readme extends Component {
 							iets geleerd of een nieuw inzicht, heeft hij/zij gemijmerd, wil hij iets onthouden?
 						</li>
 					</ul>
-					<p>We vragen om een oordeel op een zeven-puntsschaal. We vragen je om in je oordeel te betrekken hoe 
-						sterk het gevoel is <i>en</i> hoe zeker je er van bent. Een sterk gevoel bij de reviewer of een 
-						gevoel waarover geen twijfel kan bestaan leidt tot een oordeel meer naar rechts; een zwak gevoel 
+					<p>We vragen om een oordeel op een zeven-puntsschaal. We vragen je om in je oordeel te betrekken hoe
+						sterk het gevoel is <i>en</i> hoe zeker je er van bent. Een sterk gevoel bij de reviewer of een
+						gevoel waarover geen twijfel kan bestaan leidt tot een oordeel meer naar rechts; een zwak gevoel
 						of een gevoel waar je niet zeker van bent leidt tot een oordeel meer naar links.</p>
 					<p>
-						Bovendien vragen we om te bepalen wat voor gevoel dit geweest is. Het gaat hier om de gevoelens 
-						van de reviewer! Een <i>afschuwelijke moord</i> is iets negatiefs, maar kan het beginpunt zijn voor 
-						een mooi verhaal. <i>Prettig</i> is wat je aanzet tot lezen, <i>onprettig</i> is waardoor je met 
-						lezen wilt stoppen. 
+						Bovendien vragen we om te bepalen wat voor gevoel dit geweest is. Het gaat hier om de gevoelens
+						van de reviewer! Een <i>afschuwelijke moord</i> is iets negatiefs, maar kan het beginpunt zijn voor
+						een mooi verhaal. <i>Prettig</i> is wat je aanzet tot lezen, <i>onprettig</i> is waardoor je met
+						lezen wilt stoppen.
 					</p>
 					<p>
 						We tonen eerst een aantal voorbeeldzinnen uit recensies en beschrijven of en hoe
-						ze een vorm van leesimpact uitdrukken, om aan te geven wat we onder de verschillende 
+						ze een vorm van leesimpact uitdrukken, om aan te geven wat we onder de verschillende
 						vormen van leesimpact verstaan.
 					</p>
 				</div>
@@ -124,7 +124,7 @@ class Readme extends Component {
 							</span>
 						</div>
 						<div className="readme-explanation">
-							Bovenstaande zin bevat een plotbeschrijving, geen leesimpact. Uitleg: Het is een neutrale weergave van de gebeurtenissen in het verhaal, er is geen sprake van gevoel of reflectie bij de reviewer. 
+							Bovenstaande zin bevat een plotbeschrijving, geen leesimpact. Uitleg: Het is een neutrale weergave van de gebeurtenissen in het verhaal, er is geen sprake van gevoel of reflectie bij de reviewer.
 						</div>
 					</div>
 					<div className="readme-example">
@@ -135,8 +135,8 @@ class Readme extends Component {
 							</span>
 						</div>
 						<div className="readme-explanation">
-							Bovenstaande zin beschrijft plot-interne impact op een karakter, maar geeft ook leesimpact aan. Uitleg: Het woord <i>gelukkig</i> gaat waarschijnlijk ook over de reviewer. 
-							Er is sprake van emotionele impact en narratief gevoel. Dit gevoel is prettig. Hoe sterk die gevoelens bij de reviewer zijn is een kwestie van inschatting. 
+							Bovenstaande zin beschrijft plot-interne impact op een karakter, maar geeft ook leesimpact aan. Uitleg: Het woord <i>gelukkig</i> gaat waarschijnlijk ook over de reviewer.
+							Er is sprake van emotionele impact en narratief gevoel. Dit gevoel is prettig. Hoe sterk die gevoelens bij de reviewer zijn is een kwestie van inschatting.
 						</div>
 					</div>
 					<div className="readme-example">
@@ -147,16 +147,16 @@ class Readme extends Component {
 							</span>
 						</div>
 						<div className="readme-explanation">
-								Bovenstaande zin bevat een expressie van impact van lezen m.b.t. emotie, narratief gevoel en 
-								misschien gevoel over stijl. Uitleg: dat de wereld dystopisch (tegendeel van utopisch) is, is 
-								een gevoel over de verhaalwereld, dus een narratief gevoel. Het woord <i>beschrijft</i> is een hint 
-								voor een opmerking over stijl: <i>met een lach en een traan</i> gaat over de manier van vertellen. 
-								De woorden <i>rauw</i>, <i>afgrijselijk</i>, <i>lach</i> en <i>traan</i> zijn duidelijke aanwijzingen voor algemene emotionele impact.<br/> 
-								Er is echter geen aanwijzing voor reflectie. 
-								De vraag of deze impact prettig of onprettig is, is niet zo makkelijk te beantwoorden: 
-								de wereld wordt beschreven als afgrijselijk, maar het lezen over een afgrijselijke wereld 
-								is niet altijd negatief. Onze inschatting is dat "prettig" hier het juiste oordeel is, maar 
-								ook "zowel prettig als onprettig" valt te verdedigen. 
+								Bovenstaande zin bevat een expressie van impact van lezen m.b.t. emotie, narratief gevoel en
+								misschien gevoel over stijl. Uitleg: dat de wereld dystopisch (tegendeel van utopisch) is, is
+								een gevoel over de verhaalwereld, dus een narratief gevoel. Het woord <i>beschrijft</i> is een hint
+								voor een opmerking over stijl: <i>met een lach en een traan</i> gaat over de manier van vertellen.
+								De woorden <i>rauw</i>, <i>afgrijselijk</i>, <i>lach</i> en <i>traan</i> zijn duidelijke aanwijzingen voor algemene emotionele impact.<br/>
+								Er is echter geen aanwijzing voor reflectie.
+								De vraag of deze impact prettig of onprettig is, is niet zo makkelijk te beantwoorden:
+								de wereld wordt beschreven als afgrijselijk, maar het lezen over een afgrijselijke wereld
+								is niet altijd negatief. Onze inschatting is dat "prettig" hier het juiste oordeel is, maar
+								ook "zowel prettig als onprettig" valt te verdedigen.
 						</div>
 					</div>
 					<div className="readme-example">
@@ -178,9 +178,9 @@ class Readme extends Component {
 							</span>
 						</div>
 						<div className="readme-explanation">
-							Bovenstaande zin drukt positieve gevoelens over stijl uit (vlotte, wonderlijke stijl). Er is ook sprake van 
-							algemene emotonele impact: de woorden <i>hoop, fantasie en liefde</i> worden niet neutraal gebruikt. De gevoelens zijn prettig.   
-							Bovendien lijkt er sprake van reflectie (het woord <i>thema</i>). 
+							Bovenstaande zin drukt positieve gevoelens over stijl uit (vlotte, wonderlijke stijl). Er is ook sprake van
+							algemene emotonele impact: de woorden <i>hoop, fantasie en liefde</i> worden niet neutraal gebruikt. De gevoelens zijn prettig.
+							Bovendien lijkt er sprake van reflectie (het woord <i>thema</i>).
 						</div>
 					</div>
 					<div className="readme-example">
@@ -191,9 +191,9 @@ class Readme extends Component {
 							</span>
 						</div>
 						<div className="readme-explanation">
-							In bovenstaande zin geeft de lezer een quote uit het boek om schrijfstijl te illustreren. 
-							Hieruit blijkt enige aandacht voor de stijl, maar geen sterk gevoel. Of de stijl als 
-							prettig of onprettig wordt ervaren kunnen we niet weten. De geciteerde zin bevat wel emoties, 
+							In bovenstaande zin geeft de lezer een quote uit het boek om schrijfstijl te illustreren.
+							Hieruit blijkt enige aandacht voor de stijl, maar geen sterk gevoel. Of de stijl als
+							prettig of onprettig wordt ervaren kunnen we niet weten. De geciteerde zin bevat wel emoties,
 							maar geen emoties van de reviewer, dus deze emoties zijn voor ons irrelevant.
 						</div>
 					</div>
@@ -205,7 +205,7 @@ class Readme extends Component {
 							</span>
 						</div>
 						<div className="readme-explanation">
-							Bovenstaaande zin duidt op nieuwsgierigheid van de lezer naar een plotontwikkeling. Dit drukt positief narratief gevoel uit. 
+							Bovenstaaande zin duidt op nieuwsgierigheid van de lezer naar een plotontwikkeling. Dit drukt positief narratief gevoel uit.
 							Er is ook sprake van aandacht voor de stijl, in positieve zin.
 						</div>
 					</div>
