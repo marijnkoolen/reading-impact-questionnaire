@@ -20,7 +20,14 @@ class Questionnaire extends Component {
             sentences: null,
             responses: [],
             progress: null,
+            comments: "",
         }
+    }
+
+    updateComments(event) {
+        let comments = event.target.value;
+        window.localStorage.setItem("comments", comments);
+        this.setState({comments: comments});
     }
 
     changeView(event) {
@@ -31,10 +38,10 @@ class Questionnaire extends Component {
     componentDidMount() {
         AppFormStore.bind('load-sentences', this.setSentences.bind(this));
         AppFormStore.bind('load-progress', this.setProgress.bind(this));
+        AppFormStore.bind('save-response', this.setProgress.bind(this));
         AppFormStore.bind('clear-responses', this.clearResponses.bind(this));
         AppFormStore.bind('logout-annotator', this.logoutAnnotator.bind(this));
         let annotator = window.localStorage.getItem("annotator");
-        console.log("loading sentences");
         if (annotator)
             this.loadSentences(annotator);
             //this.loginAnnotator(annotator);
@@ -43,6 +50,7 @@ class Questionnaire extends Component {
     componentWillUnmount() {
         AppFormStore.unbind('load-sentences', this.setSentences.bind(this));
         AppFormStore.unbind('load-progress', this.setProgress.bind(this));
+        AppFormStore.unbind('save-response', this.setProgress.bind(this));
         AppFormStore.unbind('clear-responses', this.clearResponses.bind(this));
         AppFormStore.unbind('logout-annotator', this.logoutAnnotator.bind(this));
     }
@@ -61,7 +69,7 @@ class Questionnaire extends Component {
     }
 
     clearResponses() {
-        this.setState({responses: []});
+        this.setState({responses: [], comments: ""});
     }
 
     setSentences(sentences, responses) {
@@ -74,7 +82,8 @@ class Questionnaire extends Component {
     }
 
     setProgress(progress) {
-        this.setState({progress: progress});
+        let progressData = FormActions.progress;
+        this.setState({progress: progressData});
     }
 
 
@@ -102,13 +111,24 @@ class Questionnaire extends Component {
         }
 
         let makeProgressBar = (progress) => {
-            return (
-                <div className="header progress">
+            /*
                     <span>Totaal te beoordelen zinnen {progress.sentences_total}.</span>
                     {' '}
+            */
+            return (
+                <div
+                    className="header header-progress">
                     <span>Voldoende oordelen verzameld voor {progress.sentences_done} zinnen.</span>
                     {' '}
                     <span>Zinnen door u beoordeeld: {progress.sentences_done_by_you}.</span>
+                    {' '}
+                    <span
+                        className="badge progress-info"
+                        data-toggle="popover"
+                        title="Uitleg"
+                        data-content={"Zinnen met voldoende oordelen zijn door tenminste 3 mensen beoordeeld. Totaal te beoordelen zinnen: " + progress.sentences_total}
+                        data-trigger="hover"
+                    >i</span>
                 </div>
             )
         }
@@ -117,6 +137,10 @@ class Questionnaire extends Component {
         }
 
         var closing = (sentenceBlocks) ? (<SentenceProgress changeView={this.changeView.bind(this)}/>) : null;
+        var enablePopover = () => {
+            $('[data-toggle="popover"]').popover();
+        }
+        window.setTimeout(enablePopover, 200);
 
         return (
             <div className="col-md-10">
@@ -134,7 +158,25 @@ class Questionnaire extends Component {
                     {closing}
                 </div>
             </div>
-        )
+        );
+        /*
+                    <div>
+                        <div>
+                        <label htmlFor="comments">Opmerkingen:</label>
+                        </div>
+                        <div>
+                        <textarea
+                            id="comments"
+                            name="comments"
+                            rows="2"
+                            cols="80"
+                            onChange={this.updateComments.bind(this)}
+                            value={this.state.comments}
+                        >
+                        </textarea>
+                        </div>
+                    </div>
+        */
     }
 }
 
