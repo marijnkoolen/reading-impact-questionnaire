@@ -22,7 +22,7 @@ class LogoutButton extends Component {
                 className="btn btn-primary"
                 onClick={this.logout.bind(this)}
             >
-                Afmelden
+                Opslaan en afmelden
             </button>
         )
     }
