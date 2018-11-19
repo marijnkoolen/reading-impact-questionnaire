@@ -93,6 +93,7 @@ class Indexer(object):
         return self.es.search(index=self.index, doc_type=self.doc_type, body=query)
 
     def get_progress(self, annotator):
+        self.refresh()
         response_all = self.es.search(index=self.index, doc_type=self.doc_type, body={"size":0})
         response_done = self.get_sentences_by_status("done")
         response_in_progress = self.get_sentences_by_status("in_progress")
