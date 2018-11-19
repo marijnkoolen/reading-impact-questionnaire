@@ -79,14 +79,12 @@ class ImpactForm extends Component {
         return (
             <div className="row top">
                 <div className="col-md-2">
-                    <div className="logo">
-                        <img src="https://huc.jauco.nl/wp-content/themes/huc2018/images/logo-knaw-humanities-cluster.png"  className="logo" />
-                    </div>
-                    <div className="logo">
-                        <img src="/images/huygens_ing.jpg"  className="logo" />
-                    </div>
                 </div>
                 <div className="col-md-10">
+                    <div className="logo">
+                        <img src="https://huc.jauco.nl/wp-content/themes/huc2018/images/logo-knaw-humanities-cluster.png"  className="logo" />
+                        <img src="/images/huygens_ing.jpg"  className="logo" />
+                    </div>
                     {view}
                 </div>
             </div>
