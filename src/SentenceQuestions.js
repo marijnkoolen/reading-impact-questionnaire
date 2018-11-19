@@ -22,6 +22,7 @@ class SentenceQuestions extends Component {
     componentDidMount() {
         AppFormStore.bind('save-response', this.setResponseStatus.bind(this));
         AppFormStore.bind('clear-responses', this.clearResponses.bind(this));
+        $('[data-toggle="popover"]').popover();
     }
 
     componentWillUnmount() {
@@ -203,7 +204,7 @@ class SentenceQuestions extends Component {
                         onChange={this.setAnswerable.bind(this)}
                         checked={this.state.response.unanswerable}
                     />
-                    Voor deze zin zijn onderstaande vragen niet te beantwoorden
+                    &nbsp;Voor deze zin zijn onderstaande vragen niet te beantwoorden
                 </label>
             </div>
         )
