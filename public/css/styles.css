@@ -2,6 +2,8 @@
     padding: 5px;
     background-color: #eeeeee;
     border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .sentence-text {
@@ -27,6 +29,10 @@
     margin: 10px;
 }
 
+.readme-header {
+    margin-bottom: 20px;
+}
+
 .thankyou {
     margin-top: 100px;
 }
@@ -43,11 +49,16 @@
     width: 100px;
     margin-top: 20px;
     margin-left: 50px;
-    display: block;
+    display: inline;
 }
 
 .header {
     margin-top: 25px;
+}
+
+.header-progress {
+    margin-top: 25px;
+    padding-bottom: 25px;
 }
 
 .closing {
