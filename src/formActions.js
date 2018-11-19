@@ -7,6 +7,8 @@ import questions from './questions.js';
 
 const FormActions = {
 
+    progress : null,
+
     setSentenceServer(endpoint) {
         SentenceAPI.sentenceServer = endpoint;
     },
@@ -26,6 +28,7 @@ const FormActions = {
     },
 
     changeView(view) {
+        FormActions.checkComments();
         AppDispatcher.dispatch({
             eventName: 'change-view',
             view: view
@@ -63,7 +66,6 @@ const FormActions = {
 
     checkIdExists(identifier, callback) {
         SentenceAPI.checkIdExists(identifier, (error, serverResponse) => {
-            console.log(serverResponse);
             callback(serverResponse.exists);
         });
     },
@@ -72,9 +74,35 @@ const FormActions = {
         return identifier.match(/[a-z]{3}[0-9]{3}/) !== null;
     },
 
+    checkComments() {
+        let comments = FormActions.getLocalComments();
+        if (comments !== null && comments !== "") {
+            FormActions.sendComments(comments);
+        }
+        FormActions.setLocalComments("");
+    },
+
+    sendComments(comments) {
+        let commentsData = {
+            annotator: FormActions.getAnnotator(),
+            comments: comments,
+            sentences: FormActions.getLocalSentences().map((sentence) => {return sentence.sentence_id})
+        }
+        /*
+        SentenceAPI.saveComments(commentsData, (error, serverResponse) => {
+            if (error) {
+                console.log("Error saving comments!");
+                console.log(error);
+            }
+        });
+        console.log("Sending comments:", data);
+        */
+    },
+
     removeAnnotator() {
         SentenceAPI.annotator = null;
         window.localStorage.removeItem('annotator');
+        FormActions.checkComments();
         AppDispatcher.dispatch({
             eventName: 'logout-annotator',
         });
@@ -83,9 +111,11 @@ const FormActions = {
     saveResponse(response) {
         FormActions.setLocalResponse(response);
         SentenceAPI.saveResponse(response, (error, serverResponse) => {
-            AppDispatcher.dispatch({
-                eventName: 'save-response',
-                serverResponse: serverResponse
+            FormActions.setProgress(FormActions.getAnnotator(), (error, progressData) => {
+                AppDispatcher.dispatch({
+                    eventName: 'save-response',
+                    serverResponse: serverResponse
+                });
             });
         });
     },
@@ -139,6 +169,33 @@ const FormActions = {
         });
     },
 
+    setLocalResponses(responses) {
+        window.localStorage.setItem('responses', JSON.stringify(responses));
+    },
+
+    setLocalSentences(sentences) {
+        window.localStorage.setItem('sentences', JSON.stringify(sentences));
+    },
+
+    setLocalComments(comments) {
+        window.localStorage.setItem('comments', comments);
+    },
+
+    getLocalResponses() {
+        let responses = window.localStorage.getItem('responses');
+        return (responses) ? JSON.parse(responses) : null;
+    },
+
+    getLocalSentences() {
+        let sentences = window.localStorage.getItem('sentences');
+        return (sentences) ? JSON.parse(sentences) : null;
+    },
+
+    getLocalComments() {
+        let comments = window.localStorage.getItem("comments");
+        return (comments !== null) ? comments : "";
+    },
+
     setLocalResponse(response) {
         var responses = JSON.parse(window.localStorage.getItem('responses'));
         if (!responses)
@@ -147,27 +204,41 @@ const FormActions = {
         window.localStorage.setItem('responses', JSON.stringify(responses));
     },
 
-    setLocalData(sentences, responses) {
-        window.localStorage.setItem('sentences', JSON.stringify(sentences));
-        window.localStorage.setItem('responses', JSON.stringify(responses));
+    setLocalData(sentences, responses, comments) {
+        FormActions.setLocalResponses(responses);
+        FormActions.setLocalSentences(sentences);
+        FormActions.setLocalComments(comments);
+        //window.localStorage.setItem('sentences', JSON.stringify(sentences));
+        //window.localStorage.setItem('responses', JSON.stringify(responses));
+        //window.localStorage.setItem('comments', comments);
     },
 
     getLocalData() {
+        return {
+            sentences: FormActions.getLocalSentences(),
+            responses: FormActions.getLocalResponses(),
+            comments: FormActions.getLocalComments()
+        }
+        /*
         var sentences = window.localStorage.getItem('sentences');
         var responses = window.localStorage.getItem('responses');
+        var comments = window.localStorage.getItem('comments');
         if (sentences)
             sentences = JSON.parse(sentences);
         if (responses)
             responses = JSON.parse(responses);
         return {
             sentences: sentences,
-            responses: responses
+            responses: responses,
+            comments: comments
         }
+        */
     },
 
     clearLocalData() {
         window.localStorage.removeItem('sentences');
         window.localStorage.removeItem('responses');
+        window.localStorage.removeItem('comments');
         AppDispatcher.dispatch({
             eventName: 'clear-responses'
         });
@@ -179,16 +250,18 @@ const FormActions = {
             AppDispatcher.dispatch({
                 eventName: 'load-sentences',
                 sentences: localData.sentences,
-                responses: localData.responses
+                responses: localData.responses,
+                comments: localData.comments
             });
         }
         else {
             SentenceAPI.loadSentences(annotator, (error, sentences) => {
-                FormActions.setLocalData(sentences, null);
+                FormActions.setLocalData(sentences, null, null);
                 AppDispatcher.dispatch({
                     eventName: 'load-sentences',
                     sentences: sentences,
-                    responses: null
+                    responses: null,
+                    comments: ""
                 });
             });
         }
@@ -197,8 +270,7 @@ const FormActions = {
     loadAnnotatorJudgements(annotator) {
         SentenceAPI.loadAnnotatorJudgements(annotator, (error, sentences) => {
             FormActions.extractResponses(sentences, annotator, (responses) => {
-                console.log(responses);
-                FormActions.setLocalData(sentences, responses);
+                FormActions.setLocalData(sentences, responses, "");
                 AppDispatcher.dispatch({
                     eventName: 'load-judgements',
                     sentences: sentences,
@@ -227,19 +299,27 @@ const FormActions = {
     },
 
     loadNewSentences() {
+        FormActions.checkComments();
         FormActions.clearLocalData();
         let annotator = window.localStorage.getItem("annotator");
         FormActions.loadSentences(annotator);
     },
 
 
-    loadProgress(annotator) {
+    setProgress(annotator, callback) {
         SentenceAPI.loadProgress(annotator, (error, progressData) => {
+            FormActions.progress = progressData;
+            return callback(error, progressData);
+        });
+    },
+
+    loadProgress(annotator) {
+        FormActions.setProgress(annotator, (error, progressData) => {
             AppDispatcher.dispatch({
                 eventName: 'load-progress',
                 progress: progressData
-            })
-        })
+            });
+        });
     }
 
 }
