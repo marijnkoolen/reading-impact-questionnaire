@@ -103,6 +103,20 @@ const SentenceAPI = {
         }
     },
 
+    saveComments : (comments, callback) => {
+        let url = SentenceAPI.sentenceServer + "/save_comments";
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(comments));
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                callback(null, responseData);
+            }
+        }
+    },
+
     saveResponse : (response, callback) => {
         let url = SentenceAPI.sentenceServer + "/save_response";
         let xhr = new XMLHttpRequest();
