@@ -11,6 +11,11 @@ class ReadmeExamples extends Component {
             <div className="readme-examples">
                 <div className="readme-header">
                     <h3>Impact voorbeeldenzinnen</h3>
+					<p>
+						Hier geven we een aantal voorbeeldzinnen uit recensies, waarbij we beschrijven of en hoe ze een vorm van leesimpact uitdrukken.
+						Deze oordelen zijn subjectief en verschil van mening is mogelijk. Deze verschillen van mening zijn belangrijk om te achterhalen 
+						waar leesimpact heel duidelijk is en waar niet.
+					</p>
                 </div>
                 <div className="readme-example">
                     <div className="sentence">
@@ -43,12 +48,12 @@ class ReadmeExamples extends Component {
                         </span>
                     </div>
                     <div className="readme-explanation">
-                            Bovenstaande zin bevat een expressie van impact van lezen m.b.t. emotie, narratief gevoel en
-                            misschien gevoel over stijl. Uitleg: dat de wereld dystopisch (tegendeel van utopisch) is, is
+                            Bovenstaande zin drukt emotie uit, en meer specifiek narratief gevoel. Misschien is er ook sprake van 
+							gevoel over stijl. Uitleg: dat de wereld dystopisch (tegendeel van utopisch) is, is
                             een gevoel over de verhaalwereld, dus een narratief gevoel. Het woord <i>beschrijft</i> is een hint
                             voor een opmerking over stijl: <i>met een lach en een traan</i> gaat over de manier van vertellen.
                             De woorden <i>rauw</i>, <i>afgrijselijk</i>, <i>lach</i> en <i>traan</i> zijn duidelijke aanwijzingen voor algemene emotionele impact.<br/>
-                            Er is echter geen aanwijzing voor reflectie.
+                            Er is echter geen aanwijzing voor reflectie. 
                             De vraag of deze impact prettig of onprettig is, is niet zo makkelijk te beantwoorden:
                             de wereld wordt beschreven als afgrijselijk, maar het lezen over een afgrijselijke wereld
                             is niet altijd negatief. Onze inschatting is dat "prettig" hier het juiste oordeel is, maar
@@ -106,7 +111,8 @@ class ReadmeExamples extends Component {
                     </div>
                 </div>
                 <div className="closing">
-                    <p>Dit is het einde van de uitleg. Klik bovenaan de pagina op <em>Naar de vragenlijst</em> om zelf zinnen te beoordelen. We danken je nogmaals voor je interesse en bijdrage! We zijn blij met elke vraag die je beantwoordt, en beseffen dat je oordeel kan afwijken van die van anderen. Er zijn geen foute oordelen.</p>
+                    <p>Dit is het einde van de uitleg. Klik bovenaan de pagina op <em>Naar de vragenlijst</em> om zelf zinnen te beoordelen. 
+					We danken je nogmaals voor je interesse en bijdrage! We zijn blij met elke vraag die je beantwoordt. Er zijn geen foute oordelen.</p>
                 </div>
             </div>
 
