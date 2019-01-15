@@ -1,4 +1,4 @@
-
+﻿
 "use strict"
 
 import React, {Component} from 'react';
@@ -57,15 +57,15 @@ class Readme extends Component {
                         <a className="btn btn-primary "
                             name="readme-general"
                             onClick={this.changeView.bind(this)}>Algemene uitleg</a>
-                        &nbsp;->&nbsp;
+                        &nbsp;→&nbsp;
                         <a className="btn btn-primary "
                             name="readme-impact"
                             onClick={this.changeView.bind(this)}>Impact uitleg</a>
-                        &nbsp;->&nbsp;
+                        &nbsp;→&nbsp;
                         <a className="btn btn-primary "
                             name="readme-examples"
                             onClick={this.changeView.bind(this)}>Impact voorbeelden</a>
-                        &nbsp;->&nbsp;
+                        &nbsp;→&nbsp;
                         {nextButton}
                     </div>
                 </div>

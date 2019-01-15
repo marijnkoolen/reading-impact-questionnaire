@@ -1,4 +1,4 @@
-
+ï»¿
 "use strict"
 
 import React, {Component} from 'react';
@@ -10,7 +10,7 @@ class ReadmeImpact extends Component {
         return (
             <div className="readme-background">
                 <p>
-                    In ons onderzoek zijn we geïnteresseerd in verschillende vormen van impact:
+                    In ons onderzoek zijn we geÃ¯nteresseerd in verschillende vormen van impact:
                 </p>
                 <ul>
                     <li>
@@ -20,7 +20,7 @@ class ReadmeImpact extends Component {
                         verveling, waar het boek kennelijk niet het gewenste effect heeft.<br/>
 						De emotie kan betrekking hebben op het boek als geheel, de karakters, de auteur, de stijl,
                         aspecten van de wereld die het boek beschrijft, of enig ander aspect. 
-						We zijn in het bijzonder geïnteresseerd in: 
+						We zijn in het bijzonder geÃ¯nteresseerd in: 
 						<ul>
 							<li>
 								Narratieve gevoelens: Bij narratieve gevoelens gaat het om gevoelens voor

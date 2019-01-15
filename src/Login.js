@@ -1,4 +1,4 @@
-
+﻿
 "use strict"
 
 import React, {Component} from 'react';
@@ -129,7 +129,7 @@ class Login extends React.Component {
                     </p>
                     <h3>Wanneer moet ik een bestaand ID invoeren?</h3>
                     <p>
-                        Dit is alleen nodig als u de enqu�te op meerdere devices wilt gebruiken (PC, telefoon, tablet, ...). Schrijf in dat geval uw ID op en hergebruik het voor alle devices. Dan zorgt de applicatie ervoor dat u verder kunt gaan waar u gebleven was op een ander device, en eerdere antwoorden inzien.
+                        Dit is alleen nodig als u de enquête op meerdere devices wilt gebruiken (PC, telefoon, tablet, ...). Schrijf in dat geval uw ID op en hergebruik het voor alle devices. Dan zorgt de applicatie ervoor dat u verder kunt gaan waar u gebleven was op een ander device, en eerdere antwoorden inzien.
                     </p>
                     <p>
                         Als u aangemeld bent, slaat uw browser automatisch het ID op in de lokale browseropslag op het apparaat dat u gebruikt. Als op een later moment weer terugkeert naar deze site, wordt u automatisch aangemeld met het opgeslagen ID. U kunt eerder gegeven antwoorden altijd inzien zolang u bent aangemeld met uw ID.
