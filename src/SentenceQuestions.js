@@ -53,6 +53,15 @@ class SentenceQuestions extends Component {
             sentenceResponse.sentence_id = this.props.sentence.sentence_id;
         }
         sentenceResponse[questionResponse.category] = questionResponse.value;
+        console.log(questionResponse);
+        if (questionResponse.category === "emotional_scale" && questionResponse.value === "0") {
+            console.log("set sub-questions to zero");
+            sentenceResponse["narrative_scale"] = "0";
+            sentenceResponse["style_scale"] = "0";
+        }
+        if (sentenceResponse["narrative_scale"] > "0" && sentenceResponse["emotional_scale"] === "0") {
+            window.alert("emotionele impact kan niet afwezig zijn als er narratieve gevoelens uitgedrukt worden. ");
+        }
         if (FormActions.checkResponseDone(sentenceResponse)) {
             FormActions.saveResponse(sentenceResponse);
         } else if (questionResponse.category === "unanswerable") {
@@ -65,7 +74,7 @@ class SentenceQuestions extends Component {
 
     makeLikertRange() {
         var list = [];
-        for (var i = 1; i <= 7; i++) {
+        for (var i = 0; i < 5; i++) {
             list.push(i);
         }
         return list;
@@ -147,7 +156,7 @@ class SentenceQuestions extends Component {
 
         let buttons = makeButtons(question);
         return (
-            <div className="sentence-question" key={question.key}>
+            <div className={"sentence-" + question.questionType} key={question.key}>
                 <div className="row">
                     <label key={question.key}>{question.label}</label>
                     <span
