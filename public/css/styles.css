@@ -16,6 +16,18 @@
     padding: 5px;
 }
 
+.sentence-main-question {
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 5px;
+}
+
+.sentence-sub-question {
+    margin-top: 10px;
+    margin-left: 70px;
+    padding: 5px;
+}
+
 .sentence-checks {
     margin: 25px;
 }

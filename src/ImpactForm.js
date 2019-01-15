@@ -82,8 +82,12 @@ class ImpactForm extends Component {
                 </div>
                 <div className="col-md-10">
                     <div className="logo">
-                        <img src="https://huc.jauco.nl/wp-content/themes/huc2018/images/logo-knaw-humanities-cluster.png"  className="logo" />
-                        <img src="/images/huygens_ing.jpg"  className="logo" />
+                        <a href="https://huc.knaw.nl/">
+                            <img src="https://huc.jauco.nl/wp-content/themes/huc2018/images/logo-knaw-humanities-cluster.png"  className="logo" />
+                        </a>
+                        <a href="https://www.huygens.knaw.nl/">
+                            <img src="/images/huygens_ing.jpg"  className="logo" />
+                        </a>
                     </div>
                     {view}
                 </div>
