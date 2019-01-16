@@ -61,6 +61,11 @@ class SentenceQuestions extends Component {
         }
         if (sentenceResponse["narrative_scale"] > "0" && sentenceResponse["emotional_scale"] === "0") {
             window.alert("emotionele impact kan niet afwezig zijn als er narratieve gevoelens uitgedrukt worden. ");
+            sentenceResponse["narrative_scale"] = "0";
+        }
+        if (sentenceResponse["style_scale"] > "0" && sentenceResponse["emotional_scale"] === "0") {
+            window.alert("emotionele impact kan niet afwezig zijn als er gevoelens m.b.t. stijl uitgedrukt worden. ");
+            sentenceResponse["style_scale"] = "0";
         }
         if (FormActions.checkResponseDone(sentenceResponse)) {
             FormActions.saveResponse(sentenceResponse);
