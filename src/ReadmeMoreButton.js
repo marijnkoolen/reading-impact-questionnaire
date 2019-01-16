@@ -1,4 +1,4 @@
-
+﻿
 "use strict"
 
 import React, {Component} from 'react';
@@ -69,7 +69,7 @@ class ReadmeMoreButton extends Component {
 						Maar is dat zo? <em>Wij</em> kunnen denken dat humor een kwestie is van stijl, of dat gebruik van het woord <em>bizar</em> 
 						betekent dat de lezer/reviewer aan het denken is gezet. Maar we willen graag toetsen of dat klopt met hoe mensen ernaar kijken 
 						die elke dag reviews lezen en schrijven. Vandaar dat we voor een beperkt aantal zinnen uit de reviews willen vergelijken 
-						welke impactaspecten de computer ziet en welke impactaspecten de Hebban-bezoeker onderkent. Dat is het doel van deze enq�te. Kloppen  
+						welke impactaspecten de computer ziet en welke impactaspecten de Hebban-bezoeker onderkent. Dat is het doel van deze enqête. Kloppen  
 						uw antwoorden met die van de computer dan hebben wij het goed gedaan en kunnen we verder met de analyse van de reviews. 
 						Als u iets anders zegt dan de computer dan hebben we het fout gedaan en moeten we kijken hoe we onze regels kunnen aanpassen. 
 					</p>
