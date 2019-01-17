@@ -53,24 +53,26 @@ class SentenceQuestions extends Component {
             sentenceResponse.sentence_id = this.props.sentence.sentence_id;
         }
         sentenceResponse[questionResponse.category] = questionResponse.value;
-        console.log(questionResponse);
         if (questionResponse.category === "emotional_scale" && questionResponse.value === "0") {
-            console.log("set sub-questions to zero");
             sentenceResponse["narrative_scale"] = "0";
             sentenceResponse["style_scale"] = "0";
+            sentenceResponse["emotional_valence"] = "na";
         }
         if (sentenceResponse["narrative_scale"] > "0" && sentenceResponse["emotional_scale"] === "0") {
-            window.alert("emotionele impact kan niet afwezig zijn als er narratieve gevoelens uitgedrukt worden. ");
+            window.alert("Emotionele impact kan niet afwezig zijn als er narratieve gevoelens uitgedrukt worden. ");
             sentenceResponse["narrative_scale"] = "0";
         }
         if (sentenceResponse["style_scale"] > "0" && sentenceResponse["emotional_scale"] === "0") {
-            window.alert("emotionele impact kan niet afwezig zijn als er gevoelens m.b.t. stijl uitgedrukt worden. ");
+            window.alert("Emotionele impact kan niet afwezig zijn als er gevoelens m.b.t. stijl uitgedrukt worden. ");
             sentenceResponse["style_scale"] = "0";
+        }
+        if (sentenceResponse["emotional_valence"] && sentenceResponse["emotional_valence"] !== "na" && sentenceResponse["emotional_scale"] === "0") {
+            window.alert("Gevoelens kunnen niet prettig of onprettig zijn als er geen emotionele impact is. ");
+            sentenceResponse["emotional_valence"] = "na";
         }
         if (FormActions.checkResponseDone(sentenceResponse)) {
             FormActions.saveResponse(sentenceResponse);
         } else if (questionResponse.category === "unanswerable") {
-            console.log("question is answerable but incomplete");
             FormActions.removeIncompleteResponse(sentenceResponse);
         }
         FormActions.setLocalResponse(sentenceResponse);
