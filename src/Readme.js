@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import LoginButton from './LoginButton.js';
 import ReadmeGeneral from './ReadmeGeneral.js';
+import ReadmeMore from './ReadmeMore.js';
 import ReadmeImpact from './ReadmeImpact.js';
 import ReadmeExamples from './ReadmeExamples.js';
 import ReadmeMoreButton from './ReadmeMoreButton.js';
@@ -27,9 +28,11 @@ class Readme extends Component {
             this.setState({readmeView: nextView})
         }
         console.log(nextView);
+        /*
         if (nextView === "readme-more") {
             this.props.changeView("readme-more");
        }
+       */
     }
 
     render() {
@@ -44,6 +47,8 @@ class Readme extends Component {
                 return (<ReadmeImpact/>);
             } else if (this.state.readmeView === "readme-examples") {
                 return (<ReadmeExamples/>);
+            } else if (this.state.readmeView === "readme-more") {
+                return (<ReadmeMore/>);
             } else {
                 return null;
             }
@@ -67,6 +72,10 @@ class Readme extends Component {
                             onClick={this.changeView.bind(this)}>Impact voorbeelden</a>
                         &nbsp;→&nbsp;
                         {nextButton}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a className="btn btn-primary "
+                            name="readme-more"
+                            onClick={this.changeView.bind(this)}>Meer informatie</a>
                     </div>
                 </div>
                 <div className="readme-explanation">

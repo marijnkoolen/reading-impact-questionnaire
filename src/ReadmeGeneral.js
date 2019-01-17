@@ -9,24 +9,24 @@ class ReadmeGeneral extends Component {
     render() {
         return (
             <div className="readme-background">
-				<p>Hartelijk welkom bij deze vragenlijst. We waarderen het zeer dat u de moeite neemt deze pagina te bezoeken. Door het invullen van de vragenlijst 
-					helpt u mee bij wetenschappelijk onderzoek naar de vraag wat lezers aanspreekt in de boeken die ze lezen. We geven op deze en de volgende 
-					pagina’s een beknopte toelichting. Als u meer wilt weten over dit onderzoek en hoe de
-                    gegevens gebruikt worden, klik dan hierboven op <em>Meer informatie</em> of neem contact op via email met <a href="mailto:peter.boot@huygens.knaw.nl">peter.boot@huygens.knaw.nl</a> en/of <a href="mailto:marijn.koolen@di.huc.knaw.nl">marijn.koolen@di.huc.knaw.nl</a>, de opstellers van deze vragenlijst. 
-				</p>
-                <p>
-                    De vragenlijst is opgesteld omdat we graag willen weten hoe lezers door boeken (in het bijzonder door fictie) worden geraakt. 
-					We onderscheiden daarvoor verschillende vormen van impact, en we willen graag weten 
-					welke vorm van impact blijkt uit online boekrecensies (van Hebban). 
-					U krijgt een aantal zinnen uit boekrecensies te zien en we vragen u te beoordelen of 
-					deze zinnen leesimpact uitdrukken en zo ja, wat voor soort impact. 
+                <p>Hartelijk welkom bij deze vragenlijst. We waarderen het zeer dat u de moeite neemt deze pagina te bezoeken. Door het invullen van de vragenlijst
+                    helpt u mee bij wetenschappelijk onderzoek naar de vraag wat lezers aanspreekt in de boeken die ze lezen. We geven op deze en de volgende
+                    pagina’s een beknopte toelichting. Als u meer wilt weten over dit onderzoek en hoe de
+                    gegevens gebruikt worden, klik dan hierboven op <em>Meer informatie</em> of neem contact op via email met <a href="mailto:peter.boot@huygens.knaw.nl">peter.boot@huygens.knaw.nl</a> en/of <a href="mailto:marijn.koolen@di.huc.knaw.nl">marijn.koolen@di.huc.knaw.nl</a>, de opstellers van deze vragenlijst.
                 </p>
-				<p>Onze belangstelling is puur wetenschappelijk. De gegevens die we verzamelen
+                <p>
+                    De vragenlijst is opgesteld omdat we graag willen weten hoe lezers door boeken (in het bijzonder door fictie) worden geraakt.
+                    We onderscheiden daarvoor verschillende vormen van impact, en we willen graag weten
+                    welke vorm van impact blijkt uit online boekrecensies (van Hebban).
+                    U krijgt een aantal zinnen uit boekrecensies te zien en we vragen u te beoordelen of
+                    deze zinnen leesimpact uitdrukken en zo ja, wat voor soort impact.
+                </p>
+                <p>Onze belangstelling is puur wetenschappelijk. De gegevens die we verzamelen
                     worden alleen voor onderzoek gebruikt en niemand verdient er geld aan.
-				</p>
-                <p>Het liefst zouden we u direct doorsturen naar de enquête. Maar voor de beste resultaten leggen 
-					we eerst graag uit welke soorten impact we in ons onderzoek onderscheiden. Klik hierboven 
-					op <em>Impact uitleg</em> om daarover te lezen.
+                </p>
+                <p>Het liefst zouden we u direct doorsturen naar de enquête. Maar voor de beste resultaten leggen
+                    we eerst graag uit welke soorten impact we in ons onderzoek onderscheiden. Klik hierboven
+                    op <em>Impact uitleg</em> om daarover te lezen.
                 </p>
             </div>
         );
