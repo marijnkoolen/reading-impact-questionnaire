@@ -13,7 +13,8 @@ const questions = [
         key: "emo_likert"
     },
     {
-        label: "Blijken uit deze zin narratieve gevoelens bij de reviewer?",
+        label: "Hebben deze emotionele gevoelens betrekking op het verhaal of de personages?",
+        //label: "Blijken uit deze zin narratieve gevoelens bij de reviewer?",
         explanation: "Narratieve gevoelens: elk gevoel met betrekking tot de verhaalwereld en de personages. Het mag gaan om gevoelens van opgaan in het verhaal of de verhaalwereld of gevoelens voor personages, zoals bewondering, identificatie of medelijden.",
         answerType: "likert",
         questionType: "sub-question",
@@ -23,7 +24,8 @@ const questions = [
         key: "narr_likert"
     },
     {
-        label: "Geeft de reviewer in deze zin blijk van gevoelens m.b.t. de stijl?",
+        label: "Hebben deze emotionele gevoelens betrokking op de stijl?",
+        //label: "Geeft de reviewer in deze zin blijk van gevoelens m.b.t. de stijl?",
         explanation: "Gevoelens met betrekking tot de stijl: elk gevoel dat betrekking heeft op de aesthetische aspecten van de tekst, zoals bewondering, waardering, verrassing of vervreemding.",
         answerType: "likert",
         questionType: "sub-question",
@@ -37,7 +39,7 @@ const questions = [
         explanation: "Prettig/onprettig: Het gaat hier om de gevoelens van de reviewer! Een 'afschuwelijke moord' is iets negatiefs, maar kan het beginpunt zijn voor een mooi verhaal. 'Prettig' is wat je aanzet tot lezen, 'onprettig' is waardoor je met lezen wilt stoppen.",
         answerType: "category",
         questionType: "main-question",
-        impactType: "style_valence",
+        impactType: "emotional_valence",
         labels: [
             {"value": "positive", "label": "prettig"},
             {"value": "negative", "label": "onprettig"},
@@ -45,7 +47,7 @@ const questions = [
             {"value": "na", "label": "niet van toepassing, neutraal of onduidelijk"},
         ],
         required: true,
-        key: "style_valence"
+        key: "emotional_valence"
     },
     {
         label: "Blijkt uit deze zin reflectie van de reviewer?",
