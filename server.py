@@ -1,11 +1,8 @@
+#!/usr/bin/python3
 # Created by Marijn Koolen (marijnkoolen)
 
 import json
 import os
-import time
-import requests
-import xmltodict
-import re
 from flask import Flask, Response, request
 from flask_cors import CORS
 from indexer import Indexer
