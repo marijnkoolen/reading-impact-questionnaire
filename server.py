@@ -10,7 +10,7 @@ from settings import config
 
 app = Flask(__name__, static_url_path='', static_folder='public')
 app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
-app.add_url_rule('/reading-impact-questionnaire/', 'reading-impact-questionnaire', lambda: app.send_static_file('questionnaire/index.html'))
+app.add_url_rule('/lees-impact-vragenlijst/', 'reading-impact-questionnaire', lambda: app.send_static_file('questionnaire/index.html'))
 
 cors = CORS(app)
 es_indexer = Indexer(config)
