@@ -89,6 +89,9 @@ class ImpactForm extends Component {
                             <a href="https://www.huygens.knaw.nl/">
                                 <img src="/images/huygens_ing.jpg"  className="logo" />
                             </a>
+                            <a href="https://www.hebban.nl/">
+                                <img src="/images/hebbanlogo_2016_web_roze.png"  className="logo" />
+                            </a>
                         </div>
                         {view}
                     </div>
