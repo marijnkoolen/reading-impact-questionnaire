@@ -143,7 +143,7 @@ class Questionnaire extends Component {
         window.setTimeout(enablePopover, 200);
 
         return (
-            <div className="col-md-10">
+            <div>
                 <div className="row header">
                     <p>U bent aangemeld met ID: {annotator}</p>
                     <LogoutButton/>
@@ -159,24 +159,6 @@ class Questionnaire extends Component {
                 </div>
             </div>
         );
-        /*
-                    <div>
-                        <div>
-                        <label htmlFor="comments">Opmerkingen:</label>
-                        </div>
-                        <div>
-                        <textarea
-                            id="comments"
-                            name="comments"
-                            rows="2"
-                            cols="80"
-                            onChange={this.updateComments.bind(this)}
-                            value={this.state.comments}
-                        >
-                        </textarea>
-                        </div>
-                    </div>
-        */
     }
 }
 

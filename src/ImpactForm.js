@@ -79,8 +79,6 @@ class ImpactForm extends Component {
         return (
             <div className="container">
                 <div className="row top">
-                    <div className="">
-                    </div>
                     <div className="col-md-12 col-xs-12">
                         <div className="logo">
                             <a href="https://huc.knaw.nl/">
