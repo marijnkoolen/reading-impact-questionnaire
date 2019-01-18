@@ -88,6 +88,7 @@ class Login extends React.Component {
                         name="typedId"
                         value={this.state.typedId}
                         onChange={this.handleIdChange.bind(this)}
+                        autocapitalize="none"
                     />
                     {' '}
                     <button
@@ -125,7 +126,7 @@ class Login extends React.Component {
                 <div className="explanation">
                     <h3>Welke gegevens verzamelen we?</h3>
                     <p>
-                        We willen geen persoonlijk identificeerbare informatie opslaan, dus ook geen IP adressen. Om u aan te melden kunt u een nieuw ID laten generen. Dit is een code van 3 letters en 3 cijfers die we samen met uw oordelen opslaan. We doen dit alleen om antwoorden van verschillende deelnemers uit elkaar te kunnen houden, zodat u niet twee keer dezelfde zinnen krijgt voorgelegd. 
+                        We willen geen persoonlijk identificeerbare informatie opslaan, dus ook geen IP adressen. Om u aan te melden kunt u een nieuw ID laten generen. Dit is een code van 3 letters en 3 cijfers die we samen met uw oordelen opslaan. We doen dit alleen om antwoorden van verschillende deelnemers uit elkaar te kunnen houden, zodat u niet twee keer dezelfde zinnen krijgt voorgelegd.
                     </p>
                     <h3>Wanneer moet ik een bestaand ID invoeren?</h3>
                     <p>
