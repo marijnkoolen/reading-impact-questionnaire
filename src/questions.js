@@ -13,7 +13,7 @@ const questions = [
         key: "emo_likert"
     },
     {
-        label: "Hebben deze emotionele gevoelens betrekking op het verhaal of de personages?",
+        label: "Hebben deze gevoelens specifiek betrekking op het verhaal of de personages?",
         //label: "Blijken uit deze zin narratieve gevoelens bij de reviewer?",
         explanation: "Narratieve gevoelens: elk gevoel met betrekking tot de verhaalwereld en de personages. Het mag gaan om gevoelens van opgaan in het verhaal of de verhaalwereld of gevoelens voor personages, zoals bewondering, identificatie of medelijden.",
         answerType: "likert",
@@ -24,7 +24,7 @@ const questions = [
         key: "narr_likert"
     },
     {
-        label: "Hebben deze emotionele gevoelens betrokking op de stijl?",
+        label: "Hebben deze gevoelens specifiek betrekking op de stijl?",
         //label: "Geeft de reviewer in deze zin blijk van gevoelens m.b.t. de stijl?",
         explanation: "Gevoelens met betrekking tot de stijl: elk gevoel dat betrekking heeft op de aesthetische aspecten van de tekst, zoals bewondering, waardering, verrassing of vervreemding.",
         answerType: "likert",

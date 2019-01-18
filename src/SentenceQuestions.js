@@ -211,6 +211,7 @@ class SentenceQuestions extends Component {
     }
 
     render() {
+        let answerableExplanation = "Vink dit aan wanneer de zin bijvoorbeeld niet in het Nederlands is, volledig onbegrijpelijk is of alleen een gegeven zoals isbn of prijs bevat."
         let answerable = (
             <div>
                 <label>
@@ -220,7 +221,14 @@ class SentenceQuestions extends Component {
                         onChange={this.setAnswerable.bind(this)}
                         checked={this.state.response.unanswerable}
                     />
-                    &nbsp;Voor deze zin zijn onderstaande vragen niet te beantwoorden
+                    &nbsp;Voor deze zin zijn onderstaande vragen niet te beantwoorden&nbsp;
+                    <span
+                        className="badge term-info"
+                        data-toggle="popover"
+                        title="Uitleg"
+                        data-content={answerableExplanation}
+                        data-trigger="hover"
+                    >i</span>
                 </label>
             </div>
         )
