@@ -32,7 +32,7 @@ class ImpactForm extends Component {
 
     changeView(view) {
         if (this.state.view === "judgements" && view === "questionnaire") {
-            console.log("remove and load new sentences");
+            //console.log("remove and load new sentences");
             if (FormActions.isDispatching()) {
                 setTimeout(FormActions.loadNewSentences, 100)
             } else {

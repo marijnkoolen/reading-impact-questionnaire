@@ -57,10 +57,13 @@ class AllJudgements extends Component {
         //console.log(sentences);
         //console.log(responses);
         let annotator = FormActions.getAnnotator();
-        this.setState({
-            sentences: sentences,
-            responses: responses
-        });
+        if (this.refs.judgementsRef) {
+            this.setState({
+                sentences: sentences,
+                responses: responses
+            });
+
+        }
         FormActions.loadProgress(annotator);
     }
 
@@ -112,7 +115,7 @@ class AllJudgements extends Component {
         }
 
         return (
-            <div className="col-md-10">
+            <div className="col-md-10" ref="judgementsRef">
                 <div className="row header">
                     <p>U bent aangemeld met ID: {annotator}</p>
                     <LogoutButton/>

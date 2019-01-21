@@ -31,7 +31,7 @@ class SentenceQuestions extends Component {
     }
 
     clearResponses() {
-        console.log("clearing responses");
+        //console.log("clearing responses");
         this.setState({response: {unanswerable: false}});
     }
 

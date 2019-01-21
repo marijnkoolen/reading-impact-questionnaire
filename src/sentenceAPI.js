@@ -81,7 +81,7 @@ const SentenceAPI = {
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let responseData = JSON.parse(xhr.responseText);
-                console.log(responseData);
+                //console.log(responseData);
                 callback(null, responseData);
             }
         }
