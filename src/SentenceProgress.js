@@ -51,6 +51,7 @@ class SentenceProgress extends Component {
         let sentencesDone = FormActions.checkSentencesDone();
         let done = sentencesDone.every(sentence => { return sentence.sentenceDone});
         this.setState({done: done, sentencesDone: sentencesDone});
+        this.props.checkDone(done);
     }
 
     loadNewSentences() {
@@ -72,23 +73,8 @@ class SentenceProgress extends Component {
         return (
             <div className="done">
                 <div className="sentence-checks">
-                    <div>Zinnen volledig beantwoord:</div>
+                    <div>Zinnen volledig beoordeeld:</div>
                     {sentenceChecks}
-                </div>
-                <div className="buttons">
-                    <LogoutButton/>
-                    {' '}
-                    <a
-                        type="button"
-                        href="#top"
-                        className="done btn btn-primary"
-                        disabled={!this.state.done}
-                        onClick={this.loadNewSentences.bind(this)}
-                    >
-                        Meer zinnen beoordelen
-                    </a>
-                    {' '}
-                    <AllJudgementsButton/>
                 </div>
             </div>
         )

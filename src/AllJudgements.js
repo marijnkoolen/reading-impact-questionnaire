@@ -54,8 +54,8 @@ class AllJudgements extends Component {
     }
 
     setJudgements(sentences, responses) {
-        console.log(sentences);
-        console.log(responses);
+        //console.log(sentences);
+        //console.log(responses);
         let annotator = FormActions.getAnnotator();
         this.setState({
             sentences: sentences,
@@ -123,6 +123,7 @@ class AllJudgements extends Component {
                     {progressBar}
                 </div>
                 <div className="row">
+                    <p>Onderstaande zinnen zijn volledig door u beoordeeld. U kunt hier eventueel uw oordelen aanpassen. Aanpassingen worden automatisch opgeslagen.</p>
                     {(annotator) ? sentenceBlocks : null}
                 </div>
                 <div className="row closing">

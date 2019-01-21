@@ -28,7 +28,7 @@ const FormActions = {
     },
 
     changeView(view) {
-        FormActions.checkComments();
+        FormActions.checkComment();
         AppDispatcher.dispatch({
             eventName: 'change-view',
             view: view
@@ -74,39 +74,37 @@ const FormActions = {
         return identifier.match(/[a-z]{3}[0-9]{3}/) !== null;
     },
 
-    checkComments() {
-        let comments = FormActions.getLocalComments();
-        if (comments !== null && comments !== "") {
-            FormActions.sendComments(comments);
+    checkComment() {
+        let comment = FormActions.getLocalComment();
+        if (comment !== null && comment !== "") {
+            FormActions.sendComment(comment);
         }
-        FormActions.setLocalComments("");
+        FormActions.setLocalComment("");
     },
 
-    sendComments(comments) {
+    sendComment(comment) {
         var sentences = FormActions.getLocalSentences();
         if (sentences) {
             sentences = sentences.map((sentence) => {return sentence.sentence_id});
         }
-        let commentsData = {
+        let commentData = {
             annotator: FormActions.getAnnotator(),
-            comments: comments,
+            comment: comment,
             sentences: sentences
         }
-        /*
-        SentenceAPI.saveComments(commentsData, (error, serverResponse) => {
+        SentenceAPI.saveComment(commentData, (error, serverResponse) => {
             if (error) {
-                console.log("Error saving comments!");
+                console.log("Error saving comment!");
                 console.log(error);
             }
         });
-        console.log("Sending comments:", data);
-        */
+        console.log("Sending comment:", commentData);
     },
 
     removeAnnotator() {
         SentenceAPI.annotator = null;
         window.localStorage.removeItem('annotator');
-        FormActions.checkComments();
+        FormActions.checkComment();
         AppDispatcher.dispatch({
             eventName: 'logout-annotator',
         });
@@ -181,8 +179,8 @@ const FormActions = {
         window.localStorage.setItem('sentences', JSON.stringify(sentences));
     },
 
-    setLocalComments(comments) {
-        window.localStorage.setItem('comments', comments);
+    setLocalComment(comment) {
+        window.localStorage.setItem('comment', comment);
     },
 
     getLocalResponses() {
@@ -195,9 +193,9 @@ const FormActions = {
         return (sentences) ? JSON.parse(sentences) : null;
     },
 
-    getLocalComments() {
-        let comments = window.localStorage.getItem("comments");
-        return (comments !== null) ? comments : "";
+    getLocalComment() {
+        let comment = window.localStorage.getItem("comment");
+        return (comment !== null) ? comment : "";
     },
 
     setLocalResponse(response) {
@@ -208,25 +206,25 @@ const FormActions = {
         window.localStorage.setItem('responses', JSON.stringify(responses));
     },
 
-    setLocalData(sentences, responses, comments) {
+    setLocalData(sentences, responses, comment) {
         FormActions.setLocalResponses(responses);
         FormActions.setLocalSentences(sentences);
-        FormActions.setLocalComments(comments);
+        FormActions.setLocalComment(comment);
         //window.localStorage.setItem('sentences', JSON.stringify(sentences));
         //window.localStorage.setItem('responses', JSON.stringify(responses));
-        //window.localStorage.setItem('comments', comments);
+        //window.localStorage.setItem('comment', comment);
     },
 
     getLocalData() {
         return {
             sentences: FormActions.getLocalSentences(),
             responses: FormActions.getLocalResponses(),
-            comments: FormActions.getLocalComments()
+            comment: FormActions.getLocalComment()
         }
         /*
         var sentences = window.localStorage.getItem('sentences');
         var responses = window.localStorage.getItem('responses');
-        var comments = window.localStorage.getItem('comments');
+        var comment = window.localStorage.getItem('comment');
         if (sentences)
             sentences = JSON.parse(sentences);
         if (responses)
@@ -234,7 +232,7 @@ const FormActions = {
         return {
             sentences: sentences,
             responses: responses,
-            comments: comments
+            comment: comment
         }
         */
     },
@@ -242,7 +240,7 @@ const FormActions = {
     clearLocalData() {
         window.localStorage.removeItem('sentences');
         window.localStorage.removeItem('responses');
-        window.localStorage.removeItem('comments');
+        window.localStorage.removeItem('comment');
         AppDispatcher.dispatch({
             eventName: 'clear-responses'
         });
@@ -255,7 +253,7 @@ const FormActions = {
                 eventName: 'load-sentences',
                 sentences: localData.sentences,
                 responses: localData.responses,
-                comments: localData.comments
+                comment: localData.comment
             });
         }
         else {
@@ -265,7 +263,7 @@ const FormActions = {
                     eventName: 'load-sentences',
                     sentences: sentences,
                     responses: null,
-                    comments: ""
+                    comment: ""
                 });
             });
         }
@@ -303,7 +301,7 @@ const FormActions = {
     },
 
     loadNewSentences() {
-        FormActions.checkComments();
+        FormActions.checkComment();
         FormActions.clearLocalData();
         let annotator = window.localStorage.getItem("annotator");
         FormActions.loadSentences(annotator);

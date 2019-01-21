@@ -143,7 +143,7 @@ class Indexer(object):
         return modified
 
     def add_comment(self, comment):
-        response = self.es(index="annotator_comment", doc_type="comment", body=comment)
+        response = self.es.index(index="annotator_comment", doc_type="comment", body=comment)
         return response
 
     def add_response(self, response):

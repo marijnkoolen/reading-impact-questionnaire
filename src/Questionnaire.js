@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
 import LogoutButton from './LogoutButton.js';
+import AllJudgementsButton from './AllJudgementsButton.js';
 import ReadmeButton from './ReadmeButton.js';
 import SentenceProgress from './SentenceProgress.js';
 import SentenceQuestions from './SentenceQuestions.js';
@@ -16,7 +17,9 @@ class Questionnaire extends Component {
     constructor(props) {
         super(props);
         this.changeView = this.changeView.bind(this);
+        this.checkDone = this.checkDone.bind(this);
         this.state = {
+            done: false,
             sentences: null,
             responses: [],
             progress: null,
@@ -86,6 +89,17 @@ class Questionnaire extends Component {
         this.setState({progress: progressData});
     }
 
+    loadNewSentences() {
+        FormActions.loadNewSentences();
+        this.setState({done: false});
+    }
+
+    checkDone(done) {
+        if (done !== this.state.done) {
+            this.setState({done: done});
+        }
+    }
+
 
     render() {
         let annotator = window.localStorage.getItem('annotator');
@@ -136,7 +150,7 @@ class Questionnaire extends Component {
             progressBar = makeProgressBar(this.state.progress);
         }
 
-        var closing = (sentenceBlocks) ? (<SentenceProgress changeView={this.changeView.bind(this)}/>) : null;
+        var sentenceProgress = (sentenceBlocks) ? (<SentenceProgress checkDone={this.checkDone.bind(this)} changeView={this.changeView.bind(this)}/>) : null;
         var enablePopover = () => {
             $('[data-toggle="popover"]').popover();
         }
@@ -152,10 +166,27 @@ class Questionnaire extends Component {
                     {progressBar}
                 </div>
                 <div className="row">
+                    <p>Beoordeel onderstaande zinnen. Zinnen met een rood label zijn nog niet volledig beoordeeld. Als het label groen wordt, wordt uw oordeel opgeslagen.</p>
+                    {sentenceProgress}
                     {(annotator) ? sentenceBlocks : null}
                 </div>
                 <div className="row closing">
-                    {closing}
+                    {sentenceProgress}
+                    <div className="buttons">
+                        <LogoutButton/>
+                        {' '}
+                        <a
+                            type="button"
+                            href="#top"
+                            className="done btn btn-primary"
+                            disabled={!this.state.done}
+                            onClick={this.loadNewSentences.bind(this)}
+                        >
+                            Meer zinnen beoordelen
+                        </a>
+                        {' '}
+                        <AllJudgementsButton/>
+                    </div>
                 </div>
             </div>
         );
