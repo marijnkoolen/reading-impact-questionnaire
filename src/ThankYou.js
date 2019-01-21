@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import ReadmeButton from './ReadmeButton.js';
 import LoginButton from './LoginButton.js';
+import CommentBox from './CommentBox.js';
 import AppFormStore from './formStore.js';
 
 class ThankYou extends Component {
@@ -37,6 +38,7 @@ class ThankYou extends Component {
                     Als u op de hoogte gehouden wilt worden over de vorderingen van dit onderzoek, laat het ons weten. Mail naar <a href="mailto:peter.boot@huygens.knaw.nl">peter.boot@huygens.knaw.nl</a> en/of <a href="mailto:marijn.koolen@di.huc.knaw.nl">marijn.koolen@di.huc.knaw.nl</a>.
                 </p>
                 <div className="closing">
+                    <CommentBox/>
                     <ReadmeButton labelText="Terug naar de uitleg"/>
                     {' '}
                     <LoginButton labelText="Opnieuw aanmelden"/>

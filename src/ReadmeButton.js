@@ -16,7 +16,7 @@ class ReadmeButton extends Component {
     }
 
     render() {
-        let labelText = (this.props.labelText) ? this.props.labelText : "Uitleg";
+        let labelText = (this.props.labelText) ? this.props.labelText : "Toon uitleg";
         return (
             <button
                 className="btn btn-primary"

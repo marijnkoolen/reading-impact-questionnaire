@@ -103,12 +103,12 @@ const SentenceAPI = {
         }
     },
 
-    saveComments : (comments, callback) => {
-        let url = SentenceAPI.sentenceServer + "/save_comments";
+    saveComment : (comment, callback) => {
+        let url = SentenceAPI.sentenceServer + "/save_comment";
         let xhr = new XMLHttpRequest();
         xhr.open("POST", url);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify(comments));
+        xhr.send(JSON.stringify(comment));
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let responseData = JSON.parse(xhr.responseText);
