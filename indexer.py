@@ -48,14 +48,22 @@ class Indexer(object):
         if response['hits']['total'] == 0:
             return []
         else:
-            return [hit["_source"] for hit in response['hits']['hits']]
+            sentences = [hit["_source"] for hit in response['hits']['hits']]
+            remove_non_annotator_annotations(self, annotator, sentences)
+            return sentences
 
     def get_unfinished_sentences(self, annotator):
         response = self.search_unfinished_sentences(annotator)
         if response['hits']['total'] == 0:
             return []
         else:
-            return [hit["_source"] for hit in response['hits']['hits']]
+            sentences = [hit["_source"] for hit in response['hits']['hits']]
+            remove_non_annotator_annotations(self, annotator, sentences)
+            return sentences
+
+    def remove_non_annotator_annotations(self, annotator, sentences):
+        for sentence in sentences:
+            sentence["annotations"] = [annotation for annotation in sentence["annotations"] if annotation["annotator"] == annotator]
 
     def search_unfinished_sentences(self, annotator):
         query = {

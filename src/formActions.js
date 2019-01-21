@@ -83,10 +83,14 @@ const FormActions = {
     },
 
     sendComments(comments) {
+        var sentences = FormActions.getLocalSentences();
+        if (sentences) {
+            sentences = sentences.map((sentence) => {return sentence.sentence_id});
+        }
         let commentsData = {
             annotator: FormActions.getAnnotator(),
             comments: comments,
-            sentences: FormActions.getLocalSentences().map((sentence) => {return sentence.sentence_id})
+            sentences: sentences
         }
         /*
         SentenceAPI.saveComments(commentsData, (error, serverResponse) => {

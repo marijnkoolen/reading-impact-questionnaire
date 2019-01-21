@@ -244,7 +244,7 @@ class SentenceQuestions extends Component {
         sentenceLabelClass += (sentenceDone) ? "success" : "danger";
 
         return (
-            <div key={this.props.sentence.sentence_id}>
+            <div className="sentence-block" key={this.props.sentence.sentence_id}>
                 <a name={'sentence-block-' + this.props.sentence.sentence_id}></a>
                 <div className="sentence">
                     <label className={sentenceLabelClass}>Zin {this.props.sentence.number}:</label>{'  '}

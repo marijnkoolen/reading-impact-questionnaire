@@ -88,7 +88,7 @@ class Login extends React.Component {
                         name="typedId"
                         value={this.state.typedId}
                         onChange={this.handleIdChange.bind(this)}
-                        autocapitalize="none"
+                        autoCapitalize="none"
                     />
                     {' '}
                     <button
