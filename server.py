@@ -67,5 +67,11 @@ def load_sentences():
     sentences = es_indexer.get_unfinished_sentences(annotator)
     return make_response(sentences)
 
+@app.route('/api/reading_impact/save_comment', methods=["POST"])
+def save_comment():
+    comment = request.get_json()
+    response = es_indexer.add_comment(comment)
+    return make_response({"status": "saved_comment"})
+
 if __name__ == '__main__':
     app.run(host=config["api_host"], port=int(os.environ.get("PORT", config["api_port"])), debug=True)

@@ -49,7 +49,7 @@ class Indexer(object):
             return []
         else:
             sentences = [hit["_source"] for hit in response['hits']['hits']]
-            remove_non_annotator_annotations(self, annotator, sentences)
+            self.remove_non_annotator_annotations(annotator, sentences)
             return sentences
 
     def get_unfinished_sentences(self, annotator):
@@ -58,7 +58,7 @@ class Indexer(object):
             return []
         else:
             sentences = [hit["_source"] for hit in response['hits']['hits']]
-            remove_non_annotator_annotations(self, annotator, sentences)
+            self.remove_non_annotator_annotations(annotator, sentences)
             return sentences
 
     def remove_non_annotator_annotations(self, annotator, sentences):
@@ -141,6 +141,10 @@ class Indexer(object):
                     response["num_modifications"] = annotation["num_modifications"]
                 modified = True
         return modified
+
+    def add_comment(self, comment):
+        response = self.es(index="annotator_comment", doc_type="comment", body=comment)
+        return response
 
     def add_response(self, response):
         sentence = self.get_sentence(response["sentence_id"])
