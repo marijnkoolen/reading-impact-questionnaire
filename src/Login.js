@@ -46,6 +46,7 @@ class Login extends React.Component {
     submitExistingId(event) {
         let identifier = event.target.name;
         this.handleLogin(identifier);
+        FormActions.addNewId(identifier);
     }
 
     generateID() {
