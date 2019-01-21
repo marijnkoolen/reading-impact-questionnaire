@@ -20,7 +20,48 @@ const FormActions = {
     setAnnotator(annotator) {
         SentenceAPI.annotator = annotator;
         window.localStorage.setItem("annotator", annotator);
+        FormActions.clearNonAnnotatorData(annotator);
         FormActions.loadSentences(annotator);
+    },
+
+    clearNonAnnotatorData(annotator) {
+        FormActions.clearNonAnnotatorResponses(annotator);
+        FormActions.clearNonAnnotatorSentences(annotator);
+    },
+
+    clearNonAnnotatorSentences(annotator) {
+        var sentences = FormActions.getLocalSentences();
+        if (sentences) {
+            var mySentences = sentences.filter((sentence) => {
+                var keep = false;
+                sentence.annotations.forEach((annotation) => {
+                    if (annotation.annotator === annotator) {
+                        keep = true;
+                    }
+                });
+                return keep;
+            });
+            if (mySentences.length === 0) {
+                mySentences = null;
+            }
+            FormActions.setLocalSentences(mySentences);
+        }
+    },
+
+    clearNonAnnotatorResponses(annotator) {
+        var responses = FormActions.getLocalResponses();
+        if (responses) {
+            var myResponses = {};
+            Object.keys(responses).forEach((sentenceId) => {
+                if (responses[sentenceId].annotator === annotator) {
+                    myResponses[sentenceId] = responses[sentenceId];
+                }
+            });
+            if (Object.keys(myResponses).length === 0) {
+                myResponses = null;
+            }
+            FormActions.setLocalResponses(myResponses);
+        }
     },
 
     isDispatching() {
