@@ -84,8 +84,10 @@ const FormActions = {
 
     addNewId(identifier) {
         var previousIds = FormActions.getPreviousIds();
-        previousIds.push(identifier);
-        window.localStorage.setItem('previousIds', JSON.stringify(previousIds));
+        if (!previousIds.includes(identifier)) {
+            previousIds.push(identifier);
+            window.localStorage.setItem('previousIds', JSON.stringify(previousIds));
+        }
         FormActions.registerId(identifier);
     },
 

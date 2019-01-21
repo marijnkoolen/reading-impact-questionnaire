@@ -28,6 +28,7 @@ class Login extends React.Component {
             FormActions.checkIdExists(this.state.identifier, (exists) => {
                 if (exists) {
                     this.handleLogin(this.state.identifier);
+                    FormActions.addNewId(this.state.identifier);
                     return false;
                 } else {
                     window.alert('Dit ID is niet in gebruik!');
@@ -46,7 +47,6 @@ class Login extends React.Component {
     submitExistingId(event) {
         let identifier = event.target.name;
         this.handleLogin(identifier);
-        FormActions.addNewId(identifier);
     }
 
     generateID() {
