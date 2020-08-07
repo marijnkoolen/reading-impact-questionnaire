@@ -3,6 +3,8 @@ const SentenceAPI = {
 
     sentenceServer : null,
 
+    version: null,
+
     annotator : null,
 
     makeRequest : (method, url, postData) => {
@@ -57,7 +59,7 @@ const SentenceAPI = {
         if (!(SentenceAPI.annotator)) {
             SentenceAPI.annotator = annotator;
         }
-        let url = SentenceAPI.sentenceServer + "/load_sentences?annotator=" + annotator;
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/load_sentences?annotator=" + annotator;
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.send();
@@ -74,7 +76,7 @@ const SentenceAPI = {
         if (!(SentenceAPI.annotator)) {
             SentenceAPI.annotator = annotator;
         }
-        let url = SentenceAPI.sentenceServer + "/load_annotator_sentences?annotator=" + annotator;
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/load_annotator_sentences?annotator=" + annotator;
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.send();
@@ -91,13 +93,14 @@ const SentenceAPI = {
         if (!(SentenceAPI.annotator)) {
             SentenceAPI.annotator = annotator;
         }
-        let url = SentenceAPI.sentenceServer + "/load_progress?annotator=" + annotator;
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/load_progress?annotator=" + annotator;
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.send();
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let responseData = JSON.parse(xhr.responseText);
+                console.debug(responseData);
                 callback(null, responseData);
             }
         }

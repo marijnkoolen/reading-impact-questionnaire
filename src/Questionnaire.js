@@ -86,6 +86,7 @@ class Questionnaire extends Component {
 
     setProgress(progress) {
         let progressData = FormActions.progress;
+        console.debug(progressData);
         this.setState({progress: progressData});
     }
 

@@ -13,6 +13,10 @@ const FormActions = {
         SentenceAPI.sentenceServer = endpoint;
     },
 
+    setVersion(version) {
+        SentenceAPI.version = version;
+    },
+
     getAnnotator() {
         return SentenceAPI.annotator;
     },
@@ -133,7 +137,8 @@ const FormActions = {
         let commentData = {
             annotator: FormActions.getAnnotator(),
             comment: comment,
-            sentences: sentences
+            sentences: sentences,
+            version: SentenceAPI.version
         }
         SentenceAPI.saveComment(commentData, (error, serverResponse) => {
             if (error) {
