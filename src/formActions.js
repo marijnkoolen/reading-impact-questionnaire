@@ -69,7 +69,7 @@ const FormActions = {
     },
 
     changeView(view) {
-        FormActions.checkComment();
+        //FormActions.checkComment();
         AppDispatcher.dispatch({
             eventName: 'change-view',
             view: view
@@ -147,7 +147,7 @@ const FormActions = {
     removeAnnotator() {
         SentenceAPI.annotator = null;
         window.localStorage.removeItem('annotator');
-        FormActions.checkComment();
+        //FormActions.checkComment();
         AppDispatcher.dispatch({
             eventName: 'logout-annotator',
         });
@@ -344,7 +344,7 @@ const FormActions = {
     },
 
     loadNewSentences() {
-        FormActions.checkComment();
+        //FormActions.checkComment();
         FormActions.clearLocalData();
         let annotator = window.localStorage.getItem("annotator");
         FormActions.loadSentences(annotator);
