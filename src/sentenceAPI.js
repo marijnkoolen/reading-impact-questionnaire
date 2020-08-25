@@ -164,6 +164,34 @@ const SentenceAPI = {
         }
     },
 
+    loadReadme : (callback) => {
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/readme";
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                //console.log(responseData);
+                callback(null, responseData);
+            }
+        }
+    },
+
+    loadVersionData : (callback) => {
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/version_data";
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                //console.log(responseData);
+                callback(null, responseData);
+            }
+        }
+    },
+
 }
 
 export default SentenceAPI;

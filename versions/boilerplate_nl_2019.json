@@ -16,6 +16,8 @@
         "logout": "Opslaan en afmelden",
         "judge_more": "Meer zinnen beoordelen",
         "back_to_explanation": "Terug naar de uitleg",
+        "back_to_questionnaire": "Terug naar de vragenlijst",
+        "show_questionnaire": "Naar de vragenlijst",
         "login_again": "Opnieuw aanmelden"
     },
     "sentences": {

@@ -16,6 +16,8 @@
         "logout": "Save and log out",
         "judge_more": "Judge more sentences",
         "back_to_explanation": "Back to the explanation",
+        "back_to_questionnaire": "Back to the questionnaire",
+        "show_questionnaire": "To the questionnaire",
         "login_again": "Login again"
     },
     "sentences": {

@@ -63,7 +63,7 @@ class ImpactForm extends Component {
         )
 
         let readme = (
-            <Readme boilerplate={this.props.boilerplate}/>
+            <Readme readme={this.props.readme} boilerplate={this.props.boilerplate}/>
         )
 
         let thankyou = (

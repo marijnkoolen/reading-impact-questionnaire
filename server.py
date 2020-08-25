@@ -8,6 +8,7 @@ from flask import Flask, Response, request, abort, jsonify
 from flask_cors import CORS
 from indexer import Indexer
 from settings import config, versions
+from version import read_readmes
 
 app = Flask(__name__, static_url_path='', static_folder='public')
 app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
@@ -18,6 +19,7 @@ app.add_url_rule('/reading-impact-questionnaire-en-2020/', 'reading-impact-quest
 
 cors = CORS(app)
 es_indexer = Indexer(config)
+readme = read_readmes()
 
 
 def read_boilerplate(version: str) -> Dict[str, str]:
@@ -113,6 +115,21 @@ def get_boilerplate(version):
     boilerplate = read_boilerplate(version)
     print(boilerplate)
     return make_response(boilerplate)
+
+
+@app.route('/api/reading_impact/<version>/readme', methods=['GET'])
+def get_readme(version):
+    if version not in versions:
+        abort(jsonify(message="unknown version"), 404)
+    return make_response(readme[version])
+
+
+@app.route('/api/reading_impact/<version>/version_data', methods=['GET'])
+def get_version_data(version):
+    global readme
+    if version not in versions:
+        abort(jsonify(message="unknown version"), 404)
+    return make_response({'readme': readme[version], 'boilerplate': read_boilerplate(version)})
 
 
 if __name__ == '__main__':
