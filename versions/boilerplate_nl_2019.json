@@ -1,0 +1,48 @@
+{
+    "progress": {
+        "done": "Voldoende oordelen verzameld voor",
+        "total": "Totaal te beoordelen zinnen",
+        "done_by_you": "Zinnen door u beoordeeld",
+        "unit": "zinnen",
+        "answered": "Zinnen volledig beoordeeld"
+    },
+    "login": {
+        "login_id": "U bent aangemeld met ID"
+    },
+    "button": {
+        "show_to_do": "Toon nog te beoordelen zinnen",
+        "show_judged": "Toon al mijn beoordelingen",
+        "show_explanation": "Toon uitleg",
+        "logout": "Opslaan en afmelden",
+        "judge_more": "Meer zinnen beoordelen",
+        "back_to_explanation": "Terug naar de uitleg",
+        "login_again": "Opnieuw aanmelden"
+    },
+    "sentences": {
+        "sentences_judged": "Onderstaande zinnen zijn volledig door u beoordeeld. U kunt hier eventueel uw oordelen aanpassen. Aanpassingen worden automatisch opgeslagen.",
+        "sentence_todo": "Beoordeel onderstaande zinnen. Zinnen met een rood label zijn nog niet volledig beoordeeld. Als het label groen wordt, wordt uw oordeel opgeslagen."
+    },
+    "question": {
+        "answerable_explanation": "Vink dit aan wanneer de zin bijvoorbeeld niet in het Nederlands is, volledig onbegrijpelijk is of alleen een gegeven zoals isbn of prijs bevat.",
+        "sentence_unanswerable": "Voor deze zin zijn onderstaande vragen niet te beantwoorden",
+        "unit": "Zin"
+    },
+    "response": {
+        "saved": "Antwoord opgeslagen",
+        "likert_low": "Geen of twijfelachtig",
+        "likert_high": "Duidelijk of zeer sterk"
+    },
+    "alert": {
+        "narrative_no_emo": "Emotionele impact kan niet afwezig zijn als er narratieve gevoelens uitgedrukt worden. ",
+        "style_no_emo": "Emotionele impact kan niet afwezig zijn als er gevoelens m.b.t. stijl uitgedrukt worden. ",
+        "valence_no_emo": "Gevoelens kunnen niet prettig of onprettig zijn als er geen emotionele impact is. "
+    },
+    "info": {
+        "explanation": "Uitleg",
+        "sentence_done": "Zinnen met voldoende oordelen zijn door tenminste 3 mensen beoordeeld. "
+    },
+    "thanks": {
+        "contribution": "Hartelijk dank voor uw medewerking!",
+        "contact": "Als u op de hoogte gehouden wilt worden over de vorderingen van dit onderzoek, laat het ons weten. Mail naar <a href=\"mailto:peter.boot@huygens.knaw.nl\">peter.boot@huygens.knaw.nl</a> en/of <a href=\"mailto:marijn.koolen@di.huc.knaw.nl\">marijn.koolen@di.huc.knaw.nl</a>."
+    }
+}

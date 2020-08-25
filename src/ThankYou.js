@@ -3,8 +3,8 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import ReadmeButton from './ReadmeButton.js';
-import LoginButton from './LoginButton.js';
+import ReadmeButton from './buttons/ReadmeButton.js';
+import LoginButton from './buttons/LoginButton.js';
 import CommentBox from './CommentBox.js';
 import AppFormStore from './formStore.js';
 
@@ -32,16 +32,16 @@ class ThankYou extends Component {
         return (
             <div className="thankyou">
                 <h2>
-                    Hartelijk dank voor uw medewerking!
+                    {this.props.boilerplate.thanks.contribution}
                 </h2>
                 <p>
-                    Als u op de hoogte gehouden wilt worden over de vorderingen van dit onderzoek, laat het ons weten. Mail naar <a href="mailto:peter.boot@huygens.knaw.nl">peter.boot@huygens.knaw.nl</a> en/of <a href="mailto:marijn.koolen@di.huc.knaw.nl">marijn.koolen@di.huc.knaw.nl</a>.
+                   {this.props.boilerplate.thanks.contact} 
                 </p>
                 <div className="closing">
                     <CommentBox/>
-                    <ReadmeButton labelText="Terug naar de uitleg"/>
+                    <ReadmeButton labelText={this.props.boilerplate.button.back_to_explanation}/>
                     {' '}
-                    <LoginButton labelText="Opnieuw aanmelden"/>
+                    <LoginButton labelText={this.props.boilerplate.button.login_again}/>
                 </div>
             </div>
         )

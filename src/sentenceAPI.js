@@ -121,7 +121,7 @@ const SentenceAPI = {
     },
 
     saveResponse : (response, callback) => {
-        let url = SentenceAPI.sentenceServer + "/save_response";
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/save_response";
         let xhr = new XMLHttpRequest();
         xhr.open("POST", url);
         //xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -136,7 +136,7 @@ const SentenceAPI = {
     },
 
     removeResponse : (response, callback) => {
-        let url = SentenceAPI.sentenceServer + "/remove_response";
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/remove_response";
         let xhr = new XMLHttpRequest();
         xhr.open("POST", url);
         //xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -149,6 +149,21 @@ const SentenceAPI = {
             }
         }
     },
+
+    loadBoilerplate : (callback) => {
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/boilerplate";
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                //console.log(responseData);
+                callback(null, responseData);
+            }
+        }
+    },
+
 }
 
 export default SentenceAPI;

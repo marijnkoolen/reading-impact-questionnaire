@@ -3,8 +3,8 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import LogoutButton from './LogoutButton.js';
-import AllJudgementsButton from './AllJudgementsButton.js';
+import LogoutButton from './buttons/LogoutButton.js';
+import AllJudgementsButton from './buttons/AllJudgementsButton.js';
 import FormActions from './formActions.js';
 import AppFormStore from './formStore.js';
 import questions from './questions.js';
@@ -73,7 +73,7 @@ class SentenceProgress extends Component {
         return (
             <div className="done">
                 <div className="sentence-checks">
-                    <div>Zinnen volledig beoordeeld:</div>
+                    <div>{this.props.boilerplate.progress.answered}:</div>
                     {sentenceChecks}
                 </div>
             </div>

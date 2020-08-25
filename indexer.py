@@ -91,7 +91,6 @@ class Indexer(object):
 
     def get_unfinished_sentences(self, annotator: str, index: str) -> List[Dict[str, any]]:
         response = self.search_unfinished_sentences(annotator, index)
-        print(response)
         if response['hits']['total']['value'] == 0:
             return []
         else:

@@ -3,7 +3,7 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import FormActions from './formActions.js';
+import FormActions from '../formActions.js';
 
 class ReadmeMoreButton extends Component {
 

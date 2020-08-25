@@ -4,10 +4,10 @@
 import json
 import os
 from typing import Dict, List, Union
-from flask import Flask, Response, request
+from flask import Flask, Response, request, abort, jsonify
 from flask_cors import CORS
 from indexer import Indexer
-from settings import config
+from settings import config, versions
 
 app = Flask(__name__, static_url_path='', static_folder='public')
 app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
@@ -18,6 +18,16 @@ app.add_url_rule('/reading-impact-questionnaire-en-2020/', 'reading-impact-quest
 
 cors = CORS(app)
 es_indexer = Indexer(config)
+
+
+def read_boilerplate(version: str) -> Dict[str, str]:
+    with open(versions[version]['boilerplate_file'], 'rt') as fh:
+        return json.load(fh)
+
+
+def read_questions(version: str) -> Dict[str, str]:
+    with open(versions[version]['questions_file'], 'rt') as fh:
+        return json.load(fh)
 
 
 def make_response(response_data: Union[List[Dict[str, any]], Dict[str, any]]):
@@ -34,6 +44,7 @@ def make_response(response_data: Union[List[Dict[str, any]], Dict[str, any]]):
 @app.route('/api/reading_impact/<version>/save_response', methods=["POST"])
 def save_response(version: str):
     response = request.get_json()
+    print(response)
     index = config["es_index"][version]
     es_indexer.add_response(response, index)
     return make_response({"status": "saved_response", "sentence_id": response["sentence_id"]})
@@ -93,6 +104,15 @@ def save_comment():
     comment = request.get_json()
     es_indexer.add_comment(comment)
     return make_response({"status": "saved_comment"})
+
+
+@app.route('/api/reading_impact/<version>/boilerplate', methods=['GET'])
+def get_boilerplate(version):
+    if version not in versions:
+        abort(jsonify(message="unknown version"), 404)
+    boilerplate = read_boilerplate(version)
+    print(boilerplate)
+    return make_response(boilerplate)
 
 
 if __name__ == '__main__':

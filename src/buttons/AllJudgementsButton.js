@@ -3,30 +3,31 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import FormActions from './formActions.js';
+import FormActions from '../formActions.js';
 
-class ReadmeButton extends Component {
+class AllJudgementsButton extends Component {
 
     constructor(props) {
         super(props);
     }
 
     changeView() {
-        FormActions.changeView("readme");
+        FormActions.changeView("judgements");
     }
 
     render() {
-        let labelText = (this.props.labelText) ? this.props.labelText : "Toon uitleg";
+        let labelText = (this.props.labelText) ? this.props.labelText : "Toon al mijn beoordelingen";
         return (
             <button
                 className="btn btn-primary"
                 onClick={this.changeView.bind(this)}
             >
-            {labelText}
+                {labelText}
             </button>
         )
     }
 }
 
-export default ReadmeButton;
+export default AllJudgementsButton;
+
 

@@ -146,7 +146,6 @@ const FormActions = {
                 console.log(error);
             }
         });
-        console.log("Sending comment:", commentData);
     },
 
     removeAnnotator() {
@@ -368,6 +367,15 @@ const FormActions = {
             AppDispatcher.dispatch({
                 eventName: 'load-progress',
                 progress: progressData
+            });
+        });
+    },
+
+    loadBoilerplate() {
+        SentenceAPI.loadBoilerplate((error, boilerplate) => {
+            AppDispatcher.dispatch({
+                eventName: 'load-boilerplate',
+                data: boilerplate
             });
         });
     }

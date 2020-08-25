@@ -4,9 +4,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
-import LogoutButton from './LogoutButton.js';
-import ReadmeButton from './ReadmeButton.js';
-import QuestionnaireButton from './QuestionnaireButton.js';
+import LogoutButton from './buttons/LogoutButton.js';
+import ReadmeButton from './buttons/ReadmeButton.js';
+import QuestionnaireButton from './buttons/QuestionnaireButton.js';
 import SentenceQuestions from './SentenceQuestions.js';
 import SentenceAPI from './sentenceAPI.js';
 import AppFormStore from './formStore.js';
@@ -20,6 +20,7 @@ class AllJudgements extends Component {
             sentences: null,
             responses: [],
             progress: null,
+            boilerplate: null,
         }
     }
 
@@ -77,6 +78,7 @@ class AllJudgements extends Component {
     }
 
     render() {
+        const boilerplate = this.props.boilerplate;
         let annotator = window.localStorage.getItem('annotator');
         let sentenceBlocks = null;
         let progressBar = null;
@@ -94,6 +96,7 @@ class AllJudgements extends Component {
                         key={sentence.number}
                         sentence={sentence}
                         response={response}
+                        boilerplate={boilerplate}
                     />
                 )
             });
@@ -102,11 +105,11 @@ class AllJudgements extends Component {
         let makeProgressBar = (progress) => {
             return (
                 <div className="header progress">
-                    <span>Totaal te beoordelen zinnen {progress.sentences_total}.</span>
+                    <span>{boilerplate.progress.total} {progress.sentences_total}.</span>
                     {' '}
-                    <span>Voldoende oordelen verzameld voor {progress.sentences_done} zinnen.</span>
+                    <span>{boilerplate.progress.done} {progress.sentences_done} {boilerplate.progress.unit}.</span>
                     {' '}
-                    <span>Zinnen door u beoordeeld: {progress.sentences_done_by_you}.</span>
+                    <span>{boilerplate.progress.done_by_you}: {progress.sentences_done_by_you}.</span>
                 </div>
             )
         }
@@ -118,28 +121,28 @@ class AllJudgements extends Component {
             <div className="col-md-10" ref="judgementsRef">
                 <div className="row header">
                     <p>U bent aangemeld met ID: {annotator}</p>
-                    <LogoutButton/>
+                    <LogoutButton labelText={boilerplate.button.logout}/>
                     {' '}
-                    <ReadmeButton/>
+                    <ReadmeButton labelText={boilerplate.button.show_explanation}/>
                     {' '}
-                    <QuestionnaireButton labelText="Toon nog te beoordelen zinnen"/>
+                    <QuestionnaireButton labelText={boilerplate.button.show_to_do}/>
                     {progressBar}
                 </div>
                 <div className="row">
-                    <p>Onderstaande zinnen zijn volledig door u beoordeeld. U kunt hier eventueel uw oordelen aanpassen. Aanpassingen worden automatisch opgeslagen.</p>
+                    <p>{boilerplate.sentences.sentences_judged}</p>
                     {(annotator) ? sentenceBlocks : null}
                 </div>
                 <div className="row closing">
-                    <ReadmeButton/>
+                    <ReadmeButton labelText={boilerplate.button.show_explanation}/>
                     {' '}
-                    <LogoutButton/>
+                    <LogoutButton labelText={boilerplate.button.logout}/>
                     {' '}
                     <button
                         className="btn btn-primary"
                         name="back-to-questionnaire"
                         onClick={this.backToQuestionnaire.bind(this)}
                     >
-                        Toon nog te beoordelen zinnen
+                        {boilerplate.button.show_to_do}
                     </button>
                 </div>
             </div>

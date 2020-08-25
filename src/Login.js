@@ -3,7 +3,7 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import ReadmeButton from './ReadmeButton.js';
+import ReadmeButton from './buttons/ReadmeButton.js';
 import FormActions from './formActions.js';
 
 class Login extends React.Component {

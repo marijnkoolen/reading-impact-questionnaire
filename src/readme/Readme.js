@@ -3,14 +3,14 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import LoginButton from './LoginButton.js';
 import ReadmeGeneral from './ReadmeGeneral.js';
 import ReadmeMore from './ReadmeMore.js';
 import ReadmeImpact from './ReadmeImpact.js';
 import ReadmeExamples from './ReadmeExamples.js';
-import ReadmeMoreButton from './ReadmeMoreButton.js';
-import QuestionnaireButton from './QuestionnaireButton.js';
-import FormActions from './formActions.js';
+import LoginButton from '../buttons/LoginButton.js';
+import ReadmeMoreButton from '../buttons/ReadmeMoreButton.js';
+import QuestionnaireButton from '../buttons/QuestionnaireButton.js';
+import FormActions from '../formActions.js';
 
 class Readme extends Component {
 
