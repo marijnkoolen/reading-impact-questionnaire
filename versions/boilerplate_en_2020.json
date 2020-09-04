@@ -1,4 +1,5 @@
 {
+    "version": "en_2020",
     "progress": {
         "done": "Sufficient judgements collected for",
         "total": "Total number of sentences to be judged",
@@ -7,7 +8,17 @@
         "answered": "Sentences judged completely"
     },
     "login": {
-        "login_id": "You are logged in with ID"
+        "login_id": "You are logged in with token",
+        "login_with_id": "Participate with token",
+        "login_with_this": "Participate with this token",
+        "login_with_new": "Participate as a new respondent",
+        "new_id": "If you are participating for the first time, all you need is click the button 'participate as a new respondent'.",
+        "reuse_id": "You can participate with the following token",
+        "enter_id": "If you have a token from a different device, you can enter it here: ",
+        "unused_id": "This token has not been used before.",
+        "invalid_id": "Invalid token. A valid token has three letters followed by three digits",
+        "title": "Participating",
+        "no_personal": "We don't ask or register any personal information about you."
     },
     "button": {
         "show_to_do": "Show sentences to be judged",

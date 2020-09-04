@@ -1,4 +1,5 @@
 {
+    "version": "nl_2019",
     "progress": {
         "done": "Voldoende oordelen verzameld voor",
         "total": "Totaal te beoordelen zinnen",
@@ -7,7 +8,17 @@
         "answered": "Zinnen volledig beoordeeld"
     },
     "login": {
-        "login_id": "U bent aangemeld met ID"
+        "login_id": "U bent aangemeld met ID",
+        "login_with_id": "Aanmelden met ID",
+        "login_with_this": "Aanmelden met dit ID",
+        "login_with_new": "Aanmelden met nieuw ID",
+        "new_id": "Als u nog niet eerder bent aangemeld, of u bent uw ID kwijt, genereer dan een nieuw ID om u aan te melden.",
+        "enter_id": "Als u eerder al via een ander device bent aangemeld, kunt u uw ID hier invoeren: ",
+        "reuse_id": "U kunt u aanmelden met een eerder gebruikt ID",
+        "unused_id": "Dit ID is niet in gebruik!",
+        "invalid_id": "Dit is geen geldig ID. Een geldig ID heeft drie letters gevolgd door drie cijfers",
+        "title": "Aanmelden",
+        "no_personal": "We slaan geen persoonlijke informatie over u op."
     },
     "button": {
         "show_to_do": "Toon nog te beoordelen zinnen",
