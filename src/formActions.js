@@ -13,6 +13,10 @@ const FormActions = {
         SentenceAPI.sentenceServer = endpoint;
     },
 
+    setVersion(version) {
+        SentenceAPI.version = version;
+    },
+
     getAnnotator() {
         return SentenceAPI.annotator;
     },
@@ -69,7 +73,7 @@ const FormActions = {
     },
 
     changeView(view) {
-        FormActions.checkComment();
+        //FormActions.checkComment();
         AppDispatcher.dispatch({
             eventName: 'change-view',
             view: view
@@ -133,7 +137,8 @@ const FormActions = {
         let commentData = {
             annotator: FormActions.getAnnotator(),
             comment: comment,
-            sentences: sentences
+            sentences: sentences,
+            version: SentenceAPI.version
         }
         SentenceAPI.saveComment(commentData, (error, serverResponse) => {
             if (error) {
@@ -141,13 +146,12 @@ const FormActions = {
                 console.log(error);
             }
         });
-        console.log("Sending comment:", commentData);
     },
 
     removeAnnotator() {
         SentenceAPI.annotator = null;
         window.localStorage.removeItem('annotator');
-        FormActions.checkComment();
+        //FormActions.checkComment();
         AppDispatcher.dispatch({
             eventName: 'logout-annotator',
         });
@@ -344,7 +348,7 @@ const FormActions = {
     },
 
     loadNewSentences() {
-        FormActions.checkComment();
+        //FormActions.checkComment();
         FormActions.clearLocalData();
         let annotator = window.localStorage.getItem("annotator");
         FormActions.loadSentences(annotator);
@@ -363,6 +367,15 @@ const FormActions = {
             AppDispatcher.dispatch({
                 eventName: 'load-progress',
                 progress: progressData
+            });
+        });
+    },
+
+    loadBoilerplate() {
+        SentenceAPI.loadBoilerplate((error, boilerplate) => {
+            AppDispatcher.dispatch({
+                eventName: 'load-boilerplate',
+                data: boilerplate
             });
         });
     }

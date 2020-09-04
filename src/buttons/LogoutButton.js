@@ -3,7 +3,7 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import FormActions from './formActions.js';
+import FormActions from '../formActions.js';
 
 class LogoutButton extends Component {
 
@@ -22,7 +22,7 @@ class LogoutButton extends Component {
                 className="btn btn-primary"
                 onClick={this.logout.bind(this)}
             >
-                Opslaan en afmelden
+                {this.props.labelText}
             </button>
         )
     }

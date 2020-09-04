@@ -3,7 +3,7 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import ReadmeButton from './ReadmeButton.js';
+import ReadmeButton from './buttons/ReadmeButton.js';
 import FormActions from './formActions.js';
 
 class Login extends React.Component {
@@ -24,6 +24,7 @@ class Login extends React.Component {
     }
 
     submitTypeId() {
+        let component = this;
         if (FormActions.checkIdIsValid(this.state.identifier)) {
             FormActions.checkIdExists(this.state.identifier, (exists) => {
                 if (exists) {
@@ -31,11 +32,11 @@ class Login extends React.Component {
                     FormActions.addNewId(this.state.identifier);
                     return false;
                 } else {
-                    window.alert('Dit ID is niet in gebruik!');
+                    window.alert(component.props.boilerplate.login.unused_id);
                 }
             });
         } else {
-            window.alert('Dit is geen geldig ID. Een geldig ID heeft drie letters gevolgd door drie cijfers');
+            window.alert(component.props.boilerplate.login.invalid_id);
         }
     }
 
@@ -68,7 +69,7 @@ class Login extends React.Component {
                     name={identifier}
                     onClick={this.submitExistingId.bind(this)}
                 >
-                    Aanmelden met ID {identifier}
+                    {this.props.boilerplate.login.login_with_id} {identifier}
                 </button>
                 {' '}
                 </span>
@@ -77,13 +78,13 @@ class Login extends React.Component {
 
         let previous = (previousIds.length === 0) ? null : (
             <div className="login-type">
-                <span>U kunt u aanmelden met een eerder gebruikt ID:</span>
+                <span>{this.props.boilerplate.login.reuse_id}:</span>
                 <div>{idList}</div>
             </div>
         );
         let typedId = (
                 <div className="login-type">
-                    <span>Als u eerder al via een ander device bent aangemeld, kunt u uw ID hier invoeren: </span>
+                    <span>{this.props.boilerplate.login.enter_id}</span>
                     <input
                         type="text"
                         name="typedId"
@@ -96,25 +97,25 @@ class Login extends React.Component {
                         className="btn btn-primary"
                         onClick={this.submitTypeId.bind(this)}
                     >
-                        Aanmelden met dit ID
+                        {this.props.boilerplate.login.login_with_this}
                     </button>
                 </div>
         )
         let generateNewId = (
             <div className="login-type">
-                <p>Als u nog niet eerder bent aangemeld, of u bent uw ID kwijt, genereer dan een nieuw ID om u aan te melden.</p>
+                <p>{this.props.boilerplate.login.new_id}</p>
                 <span>
                     <button
                         className="btn btn-primary"
                         onClick={this.generateID.bind(this)}
                         >
-                        Aanmelden met nieuw ID
+                            {this.props.boilerplate.login.login_with_new}
                     </button>
                 </span>
             </div>
         )
 
-       return (
+        const nl_login = (
             <div>
                 <div className="login">
                     <h2>Aanmelden</h2>
@@ -138,8 +139,60 @@ class Login extends React.Component {
                     </p>
                 </div>
                 <div className="closing">
-                    <ReadmeButton labelText="Terug naar de uitleg"/>
+                    <ReadmeButton labelText={this.props.boilerplate.button.back_to_explanation}/>
                 </div>
+            </div>
+        );
+
+        const en_login = (
+            <div>
+                <div className="login">
+                    <h2>Particpating</h2>
+                    <p>You can participate without providing any personal information.</p>
+                    <p>If you have already participated before, please reuse the token you 
+                        were given before, so we know which sentences you have already judged.</p>
+                    {previous}
+                    {generateNewId}
+                    {typedId}
+                </div>
+                <span className="author-info">
+                </span>
+                <div className="explanation">
+                    <h3>What data do we collect?</h3>
+                    <p>
+                        We don't register personal information, unless you provide it at the end because you want us to 
+                        keep you informed about the results of the questionnaire.
+                        When you participate, you will be given a randomly generated and anonymous token. 
+                        The sole purpose of this token is to keep track of which sentences you have judged before, 
+                        so you don't receive the same sentence twice. 
+                    </p>
+                    <p>
+                        We store your responses to the questionnaire on a secure server at the Humanities Cluster. 
+                        These responses will only be used to validate our computational model and will not be shared with 
+                        third parties. The data will be kept for five years, conforming to standard research data 
+                        management protocol, to ensure transparency and reproducibility of our research. 
+                    </p>
+                    <h3>When do I have to fill in an existing token?</h3>
+                    <p>
+                        This is only necessary when you use multiple devices to participate (desktop, laptop, tablet, ...). 
+                        In that case, please write down the token and reuse on all devices. 
+                    </p>
+                    <p>
+                        When you participate, your browser automatically stores the token locally on your device. If you 
+                        return at a later time, the browser loads the token from your device so you can easily continue
+                        with the questionnaire and review all your responses.
+                    </p>
+                </div>
+                <div className="closing">
+                    <ReadmeButton labelText={this.props.boilerplate.button.back_to_explanation}/>
+                </div>
+            </div>
+
+        )
+
+        return (
+            <div>
+                {(this.props.boilerplate.version == "nl_2019") ? nl_login : en_login}
             </div>
         )
     }

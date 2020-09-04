@@ -3,20 +3,20 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import FormActions from './formActions.js';
+import FormActions from '../formActions.js';
 
-class AllJudgementsButton extends Component {
+class QuestionnaireButton extends Component {
 
     constructor(props) {
         super(props);
     }
 
     changeView() {
-        FormActions.changeView("judgements");
+        FormActions.changeView("questionnaire");
     }
 
     render() {
-        let labelText = (this.props.labelText) ? this.props.labelText : "Toon al mijn beoordelingen";
+        let labelText = (this.props.labelText) ? this.props.labelText : "Naar de vragenlijst";
         return (
             <button
                 className="btn btn-primary"
@@ -28,6 +28,5 @@ class AllJudgementsButton extends Component {
     }
 }
 
-export default AllJudgementsButton;
-
+export default QuestionnaireButton;
 

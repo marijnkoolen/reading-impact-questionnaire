@@ -3,8 +3,8 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import LikertButton from './LikertButton.js';
-import CategoryButton from './CategoryButton.js';
+import LikertButton from './buttons/LikertButton.js';
+import CategoryButton from './buttons/CategoryButton.js';
 import FormActions from './formActions.js';
 import AppFormStore from './formStore.js';
 import questions from './questions.js';
@@ -59,15 +59,15 @@ class SentenceQuestions extends Component {
             sentenceResponse["emotional_valence"] = "na";
         }
         if (sentenceResponse["narrative_scale"] > "0" && sentenceResponse["emotional_scale"] === "0") {
-            window.alert("Emotionele impact kan niet afwezig zijn als er narratieve gevoelens uitgedrukt worden. ");
+            window.alert(this.props.boilerplate.alert.narrative_no_emo);
             sentenceResponse["narrative_scale"] = "0";
         }
         if (sentenceResponse["style_scale"] > "0" && sentenceResponse["emotional_scale"] === "0") {
-            window.alert("Emotionele impact kan niet afwezig zijn als er gevoelens m.b.t. stijl uitgedrukt worden. ");
+            window.alert(this.props.boilerplate.alert.style_no_emo);
             sentenceResponse["style_scale"] = "0";
         }
         if (sentenceResponse["emotional_valence"] && sentenceResponse["emotional_valence"] !== "na" && sentenceResponse["emotional_scale"] === "0") {
-            window.alert("Gevoelens kunnen niet prettig of onprettig zijn als er geen emotionele impact is. ");
+            window.alert(this.props.boilerplate.alert.valence_no_emo);
             sentenceResponse["emotional_valence"] = "na";
         }
         if (FormActions.checkResponseDone(sentenceResponse)) {
@@ -144,10 +144,10 @@ class SentenceQuestions extends Component {
                 return (
                     <div key={question.key}>
                         <div>
-                        <label>Geen of twijfelachtig</label>
+                        <label>{this.props.boilerplate.response.likert_low}</label>
                         {' '}
                         {likertButtons}
-                        <label>Duidelijk of zeer sterk</label>
+                        <label>{this.props.boilerplate.response.likert_high}</label>
                         </div>
                     </div>
                 )
@@ -169,7 +169,7 @@ class SentenceQuestions extends Component {
                     <span
                         className="badge term-info"
                         data-toggle="popover"
-                        title="Uitleg"
+                        title={this.props.boilerplate.info.explanation}
                         data-content={question.explanation}
                         data-trigger="hover"
                     >i</span>
@@ -181,7 +181,6 @@ class SentenceQuestions extends Component {
 
     getAnswerable() {
         let response = this.state.response;
-        console.log(response);
         if (response && response.unanswerable)
             return response.unanswerable;
         else
@@ -211,7 +210,8 @@ class SentenceQuestions extends Component {
     }
 
     render() {
-        let answerableExplanation = "Vink dit aan wanneer de zin bijvoorbeeld niet in het Nederlands is, volledig onbegrijpelijk is of alleen een gegeven zoals isbn of prijs bevat."
+        const boilerplate = this.props.boilerplate;
+        let answerableExplanation = boilerplate.question.answerable_explanation;
         let answerable = (
             <div>
                 <label>
@@ -221,12 +221,12 @@ class SentenceQuestions extends Component {
                         onChange={this.setAnswerable.bind(this)}
                         checked={this.state.response.unanswerable}
                     />
-                    &nbsp;Voor deze zin zijn onderstaande vragen niet te beantwoorden&nbsp;
+                    &nbsp;{boilerplate.question.sentence_unanswerable}&nbsp;
                     <span
                         className="badge term-info"
                         data-toggle="popover"
-                        title="Uitleg"
-                        data-content={answerableExplanation}
+                        title={boilerplate.info.explanation}
+                        data-content={boilerplate.question.answerable_explanation}
                         data-trigger="hover"
                     >i</span>
                 </label>
@@ -235,7 +235,7 @@ class SentenceQuestions extends Component {
 
         let responseStatus = (<div></div>);
         if (this.state.responseSaved) {
-            responseStatus = (<div>Antwoord opgeslagen</div>);
+            responseStatus = (<div>{boilerplate.response.saved}</div>);
         }
 
         let questionList = this.makeQuestionList();
@@ -247,7 +247,7 @@ class SentenceQuestions extends Component {
             <div className="sentence-block" key={this.props.sentence.sentence_id}>
                 <a name={'sentence-block-' + this.props.sentence.sentence_id}></a>
                 <div className="sentence">
-                    <label className={sentenceLabelClass}>Zin {this.props.sentence.number}:</label>{'  '}
+                    <label className={sentenceLabelClass}>{boilerplate.question.unit} {this.props.sentence.number}:</label>{'  '}
                     <span className="sentence-text">
                         <i>{this.props.sentence.text}</i>
                     </span>

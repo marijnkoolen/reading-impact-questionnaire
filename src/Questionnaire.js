@@ -4,9 +4,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
-import LogoutButton from './LogoutButton.js';
-import AllJudgementsButton from './AllJudgementsButton.js';
-import ReadmeButton from './ReadmeButton.js';
+import LogoutButton from './buttons/LogoutButton.js';
+import AllJudgementsButton from './buttons/AllJudgementsButton.js';
+import ReadmeButton from './buttons/ReadmeButton.js';
 import SentenceProgress from './SentenceProgress.js';
 import SentenceQuestions from './SentenceQuestions.js';
 import SentenceAPI from './sentenceAPI.js';
@@ -102,6 +102,7 @@ class Questionnaire extends Component {
 
 
     render() {
+        const boilerplate = this.props.boilerplate;
         let annotator = window.localStorage.getItem('annotator');
         let sentenceBlocks = null;
         let progressBar = null;
@@ -119,6 +120,7 @@ class Questionnaire extends Component {
                         key={sentence.number}
                         sentence={sentence}
                         response={response}
+                        boilerplate={boilerplate}
                     />
                 )
             });
@@ -126,21 +128,21 @@ class Questionnaire extends Component {
 
         let makeProgressBar = (progress) => {
             /*
-                    <span>Totaal te beoordelen zinnen {progress.sentences_total}.</span>
+                    <span>{boilerplate.progress.total} {progress.sentences_total}.</span>
                     {' '}
             */
             return (
                 <div
                     className="header header-progress">
-                    <span>Voldoende oordelen verzameld voor {progress.sentences_done} zinnen.</span>
+                    <span>{boilerplate.progress.done} {progress.sentences_done} {boilerplate.progress.unit}.</span>
                     {' '}
-                    <span>Zinnen door u beoordeeld: {progress.sentences_done_by_you}.</span>
+                    <span>{boilerplate.progress.done_by_you}: {progress.sentences_done_by_you}.</span>
                     {' '}
                     <span
                         className="badge progress-info"
                         data-toggle="popover"
-                        title="Uitleg"
-                        data-content={"Zinnen met voldoende oordelen zijn door tenminste 3 mensen beoordeeld. Totaal te beoordelen zinnen: " + progress.sentences_total}
+                        title={boilerplate.info.explanation}
+                        data-content={boilerplate.info.sentence_done + boilerplate.progress.total + ": " + progress.sentences_total}
                         data-trigger="hover"
                     >i</span>
                 </div>
@@ -150,7 +152,7 @@ class Questionnaire extends Component {
             progressBar = makeProgressBar(this.state.progress);
         }
 
-        var sentenceProgress = (sentenceBlocks) ? (<SentenceProgress checkDone={this.checkDone.bind(this)} changeView={this.changeView.bind(this)}/>) : null;
+        var sentenceProgress = (sentenceBlocks) ? (<SentenceProgress checkDone={this.checkDone.bind(this)} changeView={this.changeView.bind(this)} boilerplate={this.props.boilerplate}/>) : null;
         var enablePopover = () => {
             $('[data-toggle="popover"]').popover();
         }
@@ -159,21 +161,21 @@ class Questionnaire extends Component {
         return (
             <div>
                 <div className="row header">
-                    <p>U bent aangemeld met ID: {annotator}</p>
-                    <LogoutButton/>
+                    <p>{boilerplate.login.login_id}: {annotator}</p>
+                    <LogoutButton labelText={boilerplate.button.logout}/>
                     {' '}
-                    <ReadmeButton/>
+                    <ReadmeButton labelText={boilerplate.button.show_explanation}/>
                     {progressBar}
                 </div>
                 <div className="row">
-                    <p>Beoordeel onderstaande zinnen. Zinnen met een rood label zijn nog niet volledig beoordeeld. Als het label groen wordt, wordt uw oordeel opgeslagen.</p>
+                    <p>{boilerplate.sentences.sentence_todo}</p>
                     {sentenceProgress}
                     {(annotator) ? sentenceBlocks : null}
                 </div>
                 <div className="row closing">
                     {sentenceProgress}
                     <div className="buttons">
-                        <LogoutButton/>
+                        <LogoutButton labelText={boilerplate.button.logout}/>
                         {' '}
                         <a
                             type="button"
@@ -182,10 +184,10 @@ class Questionnaire extends Component {
                             disabled={!this.state.done}
                             onClick={this.loadNewSentences.bind(this)}
                         >
-                            Meer zinnen beoordelen
+                            {boilerplate.button.judge_more}
                         </a>
                         {' '}
-                        <AllJudgementsButton/>
+                        <AllJudgementsButton labelText={boilerplate.button.show_judged}/>
                     </div>
                 </div>
             </div>

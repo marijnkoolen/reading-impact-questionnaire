@@ -1,3 +1,5 @@
+.idea
+.ipynb_checkpoints
 node_modules/
 public/js/read_impact_quest.js*
 .eslint*

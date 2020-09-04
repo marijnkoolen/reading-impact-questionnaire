@@ -3,14 +3,10 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import LoginButton from './LoginButton.js';
-import ReadmeGeneral from './ReadmeGeneral.js';
-import ReadmeMore from './ReadmeMore.js';
-import ReadmeImpact from './ReadmeImpact.js';
-import ReadmeExamples from './ReadmeExamples.js';
-import ReadmeMoreButton from './ReadmeMoreButton.js';
-import QuestionnaireButton from './QuestionnaireButton.js';
-import FormActions from './formActions.js';
+import LoginButton from '../buttons/LoginButton.js';
+import ReadmeMoreButton from '../buttons/ReadmeMoreButton.js';
+import QuestionnaireButton from '../buttons/QuestionnaireButton.js';
+import FormActions from '../formActions.js';
 
 class Readme extends Component {
 
@@ -27,28 +23,22 @@ class Readme extends Component {
         if (nextView.startsWith("readme-")) {
             this.setState({readmeView: nextView})
         }
-        console.log(nextView);
-        /*
-        if (nextView === "readme-more") {
-            this.props.changeView("readme-more");
-       }
-       */
     }
 
     render() {
         let annotator = FormActions.getAnnotator();
         let nextButton = (annotator) ?
-            (<QuestionnaireButton labelText="Terug naar de vragenlijst"/>) :
-            (<LoginButton labelText="Naar de vragenlijst"/>);
+            (<QuestionnaireButton labelText={this.props.boilerplate.button.back_to_questionnaire}/>) :
+            (<LoginButton labelText={this.props.boilerplate.questionnaire}/>);
         var setDisplay = () => {
             if (this.state.readmeView === "readme-general") {
-                return (<ReadmeGeneral/>);
+                return (<div dangerouslySetInnerHTML={{ __html: this.props.readme.general }} />)
             } else if (this.state.readmeView === "readme-impact") {
-                return (<ReadmeImpact/>);
+                return (<div dangerouslySetInnerHTML={{ __html: this.props.readme.impact }} />)
             } else if (this.state.readmeView === "readme-examples") {
-                return (<ReadmeExamples/>);
+                return (<div dangerouslySetInnerHTML={{ __html: this.props.readme.examples }} />)
             } else if (this.state.readmeView === "readme-more") {
-                return (<ReadmeMore/>);
+                return (<div dangerouslySetInnerHTML={{ __html: this.props.readme.more }} />)
             } else {
                 return null;
             }

@@ -35,6 +35,9 @@ class FormStore {
     changeView(view) {
         this.trigger('change-view', view);
     }
+    loadBoilerplate(boilerplate) {
+        this.trigger('load-boilerplate', boilerplate);
+    }
 }
 
 var AppFormStore = new FormStore();
@@ -73,6 +76,9 @@ AppDispatcher.register(function(action) {
             break;
         case 'change-view':
             AppFormStore.changeView(action.view, action.callback);
+            break;
+        case 'load-boilerplate':
+            AppFormStore.loadBoilerplate(action.data);
             break;
     }
 })

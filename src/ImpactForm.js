@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
 import Login from './Login.js';
-import Readme from './Readme.js';
+import Readme from './readme/Readme.js';
 import Questionnaire from './Questionnaire.js';
 import AllJudgements from './AllJudgements.js';
 import ThankYou from './ThankYou.js';
@@ -51,23 +51,23 @@ class ImpactForm extends Component {
 
     render() {
         let questionnaire = (
-            <Questionnaire/>
+            <Questionnaire boilerplate={this.props.boilerplate}/>
         );
 
         let judgements = (
-            <AllJudgements/>
+            <AllJudgements boilerplate={this.props.boilerplate}/>
         );
 
         let login = (
-            <Login/>
+            <Login boilerplate={this.props.boilerplate}/>
         )
 
         let readme = (
-            <Readme/>
+            <Readme readme={this.props.readme} boilerplate={this.props.boilerplate}/>
         )
 
         let thankyou = (
-            <ThankYou/>
+            <ThankYou boilerplate={this.props.boilerplate}/>
         )
 
         var view = null;

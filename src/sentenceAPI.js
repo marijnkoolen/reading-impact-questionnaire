@@ -3,6 +3,8 @@ const SentenceAPI = {
 
     sentenceServer : null,
 
+    version: null,
+
     annotator : null,
 
     makeRequest : (method, url, postData) => {
@@ -57,7 +59,7 @@ const SentenceAPI = {
         if (!(SentenceAPI.annotator)) {
             SentenceAPI.annotator = annotator;
         }
-        let url = SentenceAPI.sentenceServer + "/load_sentences?annotator=" + annotator;
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/load_sentences?annotator=" + annotator;
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.send();
@@ -74,7 +76,7 @@ const SentenceAPI = {
         if (!(SentenceAPI.annotator)) {
             SentenceAPI.annotator = annotator;
         }
-        let url = SentenceAPI.sentenceServer + "/load_annotator_sentences?annotator=" + annotator;
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/load_annotator_sentences?annotator=" + annotator;
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.send();
@@ -91,13 +93,14 @@ const SentenceAPI = {
         if (!(SentenceAPI.annotator)) {
             SentenceAPI.annotator = annotator;
         }
-        let url = SentenceAPI.sentenceServer + "/load_progress?annotator=" + annotator;
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/load_progress?annotator=" + annotator;
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.send();
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let responseData = JSON.parse(xhr.responseText);
+                console.debug(responseData);
                 callback(null, responseData);
             }
         }
@@ -118,7 +121,7 @@ const SentenceAPI = {
     },
 
     saveResponse : (response, callback) => {
-        let url = SentenceAPI.sentenceServer + "/save_response";
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/save_response";
         let xhr = new XMLHttpRequest();
         xhr.open("POST", url);
         //xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -133,7 +136,7 @@ const SentenceAPI = {
     },
 
     removeResponse : (response, callback) => {
-        let url = SentenceAPI.sentenceServer + "/remove_response";
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/remove_response";
         let xhr = new XMLHttpRequest();
         xhr.open("POST", url);
         //xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -146,6 +149,49 @@ const SentenceAPI = {
             }
         }
     },
+
+    loadBoilerplate : (callback) => {
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/boilerplate";
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                //console.log(responseData);
+                callback(null, responseData);
+            }
+        }
+    },
+
+    loadReadme : (callback) => {
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/readme";
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                //console.log(responseData);
+                callback(null, responseData);
+            }
+        }
+    },
+
+    loadVersionData : (callback) => {
+        let url = SentenceAPI.sentenceServer + "/" + SentenceAPI.version + "/version_data";
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                //console.log(responseData);
+                callback(null, responseData);
+            }
+        }
+    },
+
 }
 
 export default SentenceAPI;

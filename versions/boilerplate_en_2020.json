@@ -1,0 +1,62 @@
+{
+    "version": "en_2020",
+    "progress": {
+        "done": "Sufficient judgements collected for",
+        "total": "Total number of sentences to be judged",
+        "done_by_you": "Sentences judged by you",
+        "unit": "sentences",
+        "answered": "Sentences judged completely"
+    },
+    "login": {
+        "login_id": "You are logged in with token",
+        "login_with_id": "Participate with token",
+        "login_with_this": "Participate with this token",
+        "login_with_new": "Participate as a new respondent",
+        "new_id": "If you are participating for the first time, all you need is click the button 'participate as a new respondent'.",
+        "reuse_id": "You can participate with the following token",
+        "enter_id": "If you have a token from a different device, you can enter it here: ",
+        "unused_id": "This token has not been used before.",
+        "invalid_id": "Invalid token. A valid token has three letters followed by three digits",
+        "title": "Participating",
+        "no_personal": "We don't ask or register any personal information about you."
+    },
+    "button": {
+        "show_to_do": "Show sentences to be judged",
+        "show_judged": "Show all my judgements",
+        "show_explanation": "Show explanation",
+        "logout": "Save and log out",
+        "judge_more": "Judge more sentences",
+        "back_to_explanation": "Back to the explanation",
+        "back_to_questionnaire": "Back to the questionnaire",
+        "show_questionnaire": "To the questionnaire",
+        "login_again": "Login again"
+    },
+    "sentences": {
+        "sentences_judged": "The sentences below have been completely judged by you. You can change your responses here. Changes are saved automatically.",
+        "sentence_todo": "Please judge the sentences below. Sentences with a red label are not judged completely yet. When the label turns green, you judgements will be saved."
+    },
+    "question": {
+        "answerable_explanation": "Check this box when a sentence is not in English, it is incomprehensible or it only contains data like an ISBN or price.",
+        "sentence_unanswerable": "For this sentence these questions are impossible to answer.",
+        "unit": "Sentence"
+    },
+    "response": {
+        "saved": "Response saved",
+        "likert_low": "None or only vaguely",
+        "likert_high": "Clearly or really strong"
+    },
+    "alert": {
+        "narrative_no_emo": "Emotional impact cannot be absent when narrative feelings are expressed. ",
+        "style_no_emo": "Emotional impact cannot be absent when feelings w.r.t. style are expressed. ",
+        "valence_no_emo": "Feelings cannot be positive or negative when there is no emotional impact. "
+    },
+    "info": {
+        "explanation": "Explanation",
+        "sentence_done": "Sentences with sufficient judgements are judged by at least 3 persons. "
+    },
+    "thanks": {
+        "contribution": "Many thanks for your contribution!",
+        "contact": "If you would like to be kept updated on this research, let us know. Send an email to <a href=\"mailto:peter.boot@huygens.knaw.nl\">peter.boot@huygens.knaw.nl</a> and/or <a href=\"mailto:marijn.koolen@di.huc.knaw.nl\">marijn.koolen@di.huc.knaw.nl</a>."
+    }
+}
+
