@@ -34,11 +34,9 @@ class ThankYou extends Component {
                 <h2>
                     {this.props.boilerplate.thanks.contribution}
                 </h2>
-                <p>
-                   {this.props.boilerplate.thanks.contact} 
-                </p>
+                <p dangerouslySetInnerHTML={{ __html: this.props.boilerplate.thanks.contact }} />
                 <div className="closing">
-                    <CommentBox/>
+                    <CommentBox boilerplate={this.props.boilerplate}/>
                     <ReadmeButton labelText={this.props.boilerplate.button.back_to_explanation}/>
                     {' '}
                     <LoginButton labelText={this.props.boilerplate.button.login_again}/>

@@ -20,6 +20,9 @@
         "title": "Participating",
         "no_personal": "We don't ask or register any personal information about you."
     },
+    "readme": {
+        "title": "Assessing the Impact of Reading in Book Reviews"
+    },
     "button": {
         "show_to_do": "Show sentences to be judged",
         "show_judged": "Show all my judgements",
@@ -29,7 +32,12 @@
         "back_to_explanation": "Back to the explanation",
         "back_to_questionnaire": "Back to the questionnaire",
         "show_questionnaire": "To the questionnaire",
-        "login_again": "Login again"
+        "login_again": "Login again",
+        "comment": "Submit comments",
+        "readme_general": "General info",
+        "readme_impact": "Impact explained",
+        "readme_examples": "Impact examples",
+        "readme_more": "Further information"
     },
     "sentences": {
         "sentences_judged": "The sentences below have been completely judged by you. You can change your responses here. Changes are saved automatically.",
@@ -57,6 +65,10 @@
     "thanks": {
         "contribution": "Many thanks for your contribution!",
         "contact": "If you would like to be kept updated on this research, let us know. Send an email to <a href=\"mailto:peter.boot@huygens.knaw.nl\">peter.boot@huygens.knaw.nl</a> and/or <a href=\"mailto:marijn.koolen@di.huc.knaw.nl\">marijn.koolen@di.huc.knaw.nl</a>."
+    },
+    "comment": {
+        "title": "Comments",
+        "box": "If you have comments or questions about this questionnaire, please type them here."
     }
 }
 

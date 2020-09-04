@@ -31,11 +31,12 @@ class CommentBox extends React.Component {
     }
 
     render() {
-       return (
+        console.log('this is new')
+        return (
             <div>
                 <div className="comment-box">
-                    <h3>Opmerkingen</h3>
-                    <p>Als u opmerkingen heeft over de vragenlijst of het invullen daarvan, kunt u deze hier invullen.</p>
+                    <h3>{this.props.boilerplate.comment.title}</h3>
+                    <p>{this.props.boilerplate.comment.box}</p>
                     <textarea
                         type="text"
                         name="comment"
@@ -50,7 +51,7 @@ class CommentBox extends React.Component {
                         disabled={this.state.comment === ''}
                         onClick={this.submitComment.bind(this)}
                     >
-                        Opmerkingen versturen
+                        {this.props.boilerplate.button.comment}
                     </button>
                     <div className="comment-feedback">
                         {this.state.feedback}

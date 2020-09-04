@@ -20,6 +20,9 @@
         "title": "Aanmelden",
         "no_personal": "We slaan geen persoonlijke informatie over u op."
     },
+    "readme": {
+        "title": "Beoordelen van Impact van Lezen in Boekrecensies"
+    },
     "button": {
         "show_to_do": "Toon nog te beoordelen zinnen",
         "show_judged": "Toon al mijn beoordelingen",
@@ -29,7 +32,12 @@
         "back_to_explanation": "Terug naar de uitleg",
         "back_to_questionnaire": "Terug naar de vragenlijst",
         "show_questionnaire": "Naar de vragenlijst",
-        "login_again": "Opnieuw aanmelden"
+        "login_again": "Opnieuw aanmelden",
+        "comment": "Opmerkingen versturen",
+        "readme_general": "Algemene uitleg",
+        "readme_impact": "Impact uitleg",
+        "readme_examples": "Impact voorbeelden",
+        "readme_more": "Meer uitleg"
     },
     "sentences": {
         "sentences_judged": "Onderstaande zinnen zijn volledig door u beoordeeld. U kunt hier eventueel uw oordelen aanpassen. Aanpassingen worden automatisch opgeslagen.",
@@ -57,5 +65,9 @@
     "thanks": {
         "contribution": "Hartelijk dank voor uw medewerking!",
         "contact": "Als u op de hoogte gehouden wilt worden over de vorderingen van dit onderzoek, laat het ons weten. Mail naar <a href=\"mailto:peter.boot@huygens.knaw.nl\">peter.boot@huygens.knaw.nl</a> en/of <a href=\"mailto:marijn.koolen@di.huc.knaw.nl\">marijn.koolen@di.huc.knaw.nl</a>."
+    },
+    "comment": {
+        "title": "Opmerkingen",
+        "box": "Als u opmerkingen heeft over de vragenlijst of het invullen daarvan, kunt u deze hier invullen."
     }
 }
