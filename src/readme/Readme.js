@@ -29,7 +29,7 @@ class Readme extends Component {
         let annotator = FormActions.getAnnotator();
         let nextButton = (annotator) ?
             (<QuestionnaireButton labelText={this.props.boilerplate.button.back_to_questionnaire}/>) :
-            (<LoginButton labelText={this.props.boilerplate.questionnaire}/>);
+            (<LoginButton labelText={this.props.boilerplate.button.show_questionnaire}/>);
         var setDisplay = () => {
             if (this.state.readmeView === "readme-general") {
                 return (<div dangerouslySetInnerHTML={{ __html: this.props.readme.general }} />)
@@ -47,25 +47,25 @@ class Readme extends Component {
         return (
             <div className="readme">
                 <div className="readme-header">
-                    <h1>Beoordelen van Impact van Lezen in Boekrecensies</h1>
+                    <h1>{this.props.boilerplate.readme.title}</h1>
                     <div className="readme-navigation">
                         <a className="btn btn-primary "
                             name="readme-general"
-                            onClick={this.changeView.bind(this)}>Algemene uitleg</a>
+                            onClick={this.changeView.bind(this)}>{this.props.boilerplate.button.readme_general}</a>
                         &nbsp;→&nbsp;
                         <a className="btn btn-primary "
                             name="readme-impact"
-                            onClick={this.changeView.bind(this)}>Impact uitleg</a>
+                            onClick={this.changeView.bind(this)}>{this.props.boilerplate.button.readme_impact}</a>
                         &nbsp;→&nbsp;
                         <a className="btn btn-primary "
                             name="readme-examples"
-                            onClick={this.changeView.bind(this)}>Impact voorbeelden</a>
+                            onClick={this.changeView.bind(this)}>{this.props.boilerplate.button.readme_examples}</a>
                         &nbsp;→&nbsp;
                         {nextButton}
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a className="btn btn-primary "
                             name="readme-more"
-                            onClick={this.changeView.bind(this)}>Meer informatie</a>
+                            onClick={this.changeView.bind(this)}>{this.props.boilerplate.button.readme_more}</a>
                     </div>
                 </div>
                 <div className="readme-explanation">
