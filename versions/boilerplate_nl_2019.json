@@ -21,7 +21,8 @@
         "no_personal": "We slaan geen persoonlijke informatie over u op."
     },
     "readme": {
-        "title": "Beoordelen van Impact van Lezen in Boekrecensies"
+        "title": "Beoordelen van Impact van Lezen in Boekrecensies",
+        "pages": ["readme_general", "readme_impact", "readme_examples", "questionnaire", "readme_more"]
     },
     "button": {
         "show_to_do": "Toon nog te beoordelen zinnen",
