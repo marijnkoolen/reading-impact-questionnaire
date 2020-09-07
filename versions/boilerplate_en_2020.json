@@ -21,7 +21,8 @@
         "no_personal": "We don't ask or register any personal information about you."
     },
     "readme": {
-        "title": "Assessing the Impact of Reading in Book Reviews"
+        "title": "Assessing the Impact of Reading in Book Reviews",
+        "pages": ["readme_general", "readme_impact", "questionnaire", "readme_more"]
     },
     "button": {
         "show_to_do": "Show sentences to be judged",
