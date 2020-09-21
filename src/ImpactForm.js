@@ -16,7 +16,8 @@ class ImpactForm extends Component {
         super(props);
         this.changeView = this.changeView.bind(this);
         this.state = {
-            view: "readme"
+            view: "readme",
+            page: "readme_general"
         }
     }
 
@@ -46,7 +47,7 @@ class ImpactForm extends Component {
     setView() {
         let view = window.localStorage.getItem("view");
         if (view)
-            this.setState({view: view});
+            this.setState({view: view, page: "readme_impact"});
     }
 
     render() {
@@ -63,7 +64,7 @@ class ImpactForm extends Component {
         )
 
         let readme = (
-            <Readme readme={this.props.readme} boilerplate={this.props.boilerplate}/>
+            <Readme readme={this.props.readme} page={this.state.page} boilerplate={this.props.boilerplate}/>
         )
 
         let thankyou = (
