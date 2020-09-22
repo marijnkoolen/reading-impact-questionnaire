@@ -192,6 +192,33 @@ const SentenceAPI = {
         }
     },
 
+    checkDemographics : (annotator, callback) => {
+        let url = SentenceAPI.sentenceServer + "/has_demographics?annotator=" + annotator;
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                callback(null, responseData);
+            }
+        }
+    },
+
+    sendDemographics : (annotator, demographics, callback) => {
+        let url = SentenceAPI.sentenceServer + "/register_demographics?annotator=" + annotator;
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(demographics));
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let responseData = JSON.parse(xhr.responseText);
+                callback(null, responseData);
+            }
+        }
+    }
+
 }
 
 export default SentenceAPI;

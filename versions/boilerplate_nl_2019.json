@@ -35,6 +35,7 @@
         "show_questionnaire": "Naar de vragenlijst",
         "login_again": "Opnieuw aanmelden",
         "comment": "Opmerkingen versturen",
+        "demographics": "Antwoorden versturen",
         "readme_general": "Algemene uitleg",
         "readme_impact": "Impact uitleg",
         "readme_examples": "Impact voorbeelden",
@@ -69,6 +70,10 @@
     },
     "comment": {
         "title": "Opmerkingen",
-        "box": "Als u opmerkingen heeft over de vragenlijst of het invullen daarvan, kunt u deze hier invullen."
+        "box": "Als u opmerkingen heeft over de vragenlijst of het invullen daarvan, kunt u deze hier invullen.",
+        "feedback": "Dank voor uw opmerkingen!"
+    },
+    "demographics": {
+        "feedback": "Dank voor uw antwoorden!"
     }
 }

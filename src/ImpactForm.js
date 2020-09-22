@@ -17,18 +17,21 @@ class ImpactForm extends Component {
         this.changeView = this.changeView.bind(this);
         this.state = {
             view: "readme",
-            page: "readme_general"
+            page: "readme_general",
+            annotator: null
         }
     }
 
     componentDidMount() {
         AppFormStore.bind('change-view', this.changeView.bind(this));
+        AppFormStore.bind('has-demographics', this.hasDemographics.bind(this));
         FormActions.setSentenceServer(this.props.apiUrl);
         this.setView();
     }
 
     componentWillUnmount() {
         AppFormStore.unbind('change-view', this.changeView.bind(this));
+        AppFormStore.unbind('has-demographics', this.hasDemographics.bind(this));
     }
 
     changeView(view) {
@@ -44,6 +47,11 @@ class ImpactForm extends Component {
         this.setState({view: view});
     }
 
+    hasDemographics(data) {
+        console.log('has-demographics data:', data);
+        this.setState({hasDemographics: data});
+    }
+
     setView() {
         let view = window.localStorage.getItem("view");
         if (view)
@@ -52,11 +60,11 @@ class ImpactForm extends Component {
 
     render() {
         let questionnaire = (
-            <Questionnaire boilerplate={this.props.boilerplate}/>
+            <Questionnaire boilerplate={this.props.boilerplate} questions={this.props.questions}/>
         );
 
         let judgements = (
-            <AllJudgements boilerplate={this.props.boilerplate}/>
+            <AllJudgements boilerplate={this.props.boilerplate} questions={this.props.questions}/>
         );
 
         let login = (
@@ -68,7 +76,11 @@ class ImpactForm extends Component {
         )
 
         let thankyou = (
-            <ThankYou boilerplate={this.props.boilerplate}/>
+            <ThankYou 
+                boilerplate={this.props.boilerplate} 
+                demographics={this.props.demographics}
+                hasDemographics={this.state.hasDemographics}
+                />
         )
 
         var view = null;

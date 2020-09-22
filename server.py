@@ -31,6 +31,11 @@ def read_questions(version: str) -> Dict[str, str]:
         return json.load(fh)
 
 
+def read_demographics(version: str) -> Dict[str, str]:
+    with open(versions[version]['demographics_file'], 'rt') as fh:
+        return json.load(fh)
+
+
 def make_response(response_data: Union[List[Dict[str, any]], Dict[str, any]]):
     return Response(
         json.dumps(response_data),
@@ -46,7 +51,7 @@ def make_response(response_data: Union[List[Dict[str, any]], Dict[str, any]]):
 def save_response(version: str):
     response = request.get_json()
     print(response)
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     es_indexer.add_response(response, index)
     return make_response({"status": "saved_response", "sentence_id": response["sentence_id"]})
 
@@ -54,7 +59,7 @@ def save_response(version: str):
 @app.route('/api/reading_impact/<version>/remove_response', methods=["POST"])
 def remove_response(version: str):
     response = request.get_json()
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     es_indexer.remove_response(response, index)
     return make_response({"status": "removed_response", "sentence_id": response["sentence_id"]})
 
@@ -62,8 +67,9 @@ def remove_response(version: str):
 @app.route('/api/reading_impact/<version>/load_progress', methods=["GET"])
 def load_progress(version: str):
     annotator = request.args.get('annotator')
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     progress = es_indexer.get_progress(annotator, index)
+    progress['has_demographics'] = es_indexer.has_demographics(annotator)
     print(progress)
     return make_response(progress)
 
@@ -75,17 +81,39 @@ def register_annotator():
     return make_response(response)
 
 
+@app.route('/api/reading_impact/register_demographics', methods=["POST"])
+def register_demographics():
+    annotator = request.args.get('annotator')
+    demographics = request.get_json()
+    print(annotator)
+    print('demographics:', demographics)
+    response = es_indexer.register_demographics(annotator, demographics)
+    print('response:', response)
+    return make_response(response)
+
+
 @app.route('/api/reading_impact/annotator_exists', methods=["GET"])
 def annotator_exists():
     annotator = request.args.get('annotator')
+    print("annotator:", annotator)
     response = {"annotator": annotator, "exists": es_indexer.annotator_exists(annotator)}
+    if response['exists']:
+        response['has_demographics'] = es_indexer.has_demographics(annotator)
+    print(response)
+    return make_response(response)
+
+
+@app.route('/api/reading_impact/has_demographics', methods=["GET"])
+def has_demographics():
+    annotator = request.args.get('annotator')
+    response = {"annotator": annotator, "has_demographics": es_indexer.has_demographics(annotator)}
     return make_response(response)
 
 
 @app.route('/api/reading_impact/<version>/load_annotator_sentences', methods=["GET"])
 def load_annotator_sentences(version: str):
     annotator = request.args.get('annotator')
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     sentences = es_indexer.get_annotator_sentences(annotator, index)
     print('sentences:', len(sentences))
     return make_response(sentences)
@@ -94,7 +122,7 @@ def load_annotator_sentences(version: str):
 @app.route('/api/reading_impact/<version>/load_sentences', methods=["GET"])
 def load_sentences(version: str):
     annotator = request.args.get('annotator')
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     sentences = es_indexer.get_unfinished_sentences(annotator, index)
     print('sentences:', len(sentences))
     return make_response(sentences)
@@ -120,7 +148,7 @@ def get_boilerplate(version):
 def get_readme(version):
     if version not in versions:
         abort(jsonify(message="unknown version"), 404)
-    return make_response(readme[version])
+    return make_response(read_readme(version))
 
 
 @app.route('/api/reading_impact/<version>/version_data', methods=['GET'])
@@ -130,7 +158,8 @@ def get_version_data(version):
     return make_response({
         'readme': read_readme(version),
         'boilerplate': read_boilerplate(version),
-        'questions': read_questions(version)
+        'questions': read_questions(version),
+        'demographics': read_demographics(version)
     })
 
 

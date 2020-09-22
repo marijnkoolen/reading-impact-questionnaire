@@ -1,0 +1,74 @@
+{
+    "title": "May we ask some questions about you",
+    "intro": "We would like to ask you some demographic questions so we get some insight in the diversity of participants in this survey. These questions are optional.",
+    "questions": [
+        {
+            "label": "How old are you?",
+            "answerType": "category",
+            "labels": [
+                {"value": "under_20", "label": "Under 20 years old"},
+                {"value": "20_40", "label": "between 20 and 39 years old"},
+                {"value": "40_60", "label": "between 40 and 59 years old"},
+                {"value": "60_80", "label": "between 60 and 79 years old"},
+                {"value": "over_80", "label": "Over 80 years old"},
+                {"value": "unknown", "label": "prefer not to say"}
+            ],
+            "key": "age"
+        },
+        {
+            "label": "What is your gender?",
+            "answerType": "category",
+            "labels": [
+                {"value": "male", "label": "I identify as male"},
+                {"value": "female", "label": "I identify as female"},
+                {"value": "other", "label": "I identify as", "textInput": true},
+                {"value": "unknown", "label": "prefer not to say"}
+            ],
+            "key": "gender"
+        },
+        {
+            "label": "What languages do you speak fluently?",
+            "answerType": "textbox",
+            "key": "language"
+        },
+        {
+            "label": "How often do you read books?",
+            "answerType": "category",
+            "labels": [
+                {"value": "daily", "label": "Every day"},
+                {"value": "weekly", "label": "At least once a week"},
+                {"value": "monthly", "label": "At least once a month"},
+                {"value": "annualy", "label": "At least once a year"},
+                {"value": "never", "label": "(almost) never"},
+                {"value": "unknown", "label": "prefer not to say"}
+            ],
+            "key": "read_books"
+        },
+        {
+            "label": "How often do you read book reviews?",
+            "answerType": "category",
+            "labels": [
+                {"value": "daily", "label": "Every day"},
+                {"value": "weekly", "label": "At least once a week"},
+                {"value": "monthly", "label": "At least once a month"},
+                {"value": "annualy", "label": "At least once a year"},
+                {"value": "never", "label": "(almost) never"},
+                {"value": "unknown", "label": "prefer not to say"}
+            ],
+            "key": "read_reviews"
+        },
+        {
+            "label": "How often do you write online book reviews?",
+            "answerType": "category",
+            "labels": [
+                {"value": "daily", "label": "Every day"},
+                {"value": "weekly", "label": "At least once a week"},
+                {"value": "monthly", "label": "At least once a month"},
+                {"value": "annualy", "label": "At least once a year"},
+                {"value": "never", "label": "(almost) never"},
+                {"value": "unknown", "label": "prefer not to say"}
+            ],
+            "key": "write_reviews"
+        }
+    ]
+}
