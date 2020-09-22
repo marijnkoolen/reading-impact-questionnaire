@@ -63,13 +63,13 @@ class Indexer(object):
         self.es.index(index=index, doc_type="_doc", id=sentence["sentence_id"], body=sentence)
 
     def annotator_exists(self, annotator: str) -> bool:
-        return self.es.exists(index="reading_impact_annotator", doc_type="_doc", id=annotator)
+        return self.es.exists(index="reading_impact_annotator", doc_type="annotator", id=annotator)
 
     def register_annotator(self, annotator: str) -> Dict[str, Union[str, int]]:
         if self.annotator_exists(annotator):
             return {"status": 0, "message": "annotator already exists"}
         doc = {"annotator": annotator, "created": make_timestamp()}
-        self.es.index(index="reading_impact_annotator", doc_type="_doc", id=annotator, body=doc)
+        self.es.index(index="reading_impact_annotator", doc_type="annotator", id=annotator, body=doc)
         return {"status": 200, "message": "annotator registered"}
 
     def get_annotator_sentences(self, annotator: str, index: str) -> List[Dict[str, any]]:
@@ -82,7 +82,7 @@ class Indexer(object):
             "size": 10000
         }
         response = self.es.search(index=index, doc_type="_doc", body=query)
-        if response['hits']['total']['value'] == 0:
+        if response['hits']['total'] == 0:
             return []
         else:
             sentences = [hit["_source"] for hit in response['hits']['hits']]
@@ -91,7 +91,7 @@ class Indexer(object):
 
     def get_unfinished_sentences(self, annotator: str, index: str) -> List[Dict[str, any]]:
         response = self.search_unfinished_sentences(annotator, index)
-        if response['hits']['total']['value'] == 0:
+        if response['hits']['total'] == 0:
             return []
         else:
             sentences = [hit["_source"] for hit in response['hits']['hits']]
@@ -140,10 +140,10 @@ class Indexer(object):
         response_in_progress = self.get_sentences_by_status("in_progress", index)
         response_done_by_you = self.get_sentences_by_annotator(annotator, index)
         return {
-            "sentences_total": response_all['hits']['total']['value'],
-            "sentences_done": response_done['hits']['total']['value'],
-            "sentences_in_progress": response_in_progress['hits']['total']['value'],
-            "sentences_done_by_you": response_done_by_you['hits']['total']['value'],
+            "sentences_total": response_all['hits']['total'],
+            "sentences_done": response_done['hits']['total'],
+            "sentences_in_progress": response_in_progress['hits']['total'],
+            "sentences_done_by_you": response_done_by_you['hits']['total'],
         }
 
     def get_sentence(self, sentence_id: str, index: str) -> Dict[str, any]:

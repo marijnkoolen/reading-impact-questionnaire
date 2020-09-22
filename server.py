@@ -47,7 +47,7 @@ def make_response(response_data: Union[List[Dict[str, any]], Dict[str, any]]):
 def save_response(version: str):
     response = request.get_json()
     print(response)
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     es_indexer.add_response(response, index)
     return make_response({"status": "saved_response", "sentence_id": response["sentence_id"]})
 
@@ -55,7 +55,7 @@ def save_response(version: str):
 @app.route('/api/reading_impact/<version>/remove_response', methods=["POST"])
 def remove_response(version: str):
     response = request.get_json()
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     es_indexer.remove_response(response, index)
     return make_response({"status": "removed_response", "sentence_id": response["sentence_id"]})
 
@@ -63,7 +63,7 @@ def remove_response(version: str):
 @app.route('/api/reading_impact/<version>/load_progress', methods=["GET"])
 def load_progress(version: str):
     annotator = request.args.get('annotator')
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     progress = es_indexer.get_progress(annotator, index)
     print(progress)
     return make_response(progress)
@@ -86,7 +86,7 @@ def annotator_exists():
 @app.route('/api/reading_impact/<version>/load_annotator_sentences', methods=["GET"])
 def load_annotator_sentences(version: str):
     annotator = request.args.get('annotator')
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     sentences = es_indexer.get_annotator_sentences(annotator, index)
     print('sentences:', len(sentences))
     return make_response(sentences)
@@ -95,7 +95,7 @@ def load_annotator_sentences(version: str):
 @app.route('/api/reading_impact/<version>/load_sentences', methods=["GET"])
 def load_sentences(version: str):
     annotator = request.args.get('annotator')
-    index = config["es_index"][version]
+    index = versions[version]["es_index"]
     sentences = es_indexer.get_unfinished_sentences(annotator, index)
     print('sentences:', len(sentences))
     return make_response(sentences)
