@@ -6,7 +6,9 @@ import ReactDOM from 'react-dom';
 import ReadmeButton from './buttons/ReadmeButton.js';
 import LoginButton from './buttons/LoginButton.js';
 import CommentBox from './CommentBox.js';
+import Demographics from './Demographics.js';
 import AppFormStore from './formStore.js';
+import FormActions from './formActions.js';
 
 class ThankYou extends Component {
 
@@ -14,7 +16,8 @@ class ThankYou extends Component {
         super(props);
         this.changeView = this.changeView.bind(this);
         this.state = {
-            previousId: null
+            previousId: null,
+            annotator: FormActions.getPrevAnnotator()
         }
     }
 
@@ -29,6 +32,11 @@ class ThankYou extends Component {
     }
 
     render() {
+        console.log('has_demographics:', this.props.hasDemographics);
+        console.log('demographics:', this.props.demographics);
+        let demographics = (this.props.hasDemographics) ? null : (
+            <Demographics boilerplate={this.props.boilerplate} demographics={this.props.demographics}/>
+        )
         return (
             <div className="thankyou">
                 <h2>
@@ -36,6 +44,7 @@ class ThankYou extends Component {
                 </h2>
                 <p dangerouslySetInnerHTML={{ __html: this.props.boilerplate.thanks.contact }} />
                 <div className="closing">
+                    {demographics}
                     <CommentBox boilerplate={this.props.boilerplate}/>
                     <ReadmeButton labelText={this.props.boilerplate.button.back_to_explanation}/>
                     {' '}

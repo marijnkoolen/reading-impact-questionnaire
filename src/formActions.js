@@ -24,6 +24,7 @@ const FormActions = {
     setAnnotator(annotator) {
         SentenceAPI.annotator = annotator;
         window.localStorage.setItem("annotator", annotator);
+        FormActions.checkDemographics(annotator);
         FormActions.clearNonAnnotatorData(annotator);
         FormActions.loadSentences(annotator);
     },
@@ -149,12 +150,19 @@ const FormActions = {
     },
 
     removeAnnotator() {
+        let annotator = FormActions.getAnnotator();
         SentenceAPI.annotator = null;
+        window.localStorage.setItem('prevAnnotator', annotator);
         window.localStorage.removeItem('annotator');
         //FormActions.checkComment();
         AppDispatcher.dispatch({
             eventName: 'logout-annotator',
+            annotator: annotator
         });
+    },
+
+    getPrevAnnotator() {
+        return window.localStorage.getItem('prevAnnotator');
     },
 
     saveResponse(response) {
@@ -351,6 +359,7 @@ const FormActions = {
         //FormActions.checkComment();
         FormActions.clearLocalData();
         let annotator = window.localStorage.getItem("annotator");
+        FormActions.setAnnotator(annotator);
         FormActions.loadSentences(annotator);
     },
 
@@ -378,8 +387,29 @@ const FormActions = {
                 data: boilerplate
             });
         });
-    }
+    },
 
+    checkDemographics(annotator) {
+        SentenceAPI.checkDemographics(annotator, (error, userData) => {
+            if (error) {
+                // do something?
+            }
+            AppDispatcher.dispatch({
+                eventName: 'has-demographics',
+                demographicsBool: userData['has_demographics']
+            })
+        })
+    },
+
+    sendDemographics(demographics) {
+        //let annotator = this.getAnnotator();
+        let annotator = FormActions.getPrevAnnotator();
+        SentenceAPI.sendDemographics(annotator, demographics, (error, response) => {
+            AppDispatcher.dispatch({
+                eventName: 'register-demographics'
+            })
+        })
+    }
 }
 
 export default FormActions;

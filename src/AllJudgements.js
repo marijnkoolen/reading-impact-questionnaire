@@ -97,6 +97,7 @@ class AllJudgements extends Component {
                         sentence={sentence}
                         response={response}
                         boilerplate={boilerplate}
+                        questions={this.props.questions}
                     />
                 )
             });

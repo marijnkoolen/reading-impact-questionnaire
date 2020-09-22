@@ -16,18 +16,22 @@ class ImpactForm extends Component {
         super(props);
         this.changeView = this.changeView.bind(this);
         this.state = {
-            view: "readme"
+            view: "readme",
+            page: "readme_general",
+            annotator: null
         }
     }
 
     componentDidMount() {
         AppFormStore.bind('change-view', this.changeView.bind(this));
+        AppFormStore.bind('has-demographics', this.hasDemographics.bind(this));
         FormActions.setSentenceServer(this.props.apiUrl);
         this.setView();
     }
 
     componentWillUnmount() {
         AppFormStore.unbind('change-view', this.changeView.bind(this));
+        AppFormStore.unbind('has-demographics', this.hasDemographics.bind(this));
     }
 
     changeView(view) {
@@ -43,19 +47,24 @@ class ImpactForm extends Component {
         this.setState({view: view});
     }
 
+    hasDemographics(data) {
+        console.log('has-demographics data:', data);
+        this.setState({hasDemographics: data});
+    }
+
     setView() {
         let view = window.localStorage.getItem("view");
         if (view)
-            this.setState({view: view});
+            this.setState({view: view, page: "readme_impact"});
     }
 
     render() {
         let questionnaire = (
-            <Questionnaire boilerplate={this.props.boilerplate}/>
+            <Questionnaire boilerplate={this.props.boilerplate} questions={this.props.questions}/>
         );
 
         let judgements = (
-            <AllJudgements boilerplate={this.props.boilerplate}/>
+            <AllJudgements boilerplate={this.props.boilerplate} questions={this.props.questions}/>
         );
 
         let login = (
@@ -63,11 +72,15 @@ class ImpactForm extends Component {
         )
 
         let readme = (
-            <Readme readme={this.props.readme} boilerplate={this.props.boilerplate}/>
+            <Readme readme={this.props.readme} page={this.state.page} boilerplate={this.props.boilerplate}/>
         )
 
         let thankyou = (
-            <ThankYou boilerplate={this.props.boilerplate}/>
+            <ThankYou 
+                boilerplate={this.props.boilerplate} 
+                demographics={this.props.demographics}
+                hasDemographics={this.state.hasDemographics}
+                />
         )
 
         var view = null;

@@ -1,0 +1,85 @@
+[
+    {
+        "label": "Based on this sentence, was the reviewer’s attention engaged while reading?",
+        "explanation": "by attention we mean how focused, engaged or absorbed the reader’s attention was while reading.",
+        "answerType": "likert",
+        "questionType": "main-question",
+        "impactType": "attention_scale",
+        "labels": ["Not or doubtful", "Clearly or very strongly"],
+        "required": true,
+        "key": "attention_likert"
+    },
+    {
+        "label": "Did the reviewer experience positive emotional impact?",
+        "explanation": "by positive emotional impact we mean any emotional response to any part of the book during or after reading that contributed to a positive reading experience.",
+        "answerType": "likert",
+        "questionType": "main-question",
+        "impactType": "emotional_scale",
+        "labels": ["Not or doubtful", "Clearly or very strongly"],
+        "required": true,
+        "key": "emo_likert"
+    },
+    {
+        "label": "Did these feelings relate specifically to the narrative?",
+        "explanation": "Narrative feelings are feelings in response to any part of the narrative, such as characters, plotlines or elements from the storyworld. This includes feelings of empathy or sympathy with characters, enjoyment of a specific storyline or a desire to visit the storyworld, for example.",
+        "answerType": "likert",
+        "questionType": "sub-question",
+        "impactType": "narrative_scale",
+        "labels": ["Not or doubtful", "Clearly or very strongly"],
+        "required": true,
+        "key": "narr_likert"
+    },
+    {
+        "label": "Did these feelings relate specifically to the style?",
+        "explanation": "Feelings that relate to the style are aesthetic responses to the text including its choice of words, use of language, description or other stylistic elements.",
+        "answerType": "likert",
+        "questionType": "sub-question",
+        "impactType": "style_scale",
+        "labels": ["Not or doubtful", "Clearly or very strongly"],
+        "required": true,
+        "key": "style_likert"
+    },
+    {
+        "label": "Did these feelings relate specifically to humor?",
+        "explanation": "Feelings related to humor are affective responses like laughter or amusement. Every kind of humor counts, from slapstick to subtle irony.",
+        "answerType": "likert",
+        "questionType": "sub-question",
+        "impactType": "humor_scale",
+        "labels": ["Not or doubtful", "Clearly or very strongly"],
+        "required": true,
+        "key": "humor_likert"
+    },
+    {
+        "label": "Did the reviewer experience negative emotional impact?",
+        "explanation": "By negative emotional impact we mean negative feelings in response to the reading experience, such as dislike of narrative or stylistic elements, boredom, or aversion to the book as a whole, which contributed negatively to the reading experience. We do not mean feelings in response to negative or bad events within the story, such as horror at a gruesome scene.",
+        "answerType": "likert",
+        "questionType": "main-question",
+        "impactType": "negative_scale",
+        "labels": ["Not or doubtful", "Clearly or very strongly"],
+        "required": true,
+        "key": "negative_likert"
+    },
+    {
+        "label": "Did the reviewer experience surprise?",
+        "explanation": "Surprise is an affective response that occurs when a reader encounters an unexpected element in the book she or he is reading.",
+        "answerType": "likert",
+        "questionType": "main-question",
+        "impactType": "surprise_scale",
+        "labels": ["Not or doubtful", "Clearly or very strongly"],
+        "required": true,
+        "key": "surprise_likert"
+    },
+    {
+        "label": "Did the reviewer experience reflection?",
+        "explanation": "By reflection we mean that the reading experience made the reader reflect on elements from the book or from their own world or consider things in a new light.",
+        "answerType": "likert",
+        "questionType": "main-question",
+        "impactType": "reflection_scale",
+        "labels": ["Not or doubtful", "Clearly or very strongly"],
+        "required": true,
+        "key": "refl_likert"
+    }
+]
+
+
+

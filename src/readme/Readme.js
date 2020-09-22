@@ -13,8 +13,9 @@ class Readme extends Component {
 
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
-            readmeView: "readme_general"
+            readmeView: this.props.page
         }
         console.log('constructing')
     }

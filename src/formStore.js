@@ -20,8 +20,8 @@ class FormStore {
     loginAnnotator(annotator) {
         this.trigger('login-annotator', annotator);
     }
-    logoutAnnotator() {
-        this.trigger('logout-annotator');
+    logoutAnnotator(annotator) {
+        this.trigger('logout-annotator', annotator);
     }
     saveResponse(serverResponse) {
         this.trigger('save-response', serverResponse.sentence_id);
@@ -37,6 +37,12 @@ class FormStore {
     }
     loadBoilerplate(boilerplate) {
         this.trigger('load-boilerplate', boilerplate);
+    }
+    hasDemographics(demographicsBool) {
+        this.trigger('has-demographics', demographicsBool)
+    }
+    registerDemographics() {
+        this.trigger('register-demographics');
     }
 }
 
@@ -54,7 +60,7 @@ AppDispatcher.register(function(action) {
             AppFormStore.loginAnnotator(action.annotator, action.callback);
             break;
         case 'logout-annotator':
-            AppFormStore.logoutAnnotator(action.callback);
+            AppFormStore.logoutAnnotator(action.annotator, action.callback);
             break;
         case 'load-progress':
             AppFormStore.loadProgress(action.progress, action.callback);
@@ -79,6 +85,12 @@ AppDispatcher.register(function(action) {
             break;
         case 'load-boilerplate':
             AppFormStore.loadBoilerplate(action.data);
+            break;
+        case 'has-demographics':
+            AppFormStore.hasDemographics(action.demographicsBool);
+            break;
+        case 'register-demographics':
+            AppFormStore.registerDemographics(action.callback);
             break;
     }
 })

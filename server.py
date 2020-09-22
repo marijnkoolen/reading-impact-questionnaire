@@ -8,7 +8,7 @@ from flask import Flask, Response, request, abort, jsonify
 from flask_cors import CORS
 from indexer import Indexer
 from settings import config, versions
-from version import read_readmes
+from version import read_readme
 
 app = Flask(__name__, static_url_path='', static_folder='public')
 app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
@@ -19,7 +19,6 @@ app.add_url_rule('/reading-impact-questionnaire-en-2020/', 'reading-impact-quest
 
 cors = CORS(app)
 es_indexer = Indexer(config)
-readme = read_readmes()
 
 
 def read_boilerplate(version: str) -> Dict[str, str]:
@@ -29,6 +28,11 @@ def read_boilerplate(version: str) -> Dict[str, str]:
 
 def read_questions(version: str) -> Dict[str, str]:
     with open(versions[version]['questions_file'], 'rt') as fh:
+        return json.load(fh)
+
+
+def read_demographics(version: str) -> Dict[str, str]:
+    with open(versions[version]['demographics_file'], 'rt') as fh:
         return json.load(fh)
 
 
@@ -65,6 +69,7 @@ def load_progress(version: str):
     annotator = request.args.get('annotator')
     index = versions[version]["es_index"]
     progress = es_indexer.get_progress(annotator, index)
+    progress['has_demographics'] = es_indexer.has_demographics(annotator)
     print(progress)
     return make_response(progress)
 
@@ -76,10 +81,32 @@ def register_annotator():
     return make_response(response)
 
 
+@app.route('/api/reading_impact/register_demographics', methods=["POST"])
+def register_demographics():
+    annotator = request.args.get('annotator')
+    demographics = request.get_json()
+    print(annotator)
+    print('demographics:', demographics)
+    response = es_indexer.register_demographics(annotator, demographics)
+    print('response:', response)
+    return make_response(response)
+
+
 @app.route('/api/reading_impact/annotator_exists', methods=["GET"])
 def annotator_exists():
     annotator = request.args.get('annotator')
+    print("annotator:", annotator)
     response = {"annotator": annotator, "exists": es_indexer.annotator_exists(annotator)}
+    if response['exists']:
+        response['has_demographics'] = es_indexer.has_demographics(annotator)
+    print(response)
+    return make_response(response)
+
+
+@app.route('/api/reading_impact/has_demographics', methods=["GET"])
+def has_demographics():
+    annotator = request.args.get('annotator')
+    response = {"annotator": annotator, "has_demographics": es_indexer.has_demographics(annotator)}
     return make_response(response)
 
 
@@ -121,15 +148,19 @@ def get_boilerplate(version):
 def get_readme(version):
     if version not in versions:
         abort(jsonify(message="unknown version"), 404)
-    return make_response(readme[version])
+    return make_response(read_readme(version))
 
 
 @app.route('/api/reading_impact/<version>/version_data', methods=['GET'])
 def get_version_data(version):
-    global readme
     if version not in versions:
         abort(jsonify(message="unknown version"), 404)
-    return make_response({'readme': readme[version], 'boilerplate': read_boilerplate(version)})
+    return make_response({
+        'readme': read_readme(version),
+        'boilerplate': read_boilerplate(version),
+        'questions': read_questions(version),
+        'demographics': read_demographics(version)
+    })
 
 
 if __name__ == '__main__':

@@ -200,7 +200,7 @@ class SentenceQuestions extends Component {
     }
 
     makeQuestionList() {
-        let questionList = questions.map(question => {
+        let questionList = this.props.questions.map(question => {
             return this.makeQuestion(question, this.props.sentence.sentence_id)
         });
         var unanswerable = false;

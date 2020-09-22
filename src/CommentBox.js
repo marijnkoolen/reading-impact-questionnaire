@@ -21,8 +21,7 @@ class CommentBox extends React.Component {
 
     submitComment() {
         FormActions.sendComment(this.state.comment);
-        var feedback = "Dank voor uw opmerkingen!"
-        this.setState({comment: "", feedback: feedback});
+        this.setState({comment: "", feedback: this.props.boilerplate.comment.feedback});
     }
 
     handleCommentChange(event) {
@@ -31,7 +30,6 @@ class CommentBox extends React.Component {
     }
 
     render() {
-        console.log('this is new')
         return (
             <div>
                 <div className="comment-box">

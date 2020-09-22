@@ -65,12 +65,26 @@ class Indexer(object):
     def annotator_exists(self, annotator: str) -> bool:
         return self.es.exists(index="reading_impact_annotator", doc_type="annotator", id=annotator)
 
+    def has_demographics(self, annotator: str) -> bool:
+        doc = self.es.get(index="reading_impact_annotator", doc_type="_doc", id=annotator)
+        return 'demographics' in doc['_source']
+
     def register_annotator(self, annotator: str) -> Dict[str, Union[str, int]]:
         if self.annotator_exists(annotator):
             return {"status": 0, "message": "annotator already exists"}
         doc = {"annotator": annotator, "created": make_timestamp()}
         self.es.index(index="reading_impact_annotator", doc_type="annotator", id=annotator, body=doc)
         return {"status": 200, "message": "annotator registered"}
+
+    def register_demographics(self, annotator: str,
+                              demographics: Dict[str, Union[str, int]]) -> Dict[str, Union[str, int]]:
+        if not self.annotator_exists(annotator):
+            self.register_annotator(annotator)
+        doc = self.es.get(index="reading_impact_annotator", doc_type="_doc", id=annotator)
+        print('doc:', doc)
+        doc['_source']['demographics'] = demographics
+        self.es.index(index="reading_impact_annotator", doc_type="_doc", id=annotator, body=doc['_source'])
+        return {"status": 200, "message": "demographics registered"}
 
     def get_annotator_sentences(self, annotator: str, index: str) -> List[Dict[str, any]]:
         query = {

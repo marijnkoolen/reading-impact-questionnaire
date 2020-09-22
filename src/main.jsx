@@ -16,7 +16,11 @@ export class ReadingImpactQuestionnaire {
     SentenceAPI.loadVersionData((error, versionData) => {
       console.log(versionData);
       ReactDOM.render(
-        <ImpactForm apiUrl="/api/reading_impact" readme={versionData.readme} boilerplate={versionData.boilerplate}/>,
+        <ImpactForm apiUrl="/api/reading_impact" 
+          readme={versionData.readme} 
+          boilerplate={versionData.boilerplate} 
+          questions={versionData.questions}
+          demographics={versionData.demographics}/>,
         document.getElementById('reading-impact-questionnaire')
       );
     })
