@@ -102,7 +102,7 @@ class Demographics extends Component {
         console.log(this.props.demographics);
         return (
             <div className="demographics">
-                <div>{this.props.demographics.title}</div>
+                <div><h2>{this.props.demographics.title}</h2></div>
                 <div>{this.props.demographics.intro}</div>
                 {questions}
 

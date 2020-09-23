@@ -66,6 +66,8 @@ class Indexer(object):
         return self.es.exists(index="reading_impact_annotator", doc_type="annotator", id=annotator)
 
     def has_demographics(self, annotator: str) -> bool:
+        if not self.annotator_exists(annotator):
+            self.register_annotator(annotator)
         doc = self.es.get(index="reading_impact_annotator", doc_type="annotator", id=annotator)
         return 'demographics' in doc['_source']
 
