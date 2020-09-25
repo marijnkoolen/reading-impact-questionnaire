@@ -18,6 +18,7 @@ class SentenceQuestions extends Component {
             responseSaved: false,
             // if only likert questions, use a table
             asTable: this.props.questions.every(question => { return question.answerType === 'likert'})
+            // asTable: false
         }
     }
 
@@ -90,9 +91,7 @@ class SentenceQuestions extends Component {
     }
 
     makeQuestion(question, sentence_id) {
-        console.log(this.state.asTable)
         let showQuestions = (!this.state.response.unanswerable && !this.state.response.no_impact);
-        console.log('showQuestions:', showQuestions)
         if (!this.state.response || !showQuestions) {
             return null;
             // return (this.state.asTable) ? (<></div>) : (<div></div>)
@@ -138,9 +137,9 @@ class SentenceQuestions extends Component {
         var likertButtons = this.makeLikertRange().map(value => {
             let button = makeLikertButton(question, value);
             if (this.state.asTable) {
-                return (<td key={'likert-' + value}>{button}</td>)
+                return (<td className='likert-button' key={'likert-' + value}>{button}</td>)
             } else {
-                return button;
+                return <label className='likert-button' key={'likert-' + value}>{button}</label>;
             }
         });
         var categoryButtons = question.labels.map(value => {
@@ -246,7 +245,7 @@ class SentenceQuestions extends Component {
         });
         let labels = this.props.questions[0].labels;
         var likertHeaders = this.makeLikertRange().map(value => {
-            return (<th>{value}</th>)
+            return (<th className='likert-button' key={'likert-' + value}>{value}</th>)
         });
         let questionTable = (
             <div className="question-table">
