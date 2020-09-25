@@ -75,5 +75,22 @@
     },
     "demographics": {
         "feedback": "Dank voor uw antwoorden!"
-    }
+    },
+    "logos": [
+        {
+            "logo_url": "/images/logo-knaw-humanities-cluster.png", 
+            "website_url": "https://huc.knaw.nl/",
+            "organisation": "KNAW Humanities Cluster"
+        },
+        {
+            "logo_url": "/images/huygens_ing.jpg", 
+            "website_url": "https://www.huygens.knaw.nl/",
+            "organisation": "Huygens ING"
+        },
+        {
+            "logo_url": "/images/hebbanlogo_2016_web_roze.png", 
+            "website_url": "https://www.hebban.nl/",
+            "organisation": "Hebban"
+        }
+    ]
 }

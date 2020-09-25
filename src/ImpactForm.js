@@ -97,20 +97,19 @@ class ImpactForm extends Component {
         else if (this.state.view === "thankyou")
             view = thankyou;
 
+        let logos = this.props.boilerplate.logos.map(logo => {
+            return (
+                <a href={logo.website_url}>
+                    <img src={logo.logo_url} className="logo"/>
+                </a>
+            )
+        })
         return (
             <div className="container">
                 <div className="row top">
                     <div className="col-md-12 col-xs-12">
                         <div className="logo">
-                            <a href="https://huc.knaw.nl/">
-                                <img src="/images/logo-knaw-humanities-cluster.png"  className="logo" />
-                            </a>
-                            <a href="https://www.huygens.knaw.nl/">
-                                <img src="/images/huygens_ing.jpg"  className="logo" />
-                            </a>
-                            <a href="https://www.hebban.nl/">
-                                <img src="/images/hebbanlogo_2016_web_roze.png"  className="logo" />
-                            </a>
+                            {logos}
                         </div>
                         {view}
                     </div>
