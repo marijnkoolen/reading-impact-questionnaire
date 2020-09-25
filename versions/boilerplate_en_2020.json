@@ -48,6 +48,8 @@
     "question": {
         "answerable_explanation": "Check this box when a sentence is not in English, it is incomprehensible or it only contains data like an ISBN or price.",
         "sentence_unanswerable": "For this sentence these questions are impossible to answer.",
+        "no_impact_explanation": "Check this box when a sentence expresses no reading impact at all.",
+        "sentence_no_impact": "This sentence expresses no reading impact at all.",
         "unit": "Sentence"
     },
     "response": {
@@ -75,6 +77,11 @@
     },
     "demographics": {
         "feedback": "Thank you for your answers!"
-    }
+    },
+    "logos": [
+        {"logo_url": "", "website_url": ""},
+        {"logo_url": "", "website_url": ""},
+        {"logo_url": "", "website_url": ""}
+    ]
 }
 

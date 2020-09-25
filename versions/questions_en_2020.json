@@ -1,6 +1,6 @@
 [
     {
-        "label": "Based on this sentence, was the reviewer’s attention engaged while reading?",
+        "label": "Was the reviewer’s attention engaged while reading?",
         "explanation": "by attention we mean how focused, engaged or absorbed the reader’s attention was while reading.",
         "answerType": "likert",
         "questionType": "main-question",
