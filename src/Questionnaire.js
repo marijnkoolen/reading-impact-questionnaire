@@ -109,7 +109,7 @@ class Questionnaire extends Component {
         if (annotator && this.state.sentences) {
             sentenceBlocks = this.state.sentences.map((sentence, index) => {
                 sentence.number = index+1;
-                var response = {unanswerable: false};
+                var response = {unanswerable: false, no_impact: false};
                 let responses = this.state.responses;
                 if (responses && responses.hasOwnProperty(sentence.sentence_id)) {
                     if (responses[sentence.sentence_id].annotator === annotator)
@@ -153,7 +153,7 @@ class Questionnaire extends Component {
             progressBar = makeProgressBar(this.state.progress);
         }
 
-        var sentenceProgress = (sentenceBlocks) ? (<SentenceProgress checkDone={this.checkDone.bind(this)} changeView={this.changeView.bind(this)} boilerplate={this.props.boilerplate}/>) : null;
+        var sentenceProgress = (sentenceBlocks) ? (<SentenceProgress checkDone={this.checkDone.bind(this)} changeView={this.changeView.bind(this)} boilerplate={this.props.boilerplate} questions={this.props.questions}/>) : null;
         var enablePopover = () => {
             $('[data-toggle="popover"]').popover();
         }

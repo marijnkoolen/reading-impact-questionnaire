@@ -48,7 +48,7 @@ class SentenceProgress extends Component {
     }
 
     checkDone() {
-        let sentencesDone = FormActions.checkSentencesDone();
+        let sentencesDone = FormActions.checkSentencesDone(this.props.questions);
         let done = sentencesDone.every(sentence => { return sentence.sentenceDone});
         this.setState({done: done, sentencesDone: sentencesDone});
         this.props.checkDone(done);

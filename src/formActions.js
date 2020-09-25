@@ -193,18 +193,18 @@ const FormActions = {
         });
     },
 
-    checkResponseDone(response) {
-        if (response.unanswerable) {
+    checkResponseDone(response, questions) {
+        if (response.unanswerable || response.no_impact) {
             return true;
         }
-        return FormActions.getCategories().every(category => {
-            if (!response.hasOwnProperty(category))
+        return questions.every(question => {
+            if (!response.hasOwnProperty(question.impactType))
                 return false;
             return true;
-        });
+        })
     },
 
-    checkSentenceDone(sentence) {
+    checkSentenceDone(sentence, questions) {
         let localData = FormActions.getLocalData();
         if (!localData.responses)
             return false;
@@ -213,15 +213,15 @@ const FormActions = {
         let response = localData.responses[sentence.sentence_id];
         if (response.annotator !== FormActions.getAnnotator())
             return false;
-        return  FormActions.checkResponseDone(response);
+        return  FormActions.checkResponseDone(response, questions);
     },
 
-    checkSentencesDone() {
+    checkSentencesDone(questions) {
         let localData = FormActions.getLocalData();
         if (!localData.sentences)
             return null;
         return localData.sentences.map((sentence) => {
-            let sentenceDone = FormActions.checkSentenceDone(sentence);
+            let sentenceDone = FormActions.checkSentenceDone(sentence, questions);
             return {sentence_id: sentence.sentence_id, sentenceDone: sentenceDone};
         });
     },

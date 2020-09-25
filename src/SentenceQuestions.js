@@ -16,6 +16,9 @@ class SentenceQuestions extends Component {
         this.state = {
             response: this.props.response,
             responseSaved: false,
+            // if only likert questions, use a table
+            asTable: this.props.questions.every(question => { return question.answerType === 'likert'})
+            // asTable: false
         }
     }
 
@@ -32,7 +35,7 @@ class SentenceQuestions extends Component {
 
     clearResponses() {
         //console.log("clearing responses");
-        this.setState({response: {unanswerable: false}});
+        this.setState({response: {unanswerable: false, no_impact: false}});
     }
 
     setResponseStatus(sentence_id) {
@@ -56,21 +59,21 @@ class SentenceQuestions extends Component {
         if (questionResponse.category === "emotional_scale" && questionResponse.value === "0") {
             sentenceResponse["narrative_scale"] = "0";
             sentenceResponse["style_scale"] = "0";
-            sentenceResponse["emotional_valence"] = "na";
+            sentenceResponse["humor_scale"] = "0";
         }
-        if (sentenceResponse["narrative_scale"] > "0" && sentenceResponse["emotional_scale"] === "0") {
+        if (sentenceResponse["narrative_scale"] !== "0" && sentenceResponse["emotional_scale"] === "0") {
             window.alert(this.props.boilerplate.alert.narrative_no_emo);
             sentenceResponse["narrative_scale"] = "0";
         }
-        if (sentenceResponse["style_scale"] > "0" && sentenceResponse["emotional_scale"] === "0") {
+        if (sentenceResponse["style_scale"] !== "0" && sentenceResponse["emotional_scale"] === "0") {
             window.alert(this.props.boilerplate.alert.style_no_emo);
             sentenceResponse["style_scale"] = "0";
         }
-        if (sentenceResponse["emotional_valence"] && sentenceResponse["emotional_valence"] !== "na" && sentenceResponse["emotional_scale"] === "0") {
+        if (sentenceResponse["humor_scale"] !== "0" && sentenceResponse["emotional_scale"] === "0") {
             window.alert(this.props.boilerplate.alert.valence_no_emo);
-            sentenceResponse["emotional_valence"] = "na";
+            sentenceResponse["humor_scale"] = "0";
         }
-        if (FormActions.checkResponseDone(sentenceResponse)) {
+        if (FormActions.checkResponseDone(sentenceResponse, this.props.questions)) {
             FormActions.saveResponse(sentenceResponse);
         } else if (questionResponse.category === "unanswerable") {
             FormActions.removeIncompleteResponse(sentenceResponse);
@@ -88,14 +91,12 @@ class SentenceQuestions extends Component {
     }
 
     makeQuestion(question, sentence_id) {
-        if (this.state.response && this.state.response.unanswerable) {
-            return (
-                <div></div>
-            )
+        let showQuestions = (!this.state.response.unanswerable && !this.state.response.no_impact);
+        if (!this.state.response || !showQuestions) {
+            return null;
+            // return (this.state.asTable) ? (<></div>) : (<div></div>)
         }
         let component = this;
-        //console.log("rendering sentence", sentence_id);
-        //console.log(this.state.response);
         var makeCategoryButton = (question, category) => {
             var selected = false;
             if (this.state.response) {
@@ -134,12 +135,21 @@ class SentenceQuestions extends Component {
             );
         }
         var likertButtons = this.makeLikertRange().map(value => {
-            return makeLikertButton(question, value);
+            let button = makeLikertButton(question, value);
+            if (this.state.asTable) {
+                return (<td className='likert-button' key={'likert-' + value}>{button}</td>)
+            } else {
+                return <label className='likert-button' key={'likert-' + value}>{button}</label>;
+            }
         });
         var categoryButtons = question.labels.map(value => {
             return makeCategoryButton(question, value);
         });
         var makeButtons = question => {
+            if (this.state.asTable && question.answerType === "likert") {
+                // if presented in a table, just return the buttons to be placed in a cell
+                return likertButtons;
+            }
             if (question.answerType === "likert") {
                 return (
                     <div key={question.key}>
@@ -162,21 +172,41 @@ class SentenceQuestions extends Component {
         }
 
         let buttons = makeButtons(question);
-        return (
-            <div className={"sentence-" + question.questionType} key={question.key}>
-                <div className="row">
-                    <label key={question.key}>{question.label}</label>
-                    <span
-                        className="badge term-info"
-                        data-toggle="popover"
-                        title={this.props.boilerplate.info.explanation}
-                        data-content={question.explanation}
-                        data-trigger="hover"
-                    >i</span>
+        if (this.state.asTable) {
+            return (
+                <tr className={"question-row sentence-" + question.questionType} key={question.key}>
+                    <td className={"question-cell " + question.questionType}>
+                        <span key={question.key}>{question.label}</span>
+                        <span
+                            className="badge term-info"
+                            data-toggle="popover"
+                            title={this.props.boilerplate.info.explanation}
+                            data-content={question.explanation}
+                            data-trigger="hover"
+                        >i</span>
+                    </td>
+                    {buttons}
+                </tr>
+            )
+                    //<td className="answer-cell">{buttons}</td>
+
+        } else {
+            return (
+                <div className={"sentence-" + question.questionType} key={question.key}>
+                    <div className="row">
+                        <label key={question.key}>{question.label}</label>
+                        <span
+                            className="badge term-info"
+                            data-toggle="popover"
+                            title={this.props.boilerplate.info.explanation}
+                            data-content={question.explanation}
+                            data-trigger="hover"
+                        >i</span>
+                    </div>
+                    <div>{buttons}</div>
                 </div>
-                <div>{buttons}</div>
-            </div>
-        )
+            )
+        }
     }
 
     getAnswerable() {
@@ -194,8 +224,18 @@ class SentenceQuestions extends Component {
             response = {};
         response.unanswerable = unanswerable;
         this.setState({response: response})
-        //this.setState({unanswerable: unanswerable})
         this.setResponse({category: "unanswerable", "value": unanswerable});
+        FormActions.checkDone
+    }
+
+    setNoImpact(event) {
+        let noImpact = event.target.checked;
+        let response = this.state.response;
+        if (!response)
+            response = {};
+        response.no_impact = noImpact;
+        this.setState({response: response})
+        this.setResponse({category: "no_impact", "value": noImpact});
         FormActions.checkDone
     }
 
@@ -203,17 +243,38 @@ class SentenceQuestions extends Component {
         let questionList = this.props.questions.map(question => {
             return this.makeQuestion(question, this.props.sentence.sentence_id)
         });
+        let labels = this.props.questions[0].labels;
+        var likertHeaders = this.makeLikertRange().map(value => {
+            return (<th className='likert-button' key={'likert-' + value}>{value}</th>)
+        });
+        let questionTable = (
+            <div className="question-table">
+                <p>Rate the impact based on this sentence (0 = {labels[0]}, 4 = {labels[1]}).</p>
+                <table>
+                    <tbody className="question-list">
+                        <tr>
+                            <th></th>{likertHeaders}
+                        </tr>
+                        {questionList}
+                    </tbody>
+                </table>
+            </div>
+        )
+        let questionBlock = (this.state.asTable) ? questionTable : questionList;
         var unanswerable = false;
-        if (this.state.response && this.state.response.unanswerable)
-            unanswerable = this.state.response.unanswerable;
-        return (unanswerable) ? (<div></div>) : questionList;
+        let showQuestionList = true;
+        if (this.state.response && (this.state.response.unanswerable || this.state.response.no_impact)) {
+            showQuestionList = false;
+        }
+        //if (this.state.response && showQuestionList)
+        //    unanswerable = this.state.response.unanswerable;
+        return (showQuestionList) ? questionBlock : (<div></div>);
     }
 
     render() {
         const boilerplate = this.props.boilerplate;
-        let answerableExplanation = boilerplate.question.answerable_explanation;
         let answerable = (
-            <div>
+            <div className="sentence-unanswerable">
                 <label>
                     <input
                         name={this.props.sentence.sentence_id + "-answerable"}
@@ -233,6 +294,27 @@ class SentenceQuestions extends Component {
             </div>
         )
 
+        let noImpact = (
+            <div className="sentence-no-impact">
+                <label>
+                    <input
+                        name={this.props.sentence.sentence_id + "-no_impact"}
+                        type="checkbox"
+                        onChange={this.setNoImpact.bind(this)}
+                        checked={this.state.response.noImpact}
+                    />
+                    &nbsp;{boilerplate.question.sentence_no_impact}&nbsp;
+                    <span
+                        className="badge term-info"
+                        data-toggle="popover"
+                        title={boilerplate.info.explanation}
+                        data-content={boilerplate.question.no_impact_explanation}
+                        data-trigger="hover"
+                    >i</span>
+                </label>
+            </div>
+        )
+
         let responseStatus = (<div></div>);
         if (this.state.responseSaved) {
             responseStatus = (<div>{boilerplate.response.saved}</div>);
@@ -240,7 +322,7 @@ class SentenceQuestions extends Component {
 
         let questionList = this.makeQuestionList();
         var sentenceLabelClass = "badge progress-bar-";
-        let sentenceDone = FormActions.checkSentenceDone(this.props.sentence);
+        let sentenceDone = FormActions.checkSentenceDone(this.props.sentence, this.props.questions);
         sentenceLabelClass += (sentenceDone) ? "success" : "danger";
 
         return (
@@ -254,6 +336,9 @@ class SentenceQuestions extends Component {
                 </div>
                 <div className="sentence-answerable">
                     {answerable}
+                </div>
+                <div className="sentence-no-impact">
+                    {noImpact}
                 </div>
                 <div className="sentence-questions">
                     {questionList}
