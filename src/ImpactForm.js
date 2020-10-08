@@ -2,7 +2,6 @@
 "use strict"
 
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
 import Login from './Login.js';
 import Readme from './readme/Readme.js';
@@ -99,7 +98,7 @@ class ImpactForm extends Component {
 
         let logos = this.props.boilerplate.logos.map(logo => {
             return (
-                <a href={logo.website_url}>
+                <a href={logo.website_url} key={logo.organisation}>
                     <img src={logo.logo_url} className="logo"/>
                 </a>
             )

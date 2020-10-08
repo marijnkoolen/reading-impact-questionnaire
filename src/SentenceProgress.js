@@ -2,9 +2,6 @@
 "use strict"
 
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import LogoutButton from './buttons/LogoutButton.js';
-import AllJudgementsButton from './buttons/AllJudgementsButton.js';
 import FormActions from './formActions.js';
 import AppFormStore from './formStore.js';
 import questions from './questions.js';

@@ -8,17 +8,17 @@
         "answered": "Sentences judged completely"
     },
     "login": {
-        "login_id": "You are logged in with token",
+        "login_id": "Your participant token is",
         "login_with_id": "Participate with token",
         "login_with_this": "Participate with this token",
         "login_with_new": "Participate as a new respondent",
-        "new_id": "If you are participating for the first time, all you need is click the button 'participate as a new respondent'.",
-        "reuse_id": "You can participate with the following token",
+        "new_id": "If you are participating for the first time, just click the button 'participate as a new respondent'.",
+        "reuse_id": "You can participate with the following token(s)",
         "enter_id": "If you have a token from a different device, you can enter it here: ",
         "unused_id": "This token has not been used before.",
         "invalid_id": "Invalid token. A valid token has three letters followed by three digits",
         "title": "Participating",
-        "no_personal": "We don't ask or register any personal information about you."
+        "no_personal": "We don't ask or collect any personal information about you."
     },
     "readme": {
         "title": "Assessing the Impact of Reading in Book Reviews",
@@ -27,7 +27,7 @@
     "button": {
         "show_to_do": "Show sentences to be judged",
         "show_judged": "Show all my judgements",
-        "show_explanation": "Show explanation",
+        "show_explanation": "Show impact explanation",
         "logout": "Save and log out",
         "judge_more": "Judge more sentences",
         "back_to_explanation": "Back to the explanation",
@@ -37,13 +37,13 @@
         "comment": "Submit comments",
         "demographics": "Submit answers",
         "readme_general": "General info",
-        "readme_impact": "Impact explained",
+        "readme_impact": "Explanation of impact",
         "readme_examples": "Impact examples",
         "readme_more": "Further information"
     },
     "sentences": {
         "sentences_judged": "The sentences below have been completely judged by you. You can change your responses here. Changes are saved automatically.",
-        "sentence_todo": "Please judge the sentences below. Sentences with a red label are not judged completely yet. When the label turns green, you judgements will be saved."
+        "sentence_todo": "Please judge the sentences below. Sentences with a red label require more input from you. When the label turns green, your judgements will be saved."
     },
     "question": {
         "answerable_explanation": "Check this box when a sentence is not in English, it is incomprehensible or it only contains data like an ISBN or price.",

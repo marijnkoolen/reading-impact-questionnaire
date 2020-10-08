@@ -2,7 +2,7 @@
     {
         "label_old": "Was the reviewer’s attention engaged while reading?",
         "label": "Does this sentence express the reviewer’s attention while reading?",
-        "explanation": "by attention we mean how focused, engaged or absorbed the reader’s attention was while reading.",
+        "explanation": "By attention we mean how focused, engaged or absorbed the reader’s attention was while reading.",
         "answerType": "likert",
         "questionType": "main-question",
         "impactType": "attention_scale",
@@ -12,7 +12,7 @@
     },
     {
         "label": "Based on this sentence, did the reviewer experience positive emotional impact?",
-        "explanation": "by positive emotional impact we mean any emotional response to any part of the book during or after reading that contributed to a positive reading experience.",
+        "explanation": "By positive emotional impact we mean any emotional response to any part of the book during or after reading that contributed to a positive reading experience.",
         "answerType": "likert",
         "questionType": "main-question",
         "impactType": "emotional_scale",
@@ -22,7 +22,7 @@
     },
     {
         "label": "Did these feelings relate specifically to the narrative?",
-        "explanation": "Narrative feelings are feelings in response to any part of the narrative, such as characters, plotlines or elements from the storyworld. This includes feelings of empathy or sympathy with characters, enjoyment of a specific storyline or a desire to visit the storyworld, for example.",
+        "explanation": "Narrative feelings are feelings in response to any part of the narrative, such as characters, plotlines or elements from the storyworld. This includes feelings of empathy or sympathy with characters, enjoyment of a specific storyline or a desire to visit the storyworld.",
         "answerType": "likert",
         "questionType": "sub-question",
         "impactType": "narrative_scale",

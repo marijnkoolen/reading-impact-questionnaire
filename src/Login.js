@@ -101,16 +101,19 @@ class Login extends React.Component {
                     </button>
                 </div>
         )
-        let generateNewId = (
-            <div className="login-type">
-                <p>{this.props.boilerplate.login.new_id}</p>
-                <span>
+        let generateNewIdButton = (
                     <button
                         className="btn btn-primary"
                         onClick={this.generateID.bind(this)}
                         >
                             {this.props.boilerplate.login.login_with_new}
                     </button>
+        )
+        let generateNewId = (
+            <div className="login-type">
+                <p>{this.props.boilerplate.login.new_id}</p>
+                <span>
+                    {generateNewIdButton}
                 </span>
             </div>
         )
@@ -132,7 +135,7 @@ class Login extends React.Component {
                     </p>
                     <h3>Wanneer moet ik een bestaand ID invoeren?</h3>
                     <p>
-                        Dit is alleen nodig als u de enquête op meerdere devices wilt gebruiken (PC, telefoon, tablet, ...). Schrijf in dat geval uw ID op en hergebruik het voor alle devices. Dan zorgt de applicatie ervoor dat u verder kunt gaan waar u gebleven was op een ander device, en eerdere antwoorden inzien.
+                        Dit is alleen nodig als u de enquête op meerdere devices wilt gebruiken (PC, telefoon, tablet, etc.). Schrijf in dat geval uw ID op en hergebruik het voor alle devices. Dan zorgt de applicatie ervoor dat u verder kunt gaan waar u gebleven was op een ander device, en eerdere antwoorden inzien.
                     </p>
                     <p>
                         Als u aangemeld bent, slaat uw browser automatisch het ID op in de lokale browseropslag op het apparaat dat u gebruikt. Als op een later moment weer terugkeert naar deze site, wordt u automatisch aangemeld met het opgeslagen ID. U kunt eerder gegeven antwoorden altijd inzien zolang u bent aangemeld met uw ID.
@@ -147,10 +150,10 @@ class Login extends React.Component {
         const en_login = (
             <div>
                 <div className="login">
-                    <h2>Particpating</h2>
+                    <h2>Participating</h2>
                     <p>You can participate without providing any personal information.</p>
-                    <p>If you have already participated before, please reuse the token you 
-                        were given before, so we know which sentences you have already judged.</p>
+                    <p>If you have already participated, please reuse the token you 
+                        were given before, so we can avoid giving you sentences you have already judged.</p>
                     {previous}
                     {generateNewId}
                     {typedId}
@@ -160,7 +163,7 @@ class Login extends React.Component {
                 <div className="explanation">
                     <h3>What data do we collect?</h3>
                     <p>
-                        We don't register personal information, unless you provide it at the end because you want us to 
+                        We don't collect personal information, unless you provide it at the end because you want us to 
                         keep you informed about the results of the questionnaire.
                         When you participate, you will be given a randomly generated and anonymous token. 
                         The sole purpose of this token is to keep track of which sentences you have judged before, 
@@ -174,8 +177,8 @@ class Login extends React.Component {
                     </p>
                     <h3>When do I have to fill in an existing token?</h3>
                     <p>
-                        This is only necessary when you use multiple devices to participate (desktop, laptop, tablet, ...). 
-                        In that case, please write down the token and reuse on all devices. 
+                        This is only necessary when you use multiple devices to participate (desktop, laptop, tablet, etc.). 
+                        In that case, please write down the token (three letters and three digits) and reuse it on all devices. 
                     </p>
                     <p>
                         When you participate, your browser automatically stores the token locally on your device. If you 
@@ -185,6 +188,10 @@ class Login extends React.Component {
                 </div>
                 <div className="closing">
                     <ReadmeButton labelText={this.props.boilerplate.button.back_to_explanation}/>
+                    {' '}
+                    {idList}
+                    {' '}
+                    {generateNewIdButton}
                 </div>
             </div>
 

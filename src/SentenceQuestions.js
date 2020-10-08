@@ -2,12 +2,10 @@
 "use strict"
 
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import LikertButton from './buttons/LikertButton.js';
 import CategoryButton from './buttons/CategoryButton.js';
 import FormActions from './formActions.js';
 import AppFormStore from './formStore.js';
-import questions from './questions.js';
 
 class SentenceQuestions extends Component {
     constructor(props) {
@@ -249,7 +247,7 @@ class SentenceQuestions extends Component {
         });
         let questionTable = (
             <div className="question-table">
-                <p>Rate the impact based on this sentence (0 = {labels[0]}, 4 = {labels[1]}).</p>
+                <p>Rate the impact on the reviewer based on this sentence (0 = {labels[0]}, 4 = {labels[1]}).</p>
                 <table>
                     <tbody className="question-list">
                         <tr>

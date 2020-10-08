@@ -2,12 +2,10 @@
 "use strict"
 
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import ReadmeButton from './buttons/ReadmeButton.js';
 import LoginButton from './buttons/LoginButton.js';
 import CommentBox from './CommentBox.js';
 import Demographics from './Demographics.js';
-import AppFormStore from './formStore.js';
 import FormActions from './formActions.js';
 
 class ThankYou extends Component {

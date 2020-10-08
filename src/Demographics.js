@@ -3,8 +3,6 @@
 
 import React, {Component} from 'react';
 import FormActions from './formActions.js';
-import { Checkbox } from 'react-bootstrap';
-import ReactDOM from 'react-dom';
 
 class Demographics extends Component {
 
