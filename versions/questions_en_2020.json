@@ -12,7 +12,7 @@
     },
     {
         "label": "Based on this sentence, did the reviewer experience positive emotional impact?",
-        "explanation": "By positive emotional impact we mean any emotional response to any part of the book during or after reading that contributed to a positive reading experience.",
+        "explanation": "By positive emotional impact we mean any emotional response to any part of the book during or after reading that contributed to a positive reading experience. This includes feelings in response to negatieve or bad events in the story, such as sharing a character's sadness or pain, which can still lead to a positive appreciation of the book.",
         "answerType": "likert",
         "questionType": "main-question",
         "impactType": "emotional_scale",
