@@ -2,14 +2,12 @@
 "use strict"
 
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import FormActions from './formActions.js';
 import LogoutButton from './buttons/LogoutButton.js';
 import AllJudgementsButton from './buttons/AllJudgementsButton.js';
 import ReadmeButton from './buttons/ReadmeButton.js';
 import SentenceProgress from './SentenceProgress.js';
 import SentenceQuestions from './SentenceQuestions.js';
-import SentenceAPI from './sentenceAPI.js';
 import AppFormStore from './formStore.js';
 
 class Questionnaire extends Component {
@@ -131,13 +129,17 @@ class Questionnaire extends Component {
             /*
                     <span>{boilerplate.progress.total} {progress.sentences_total}.</span>
                     {' '}
+                    <span>{boilerplate.progress.done} {progress.sentences_done} {boilerplate.progress.unit}.</span>
+                    {' '}
             */
             return (
                 <div
                     className="header header-progress">
-                    <span>{boilerplate.progress.done} {progress.sentences_done} {boilerplate.progress.unit}.</span>
-                    {' '}
                     <span>{boilerplate.progress.done_by_you}: {progress.sentences_done_by_you}.</span>
+                    {' '}
+                    <span>{boilerplate.progress.total} {progress.sentences_total}.</span>
+                    {' '}
+                    <span>{boilerplate.progress.done} {progress.sentences_done} {boilerplate.progress.unit}.</span>
                     {' '}
                     <span
                         className="badge progress-info"

@@ -1,8 +1,7 @@
 
 "use strict"
 
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import FormActions from './formActions.js';
 
 class CommentBox extends React.Component {
