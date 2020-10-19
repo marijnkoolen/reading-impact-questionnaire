@@ -16,6 +16,8 @@ app.add_url_rule('/lees-impact-vragenlijst-nl-2019/', 'reading-impact-questionna
                  lambda: app.send_static_file('questionnaire-nl-2019/index.html'))
 app.add_url_rule('/reading-impact-questionnaire-en-2020/', 'reading-impact-questionnaire-en-2020',
                  lambda: app.send_static_file('questionnaire-en-2020/index.html'))
+app.add_url_rule('/reading-impact-questionnaire-en-2020-own/', 'reading-impact-questionnaire-en-2020-own',
+                 lambda: app.send_static_file('questionnaire-en-2020-own/index.html'))
 
 cors = CORS(app)
 es_indexer = Indexer(config)
