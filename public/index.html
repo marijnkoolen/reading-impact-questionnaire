@@ -12,37 +12,125 @@
 		-->
 	</head>
 	<body>
-            <div class="row top">
-                <div class="col-md-2 col-xs-1">
+        <div class="row top">
+            <div class="col-md-2 col-xs-1">
+            </div>
+            <div class="col-md-8 col-xs-9">
+                <div class="logo">
+                    <a href="https://huc.knaw.nl/">
+                        <img src="/images/logo-knaw-humanities-cluster.png"  class="logo" />
+                    </a>
+                    <a href="https://www.huygens.knaw.nl/">
+                        <img src="/images/huygens_ing.jpg"  class="logo" />
+                    </a>
                 </div>
-                <div class="col-md-10 col-xs-11">
-                    <div class="logo">
-                        <a href="https://huc.knaw.nl/">
-                            <img src="/images/logo-knaw-humanities-cluster.png"  class="logo" />
-                        </a>
-                        <a href="https://www.huygens.knaw.nl/">
-                            <img src="/images/huygens_ing.jpg"  class="logo" />
-                        </a>
+                <div id="bookresponse-landing">
+                    <div>
+                        <h1>The Impact of Fiction</h1>
+                        <h3>How does your favorite book make you feel?</h3>
+                        <p>If you’re an avid reader, this question might be hard to answer. Books can make
+                            us feel extatically happy or deeply sad. Books can inspire us, motivate us, or
+                            make us feel like we are a part of something that matters. As long as stories
+                            have existed, they have made people laugh, and they have made people cry.
+                        </p>
                     </div>
-                    <div id="bookresponse-landing">
-                        <h1>Project Book Response</h1>
-                        <p>Project Book Response is an academic research project which studies the responses of readers 
-                        to the books they read. We investigate the impact that books have on readers by looking at how 
-                        they express their reading experiences. </p>
-                        <p>This is a project of the <a href="https://huygens.knaw.nl">Huygens Institute for the 
-                            History of the Netherlands</a> (Huygens ING) and the 
-                        <a href="https://huc.knaw.nl">KNAW Humanities Cluster</a>, 
-                        coordinated by Peter Boot (Huygens ING) and Marijn Koolen (KNAW Humanities Cluster)</p>
+                    <div>
+                        <p>
+                            In this research project, we are trying to measure the emotional impact of books
+                            and stories, by analyzing the kind of emotional responses that readers express in
+                            online reviews.
+                        </p>
+                        <p>The <em>Impact of Fiction</em> is a project of the <a href="https://huygens.knaw.nl">Huygens Institute for the
+                            History of the Netherlands</a> (Huygens ING) and the
+                            <a href="https://huc.knaw.nl">KNAW Humanities Cluster</a>,
+                            coordinated by Peter Boot (Huygens ING) and Marijn Koolen (KNAW Humanities Cluster).
+                        </p>
                     </div>
-                    <div id="bookresponse-questionnaire">
-                        <ul>
-                            <li><a href="lees-impact-vragenlijst/">Vragenlijst leesimpact (Nederlands, versie 2019)</a> in samenwerking met
-                                <a href="https://hebban.nl">Hebban</a>.</li>
-                            <li><a href="reading-impact-questionnaire-en-2020/">Questionnaire Reading Impact (English, version 2020)</a></li>
-                        </ul>
-                    </div>
+                </div>
+                <div id="bookresponse-questionnaire">
+                    <h3>Questionnaires</h3>
+                    <p>We currently have two open questionnaires in which we ask volunteers to help us judge
+                    sentences from online book reviews on the reading impact expressed by the reviewers. We
+                    have a questionnaire in English and one in Dutch. If you want to participate, please click
+                    on one of the questionnaire links below:</p>
+                    <ul>
+                        <li><a href="lees-impact-vragenlijst-nl-2019/">Vragenlijst leesimpact (Nederlands 2019)</a></li>
+                        <li><a href="reading-impact-questionnaire-en-2020/">Questionnaire Reading Impact (English 2020)</a></li>
+                    </ul>
+                </div>
+                <div id="bookresponse-background">
+                    <h3>Computational Analysis of Reading Impact</h3>
+                    <p>
+                        There are millions upon millions of reviews on the internet today. Because of the
+                        staggering number of online reviews available, computational analysis is the ideal
+                        tool for analyzing them. But emotional impact is not easy to detect computationally.
+                        That’s why we’ve created a list of words relating to features from literature
+                        (aspect-terms) and a list of words relating to literature’s emotional impact
+                        (impact-terms) and a set of rules formulated to measure impact in relation to
+                        specific aspects.
+                    </p>
+                    <p>
+                        Here’s an example:
+                    </p>
+                    <table class="rule-example">
+                        <tbody>
+                        <tr>
+                            <td>lovely</td>
+                            <td>+</td>
+                            <td>character</td>
+                            <td>=</td>
+                            <td>narrative engagement</td>
+                        </tr>
+                        <tr>
+                            <td>[impact-term]</td>
+                            <td>+</td>
+                            <td>[aspect-term]</td>
+                            <td>=</td>
+                            <td>type of impact</td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                    <p>
+                        By looking at examples from a large set of online reviews, we formulated more than
+                        1300 rules of this kind, measuring different types of impact. For an explanation of
+                        our categories of impact, go to the “Explanation of impact” page.
+                    </p>
+                    <p>
+                        We can’t be sure, though, that the rules we formulated actually measure the types
+                        of impact we set out to measure. That’s where you come in! Now that we have this
+                        computational model for measuring impact (the impact-rules and an algorithm that
+                        applies them to a large collection of online reviews), we need actual humans with
+                        brains and notions of what emotional impact looks like to check our results.
+                        That’s what this questionnaire is designed to do.
+                    </p>
+                    <p>
+                        Here’s another example: In 2019, researchers at the Huygens ING completed a similar
+                        research project on Dutch online reviews. They found, among other things, that
+                        Harry Potter and the Half-Blood Prince scored exceptionally high on use of the
+                        word “magisch” (magical). Any human who knows Harry Potter could guess that this
+                        doesn’t mean an exceptionally high number of reviewers had a magical reading
+                        experience. Rather, in reference to Harry Potter, the word “magical” has little
+                        to do with emotional response because the plot is actually about magic. But the
+                        computer doesn’t know that! That’s why we need human validators like you.
+                    </p>
+                    <p>
+                        There are lots of other fun and interesting things you could do if you had a clear
+                        sense of the emotional impact of books. For example, this previous study into
+                        Dutch reviews suggested that appreciation of a novel’s style is linked to reflection
+                        on that novel. On the other hand, narrative engagement and mentions of style or
+                        reflection are negatively correlated, meaning that books that are have a very
+                        engaging, often suspenseful narrative are less frequently described as having an
+                        affecting style or inviting reflection. Think of your favorite thriller: is this
+                        true in that case?
+                    </p>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+        </div>
+
+>>>>>>> 740c3e90beb10205870eebaaf2329fadc162127a
 		<!--
 		-->
         <script type="text/javascript">

@@ -143,3 +143,13 @@ td.sub-question {
 .btn {
     margin-top: 5px;
 }
+
+.rule-example {
+    margin-left: 50px;
+}
+
+.rule-example td {
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
