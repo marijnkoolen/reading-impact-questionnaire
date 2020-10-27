@@ -153,6 +153,10 @@ td.sub-question {
     padding-bottom: 10px;
 }
 
+.bookresponse {
+    max-width: 640px;
+}
+
 .bookresponse-contributors li {
     padding-top: 5;
 }
