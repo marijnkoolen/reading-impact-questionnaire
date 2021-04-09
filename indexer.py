@@ -131,13 +131,16 @@ class Indexer(object):
         }
         return self.es.search(index=index, doc_type="_doc", body=query)
 
-    def get_sentences_by_status(self, annotation_status: str, index: str) -> Dict[str, any]:
-        query = {
-            "query": {
-                "match": {"annotation_status": annotation_status}
-            },
-            "size": 0
-        }
+    def get_sentences_by_status(self, annotation_status: str, index: str, size: int = 10000) -> Dict[str, any]:
+        if annotation_status == 'all':
+            query = {'size': size}
+        else:
+            query = {
+                "query": {
+                    "match": {"annotation_status": annotation_status}
+                },
+                "size": size
+            }
         return self.es.search(index=index, doc_type="_doc", body=query)
 
     def get_sentences_by_annotator(self, annotator: str, index: str) -> Dict[str, any]:

@@ -3,9 +3,12 @@
 
 import json
 import os
+import requests
 from typing import Dict, List, Union
+
 from flask import Flask, Response, request, abort, jsonify
 from flask_cors import CORS
+
 from indexer import Indexer
 from settings import config, versions
 from version import read_readme
@@ -163,6 +166,34 @@ def get_version_data(version):
         'questions': read_questions(version),
         'demographics': read_demographics(version)
     })
+
+
+def clean_response(response):
+    excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+    headers = [(name, value) for (name, value) in response.raw.headers.items()
+               if name.lower() not in excluded_headers]
+    return Response(response.content, response.status_code, headers)
+
+
+@app.route('/api/annotations/<version>/<status>', methods=['GET'])
+def get_annotations(version, status):
+    index = versions[version]["es_index"]
+    response = es_indexer.get_sentences_by_status(annotation_status=status, index=index, size=10000)
+    return make_response([hit['_source'] for hit in response['hits']['hits']])
+
+
+@app.route('/elasticsearch/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def proxy(path):
+    url = request.url.replace(request.host_url, 'http://localhost:9200/').replace("elasticsearch/", "")
+    response = requests.request(
+        method=request.method,
+        url=url,
+        headers={key: value for (key, value) in request.headers if key != 'Host'},
+        data=request.get_data(),
+        cookies=request.cookies,
+        allow_redirects=False
+    )
+    return clean_response(response)
 
 
 if __name__ == '__main__':
