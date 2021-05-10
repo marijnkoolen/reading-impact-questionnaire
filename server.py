@@ -182,6 +182,7 @@ def get_annotations(version, status):
     return make_response([hit['_source'] for hit in response['hits']['hits']])
 
 
+"""
 @app.route('/elasticsearch/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def proxy(path):
     url = request.url.replace(request.host_url, 'http://localhost:9200/').replace("elasticsearch/", "")
@@ -194,6 +195,7 @@ def proxy(path):
         allow_redirects=False
     )
     return clean_response(response)
+"""
 
 
 if __name__ == '__main__':
